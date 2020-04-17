@@ -1,26 +1,26 @@
 ---
 uid: web-pages/index
-title: ASP.NET Web Pages | Microsoft Docs
+title: ASP.NET Páginas Web (Web Pages) Microsoft Docs
 author: rick-anderson
-description: Descargar WebMatrix & obtener información sobre cómo crear rápidamente páginas web de una manera ligera de combinar código de servidor con HTML.
+description: Descarga WebMatrix & aprender a crear rápidamente páginas web de una manera ligera para combinar el código del servidor con HTML.
 ms.author: riande
 ms.date: 05/18/2012
 ms.assetid: 5418ba96-ff49-4a43-9cbb-09dea4949d23
 msc.legacyurl: /web-pages
 msc.type: categoryindex
-ms.openlocfilehash: 56bf82e22b3562893ef842a90d42aa7b6ff5858f
-ms.sourcegitcommit: e7e91932a6e91a63e2e46417626f39d6b244a3ab
+ms.openlocfilehash: d767325a376e5daa0ea4236f67c88e6b97ae71a7
+ms.sourcegitcommit: 022f79dbc1350e0c6ffaa1e7e7c6e850cdabf9af
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78520675"
+ms.lasthandoff: 04/17/2020
+ms.locfileid: "81543527"
 ---
 # <a name="aspnet-web-pages"></a>ASP.NET Web Pages
 
 > [!NOTE] 
-> WebMatrix ya no se recomienda como un entorno de desarrollo integrado para ASP.NET Web Pages. Use [Visual Studio](xref:aspnet/web-pages/overview/getting-started/program-asp-net-web-pages-in-visual-studio) o [Visual Studio Code](https://code.visualstudio.com/).
+> WebMatrix ya no se recomienda como un entorno de desarrollo integrado para ASP.NET páginas web. Use [Visual Studio](xref:web-pages/overview/getting-started/program-asp-net-web-pages-in-visual-studio) o Visual Studio [Code](https://code.visualstudio.com/).
 
-- [Orientación](overview/index.md)
+- [Guía](overview/index.md)
 
     - [Introducción](overview/getting-started/index.md)
 
@@ -50,7 +50,7 @@ ms.locfileid: "78520675"
         - [Validar la entrada del usuario en los sitios de ASP.NET Web Pages](overview/ui-layouts-and-themes/validating-user-input-in-aspnet-web-pages-sites.md)
         - [Crear una apariencia coherente](overview/ui-layouts-and-themes/3-creating-a-consistent-look.md)
         - [Personalizar el comportamiento de todo el sitio](overview/ui-layouts-and-themes/18-customizing-site-wide-behavior.md)
-        - [Working with Images (Trabajo con imágenes)](overview/ui-layouts-and-themes/9-working-with-images.md)
+        - [Trabajar con imágenes](overview/ui-layouts-and-themes/9-working-with-images.md)
         - [Trabajar con vídeo](overview/ui-layouts-and-themes/10-working-with-video.md)
         - [Crear y usar un asistente en un sitio de ASP.NET Web Pages](overview/ui-layouts-and-themes/creating-and-using-a-helper-in-an-aspnet-web-pages-site.md)
         - [Instalar un asistente](overview/ui-layouts-and-themes/installing-helpers.md)
@@ -81,7 +81,7 @@ ms.locfileid: "78520675"
     - [Referencia de API](overview/api-reference/index.md)
 
         - [Referencia rápida de la API de ASP.NET](overview/api-reference/asp-net-web-pages-api-reference.md)
-    - [Versiones](overview/releases/index.md)
+    - [Lanzamientos](overview/releases/index.md)
 
         - [Novedades de ASP.NET Web Pages 3.2](overview/releases/whats-new-in-aspnet-web-pages-32.md)
         - [Novedades de ASP.NET Web Pages 3.1](overview/releases/whats-new-aspnet-web-pages-31.md)
@@ -102,7 +102,7 @@ ms.locfileid: "78520675"
         - [Crear una página de edición de datos en WebMatrix](videos/introduction/create-an-edit-data-page-in-webmatrix.md)
         - [Crear una página de eliminación de datos en WebMatrix](videos/introduction/create-a-delete-data-page-in-webmatrix.md)
         - [Publicar un sitio web en Internet mediante WebMatrix](videos/introduction/publish-a-website-to-the-internet-using-webmatrix.md)
-    - [Razor Pages ASP.NET](videos/aspnet-razor-pages/index.md)
+    - [páginas de ASP.NET Razor](videos/aspnet-razor-pages/index.md)
 
         - [Introducción a WebMatrix y ASP.NET Web Pages](videos/aspnet-razor-pages/getting-started-with-webmatrix-and-aspnet-web-pages.md)
         - [Introducción a la sintaxis de Razor de programación web de ASP.NET](videos/aspnet-razor-pages/introduction-to-aspnet-web-programming-using-the-razor-syntax.md)
@@ -116,7 +116,7 @@ ms.locfileid: "78520675"
         - [Mostrar datos en un gráfico (parte 1)](videos/aspnet-razor-pages/displaying-data-in-a-chart-part-1.md)
         - [Mostrar datos en un gráfico (parte 2)](videos/aspnet-razor-pages/displaying-data-in-a-chart-part-2.md)
         - [Working with Files (Trabajo con archivos)](videos/aspnet-razor-pages/working-with-files.md)
-        - [Working with Images (Trabajo con imágenes)](videos/aspnet-razor-pages/working-with-images.md)
+        - [Trabajar con imágenes](videos/aspnet-razor-pages/working-with-images.md)
         - [Trabajar con vídeo](videos/aspnet-razor-pages/working-with-video.md)
         - [Agregar correo electrónico al sitio web](videos/aspnet-razor-pages/adding-email-to-your-web-site.md)
         - [Agregar búsqueda al sitio web](videos/aspnet-razor-pages/adding-search-to-your-web-site.md)

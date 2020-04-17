@@ -1,27 +1,27 @@
 ---
 uid: web-forms/videos/sql-2005/manipulating-database-data
-title: Manipular datos de base de datos | Microsoft Docs
-author: microsoft
-description: SQL Server principiantes obtendrá información sobre los objetos de ADO.NET y la ejecución de la instrucción SQL desde ADO.NET. Explore SQL y obtenga información sobre cómo insertar, actualizar y eliminar Sta...
+title: Manipulación de datos de base de datos ( Mandatación de datos de base de Microsoft Docs
+author: rick-anderson
+description: Los principiantes de SQL Server aprenderán acerca de ADO.NET objetos y la ejecución de instrucciones SQL de ADO.NET. Explore SQL y aprenda sobre insertar, actualizar y eliminar sta...
 ms.author: riande
 ms.date: 03/29/2006
 ms.assetid: 03a4cdda-480f-43fa-891c-a976633d90ae
 msc.legacyurl: /web-forms/videos/sql-2005/manipulating-database-data
 msc.type: video
-ms.openlocfilehash: 10f9379a27f96ac4acb77af1a6062a42aaecc14f
-ms.sourcegitcommit: e7e91932a6e91a63e2e46417626f39d6b244a3ab
+ms.openlocfilehash: 9db4985c07cdcc51cb3c45d811fc44366028a59d
+ms.sourcegitcommit: 022f79dbc1350e0c6ffaa1e7e7c6e850cdabf9af
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78501097"
+ms.lasthandoff: 04/17/2020
+ms.locfileid: "81543280"
 ---
 # <a name="manipulating-database-data"></a>Manipular datos de la base de datos
 
 por [Microsoft](https://github.com/microsoft)
 
-SQL Server principiantes obtendrá información sobre los objetos de ADO.NET y la ejecución de la instrucción SQL desde ADO.NET. Explore SQL y obtenga información sobre las instrucciones INSERT, Update y DELETE.
+Los principiantes de SQL Server aprenderán acerca de ADO.NET objetos y la ejecución de instrucciones SQL de ADO.NET. Explore SQL y obtenga información sobre las instrucciones de inserción, actualización y eliminación.
 
-[&#9654;Ver vídeo (40 minutos)](https://channel9.msdn.com/Blogs/ASP-NET-Site-Videos/manipulating-database-data)
+[&#9654; Ver vídeo (40 minutos)](https://channel9.msdn.com/Blogs/ASP-NET-Site-Videos/manipulating-database-data)
 
 > [!div class="step-by-step"]
 > [Anterior](designing-relational-database-tables.md)

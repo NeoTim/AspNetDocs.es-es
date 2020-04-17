@@ -1,19 +1,19 @@
 ---
 uid: mvc/overview/older-versions-1/nerddinner/secure-applications-using-authentication-and-authorization
-title: Proteger aplicaciones con autenticación y autorización | Microsoft Docs
-author: microsoft
-description: En el paso 9 se muestra cómo agregar autenticación y autorización para proteger nuestra aplicación NerdDinner, de modo que los usuarios tengan que registrarse e iniciar sesión en el sitio para crear...
+title: Aplicaciones seguras que utilizan autenticación y autorización ? Microsoft Docs
+author: rick-anderson
+description: El paso 9 muestra cómo agregar autenticación y autorización para proteger nuestra aplicación NerdDinner, por lo que los usuarios necesitan registrarse e iniciar sesión en el sitio para crear...
 ms.author: riande
 ms.date: 07/27/2010
 ms.assetid: 9e4d5cac-b071-440c-b044-20b6d0c964fb
 msc.legacyurl: /mvc/overview/older-versions-1/nerddinner/secure-applications-using-authentication-and-authorization
 msc.type: authoredcontent
-ms.openlocfilehash: 8d509c5f15bb4d5014e53b8dc2a736454238e72c
-ms.sourcegitcommit: e7e91932a6e91a63e2e46417626f39d6b244a3ab
+ms.openlocfilehash: d96f2763f6e62f9dd599fdb7977a97993d218305
+ms.sourcegitcommit: 022f79dbc1350e0c6ffaa1e7e7c6e850cdabf9af
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78486427"
+ms.lasthandoff: 04/17/2020
+ms.locfileid: "81542578"
 ---
 # <a name="secure-applications-using-authentication-and-authorization"></a>Proteger las aplicaciones mediante la autenticación y la autorización
 
@@ -21,135 +21,135 @@ por [Microsoft](https://github.com/microsoft)
 
 [Descargar PDF](http://aspnetmvcbook.s3.amazonaws.com/aspnetmvc-nerdinner_v1.pdf)
 
-> Este es el paso 9 de un [tutorial de aplicación "NerdDinner"](introducing-the-nerddinner-tutorial.md) gratuito en el que se explica cómo crear una aplicación web pequeña, pero completa, con ASP.NET MVC 1.
+> Este es el paso 9 de un tutorial gratuito de la [aplicación "NerdDinner"](introducing-the-nerddinner-tutorial.md) que describe cómo crear una aplicación web pequeña, pero completa, con ASP.NET MVC 1.
 > 
-> En el paso 9 se muestra cómo agregar autenticación y autorización para proteger nuestra aplicación de NerdDinner, de modo que los usuarios tengan que registrarse e iniciar sesión en el sitio para crear nuevas cenas y solo el usuario que hospeda una cena puede editarla más adelante.
+> El paso 9 muestra cómo agregar autenticación y autorización para proteger nuestra aplicación NerdDinner, por lo que los usuarios necesitan registrarse e iniciar sesión en el sitio para crear nuevas cenas, y solo el usuario que hospeda una cena puede editarla más adelante.
 > 
-> Si usa ASP.NET MVC 3, se recomienda seguir los tutoriales [de la introducción con MVC 3](../../older-versions/getting-started-with-aspnet-mvc3/cs/intro-to-aspnet-mvc-3.md) o MVC [Music Store](../../older-versions/mvc-music-store/mvc-music-store-part-1.md) .
+> Si usa ASP.NET MVC 3, le recomendamos que siga los tutoriales [Introducción a MVC 3](../../older-versions/getting-started-with-aspnet-mvc3/cs/intro-to-aspnet-mvc-3.md) o [MVC Music Store.](../../older-versions/mvc-music-store/mvc-music-store-part-1.md)
 
-## <a name="nerddinner-step-9-authentication-and-authorization"></a>NerdDinner paso 9: autenticación y autorización
+## <a name="nerddinner-step-9-authentication-and-authorization"></a>NerdDinner Paso 9: Autenticación y autorización
 
-En la actualidad, nuestra aplicación NerdDinner concede a cualquier persona que visite el sitio la capacidad de crear y editar los detalles de cualquier cena. Vamos a cambiar esto para que los usuarios tengan que registrarse e iniciar sesión en el sitio para crear nuevas cenas y agregar una restricción para que solo el usuario que hospeda una cena pueda editarla más adelante.
+En este momento nuestra aplicación NerdDinner otorga a cualquier persona que visite el sitio la capacidad de crear y editar los detalles de cualquier cena. Vamos a cambiar esto para que los usuarios necesiten registrarse e iniciar sesión en el sitio para crear nuevas cenas, y agreguen una restricción para que solo el usuario que hospeda una cena pueda editarla más adelante.
 
-Para habilitarlo, usaremos la autenticación y la autorización para proteger nuestra aplicación.
+Para habilitar esto usaremos la autenticación y autorización para proteger nuestra aplicación.
 
-### <a name="understanding-authentication-and-authorization"></a>Descripción de la autenticación y la autorización
+### <a name="understanding-authentication-and-authorization"></a>Comprender la autenticación y la autorización
 
-La *autenticación* es el proceso de identificar y validar la identidad de un cliente que tiene acceso a una aplicación. En otras palabras, se trata de identificar "quién" es el usuario final cuando visitan un sitio Web. ASP.NET admite varias maneras de autenticar a los usuarios del explorador. En el caso de las aplicaciones Web de Internet, el enfoque de autenticación más común que se utiliza se denomina "autenticación de formularios". La autenticación mediante formularios permite a un desarrollador crear un formulario de inicio de sesión HTML dentro de su aplicación y, a continuación, validar el nombre de usuario y la contraseña que un usuario final envía a una base de datos u otro almacén de credenciales de contraseña. Si la combinación de nombre de usuario y contraseña es correcta, el desarrollador puede solicitar a ASP.NET que emita una cookie HTTP cifrada para identificar al usuario en las solicitudes futuras. Usaremos la autenticación de formularios con nuestra aplicación NerdDinner.
+*La autenticación* es el proceso de identificar y validar la identidad de un cliente que accede a una aplicación. En pocas palabras, se trata de identificar "quién" es el usuario final cuando visita un sitio web. ASP.NET admite varias formas de autenticar a los usuarios del explorador. Para las aplicaciones web de Internet, el enfoque de autenticación más común utilizado se denomina "Autenticación de formularios". Autenticación de formularios permite a un desarrollador crear un formulario de inicio de sesión HTML dentro de su aplicación y, a continuación, validar el nombre de usuario/contraseña que un usuario final envía en una base de datos u otro almacén de credenciales de contraseña. Si la combinación de nombre de usuario y contraseña es correcta, el desarrollador puede pedir a ASP.NET emita una cookie HTTP cifrada para identificar al usuario en futuras solicitudes. Usaremos la autenticación de formularios con nuestra aplicación NerdDinner.
 
-La *autorización* es el proceso de determinar si un usuario autenticado tiene permiso para obtener acceso a una dirección URL o recurso determinado o para realizar alguna acción. Por ejemplo, en nuestra aplicación NerdDinner nos gustaría autorizar que solo los usuarios que han iniciado sesión puedan acceder a la dirección URL de */Dinners/Create* y crear nuevas cenas. También queremos agregar lógica de autorización para que solo el usuario que hospeda una cena pueda editarla y denegar el acceso de edición a todos los demás usuarios.
+*La autorización* es el proceso de determinar si un usuario autenticado tiene permiso para acceder a una dirección URL o recurso determinada o para realizar alguna acción. Por ejemplo, dentro de nuestra aplicación NerdDinner queremos autorizar que solo los usuarios que han iniciado sesión puedan acceder a la dirección URL */Dinners/Create* y crear nuevas cenas. También queremos agregar lógica de autorización para que solo el usuario que hospeda una cena pueda editarla y denegar el acceso de edición a todos los demás usuarios.
 
 ### <a name="forms-authentication-and-the-accountcontroller"></a>Autenticación de formularios y AccountController
 
-La plantilla de proyecto de Visual Studio predeterminada para ASP.NET MVC habilita automáticamente la autenticación de formularios cuando se crean nuevas aplicaciones de ASP.NET MVC. También agrega automáticamente una implementación de página de inicio de sesión de cuenta pregenerada al proyecto, lo que facilita la integración de la seguridad dentro de un sitio.
+La plantilla de proyecto de Visual Studio predeterminada para ASP.NET MVC habilita automáticamente la autenticación de formularios cuando se crean nuevas ASP.NET se crean aplicaciones MVC. También agrega automáticamente una implementación de página de inicio de sesión de cuenta precompilada al proyecto, lo que hace que sea muy fácil integrar la seguridad dentro de un sitio.
 
-La página maestra site. Master predeterminada muestra un vínculo "iniciar sesión" en la parte superior derecha del sitio cuando el usuario que tiene acceso a él no está autenticado:
+La página maestra Site.master predeterminada muestra un vínculo "Iniciar sesión" en la parte superior derecha del sitio cuando el usuario que accede a él no está autenticado:
 
 ![](secure-applications-using-authentication-and-authorization/_static/image1.png)
 
-Al hacer clic en el vínculo "iniciar sesión", se toma un usuario de la dirección URL de */account/Logon* :
+Al hacer clic en el vínculo "Iniciar sesión", un usuario se encuentra en la dirección URL *de /Account/LogOn:*
 
 ![](secure-applications-using-authentication-and-authorization/_static/image2.png)
 
-Los visitantes que no se han registrado pueden hacerlo haciendo clic en el vínculo "registrar", que los llevará a la dirección URL de */account/Register* y les permitirá especificar los detalles de la cuenta:
+Los visitantes que no se hayan registrado pueden hacerlo haciendo clic en el enlace "Registrarse", que los llevará a la URL */Account/Register* y les permitirá introducir los detalles de la cuenta:
 
 ![](secure-applications-using-authentication-and-authorization/_static/image3.png)
 
-Al hacer clic en el botón "registrar", se creará un nuevo usuario en el sistema de pertenencia a ASP.NET y se autenticará al usuario en el sitio mediante la autenticación de formularios.
+Al hacer clic en el botón "Registrarse" se creará un nuevo usuario dentro del sistema de pertenencia ASP.NET y autenticar al usuario en el sitio mediante la autenticación de formularios.
 
-Cuando un usuario ha iniciado sesión, site. Master cambia la parte superior derecha de la página para generar un "Welcome [username]!" Message y representa un vínculo "cerrar sesión" en lugar de "iniciar sesión". Al hacer clic en el vínculo "cerrar sesión", se cierra la sesión del usuario:
+Cuando un usuario inicia sesión, Site.master cambia la parte superior derecha de la página para generar un "Bienvenido [nombre de usuario]!" mensaje y representa un enlace "Cerrar sesión" en lugar de uno "Iniciar sesión". Al hacer clic en el enlace "Cerrar sesión" se cierra la sesión del usuario:
 
 ![](secure-applications-using-authentication-and-authorization/_static/image4.png)
 
-La funcionalidad de inicio de sesión, cierre de sesión y registro anterior se implementa dentro de la clase AccountController que Visual Studio agregó a nuestro proyecto al crear el proyecto. La interfaz de usuario de AccountController se implementa mediante plantillas de vista en el directorio \Views\Account:
+La funcionalidad de inicio de sesión, cierre de sesión y registro anterior se implementa dentro de la clase AccountController que Visual Studio agregó a nuestro proyecto cuando creó el proyecto. La interfaz de usuario para el AccountController se implementa mediante plantillas de vista dentro del directorio de la cuenta de views:
 
 ![](secure-applications-using-authentication-and-authorization/_static/image5.png)
 
-La clase AccountController usa el sistema de autenticación de formularios ASP.NET para emitir cookies de autenticación cifradas y la API de pertenencia a ASP.NET para almacenar y validar nombres de usuario y contraseñas. La API de pertenencia a ASP.NET es extensible y permite el uso de cualquier almacén de credenciales de contraseña. ASP.NET incluye implementaciones de proveedor de pertenencia integradas que almacenan el nombre de usuario y contraseñas en una base de datos SQL o en Active Directory.
+La clase AccountController utiliza el sistema de autenticación de formularios ASP.NET para emitir cookies de autenticación cifradas y la API de pertenencia ASP.NET para almacenar y validar nombres de usuario/contraseñas. La API de pertenencia ASP.NET es extensible y permite usar cualquier almacén de credenciales de contraseña. ASP.NET se incluye con implementaciones de proveedor de pertenencia integradas que almacenan nombres de usuario/contraseñas dentro de una base de datos SQL o dentro de Active Directory.
 
-Podemos configurar el proveedor de pertenencia que debe usar nuestra aplicación NerdDinner. para ello, abra el archivo "Web. config" en la raíz del proyecto y busque la sección &lt;pertenencia&gt; en él. El archivo Web. config predeterminado agregado cuando se creó el proyecto registra el proveedor de pertenencia de SQL y lo configura para que use una cadena de conexión denominada "ApplicationServices" para especificar la ubicación de la base de datos.
+Podemos configurar qué proveedor de pertenencia debe usar nuestra aplicación NerdDinner abriendo el archivo "web.config" en la raíz del proyecto y buscando la &lt;sección de pertenencia&gt; dentro de él. El archivo web.config predeterminado agregado cuando se creó el proyecto registra el proveedor de pertenencia SQL y lo configura para usar una cadena de conexión denominada "ApplicationServices" para especificar la ubicación de la base de datos.
 
-La cadena de conexión predeterminada "ApplicationServices" (que se especifica dentro de la sección &lt;connectionStrings&gt; del archivo Web. config) se configura para usar SQL Express. Apunta a una base de datos SQL Express denominada "ASPNETDB. MDF "en el directorio" App\_Data "de la aplicación. Si esta base de datos no existe la primera vez que se usa la API de pertenencia dentro de la aplicación, ASP.NET creará automáticamente la base de datos y aprovisionará el esquema de la base de datos de pertenencia adecuado en ella:
+La cadena de conexión predeterminada "ApplicationServices" &lt;(que&gt; se especifica en la sección connectionStrings del archivo web.config) está configurada para usar SQL Express. Señala a una base de datos de SQL Express denominada "ASPNETDB. MDF" en el directorio\_"Datos de la aplicación" de la aplicación. Si esta base de datos no existe la primera vez que se usa la API de pertenencia dentro de la aplicación, ASP.NET creará automáticamente la base de datos y aprovisionará el esquema de base de datos de pertenencia adecuado dentro de ella:
 
 ![](secure-applications-using-authentication-and-authorization/_static/image6.png)
 
-Si en lugar de usar SQL Express deseamos usar una instancia de SQL Server completa (o conectarse a una base de datos remota), lo único que debemos hacer es actualizar la cadena de conexión "ApplicationServices" en el archivo Web. config y asegurarse de que el esquema de pertenencia adecuado se ha agregado a la base de datos a la que apunta. Puede ejecutar la utilidad "ASPNET\_regsql. exe" en el directorio \Windows\Microsoft.NET\Framework\v2.0.50727\ para agregar el esquema adecuado para la pertenencia y los otros servicios de aplicación de ASP.NET a una base de datos.
+Si en lugar de usar SQL Express queríamos usar una instancia completa de SQL Server (o conectarnos a una base de datos remota), todo lo que tendríamos que hacer es actualizar la cadena de conexión "ApplicationServices" dentro del archivo web.config y asegurarnos de que se ha agregado el esquema de pertenencia adecuado a la base de datos a la que apunta. Puede ejecutar la utilidad\_"aspnet regsql.exe" en el ASP.NET directorio .
 
-### <a name="authorizing-the-dinnerscreate-url-using-the-authorize-filter"></a>Autorización de la dirección URL de/Dinners/Create mediante el filtro [Authorize]
+### <a name="authorizing-the-dinnerscreate-url-using-the-authorize-filter"></a>Autorización de la dirección URL /Dinners/Create mediante el filtro [Authorize]
 
-No tuvimos que escribir ningún código para habilitar una implementación segura de administración de cuentas y autenticación para la aplicación NerdDinner. Los usuarios pueden registrar cuentas nuevas con nuestra aplicación e iniciar sesión o cerrar la sesión del sitio.
+No tuvimos que escribir ningún código para habilitar una implementación segura de autenticación y administración de cuentas para la aplicación NerdDinner. Los usuarios pueden registrar nuevas cuentas con nuestra aplicación e iniciar sesión/cerrar sesión en el sitio.
 
-Ahora podemos agregar lógica de autorización a la aplicación y usar el estado de autenticación y el nombre de usuario de los visitantes para controlar lo que pueden y no pueden hacer en el sitio. Comencemos agregando lógica de autorización a los métodos de acción "Create" de nuestra clase DinnersController. En concreto, se requerirá que los usuarios que accedan a la dirección URL de */Dinners/Create* deban iniciar sesión. Si no se registran, se les redirigirá a la página de inicio de sesión para que puedan iniciar sesión.
+Ahora podemos agregar lógica de autorización a la aplicación y usar el estado de autenticación y el nombre de usuario de los visitantes para controlar lo que pueden y no pueden hacer dentro del sitio. Comencemos agregando lógica de autorización a los métodos de acción "Crear" de nuestra clase DinnersController. Específicamente, necesitaremos que los usuarios que accedan a la dirección URL */Dinners/Create* deben iniciar sesión. Si no han iniciado sesión, los redirigiremos a la página de inicio de sesión para que puedan iniciar sesión.
 
-La implementación de esta lógica es bastante fácil. Lo único que debemos hacer es agregar un atributo de filtro [Authorize] a nuestros métodos de acción de creación como este:
+Implementar esta lógica es bastante fácil. Todo lo que necesitamos hacer es agregar un atributo de filtro [Authorize] a nuestros métodos de acción Create de esta forma:
 
 [!code-csharp[Main](secure-applications-using-authentication-and-authorization/samples/sample1.cs)]
 
-ASP.NET MVC admite la capacidad de crear "filtros de acción" que se pueden usar para implementar una lógica reutilizable que se puede aplicar mediante declaración a métodos de acción. El filtro [Authorize] es uno de los filtros de acción integrados que proporciona ASP.NET MVC y permite a un desarrollador aplicar de forma declarativa reglas de autorización a métodos de acción y clases de controlador.
+ASP.NET MVC admite la capacidad de crear "filtros de acción" que se pueden usar para implementar lógica reutilizable que se puede aplicar mediante declaración a los métodos de acción. El filtro [Authorize] es uno de los filtros de acción integrados proporcionados por ASP.NET MVC y permite a un desarrollador aplicar mediante declaración reglas de autorización a métodos de acción y clases de controlador.
 
-Cuando se aplica sin ningún parámetro (como el anterior), el filtro [Authorize] exige que el usuario que realiza la solicitud del método de acción deba iniciar sesión, y redirigirá automáticamente el explorador a la dirección URL de inicio de sesión si no lo están. Al hacerlo, se pasa la dirección URL solicitada originalmente como argumento QueryString (por ejemplo:/Account/LogOn? ReturnUrl =% 2fDinners% 2fCreate). El AccountController redirigirá al usuario a la dirección URL solicitada originalmente una vez que inicie sesión.
+Cuando se aplica sin ningún parámetro (como el anterior) el filtro [Authorize] exige que el usuario que realiza la solicitud de método de acción debe iniciar sesión, y redirigirá automáticamente el explorador a la dirección URL de inicio de sesión si no lo está. Al hacer esta redirección, la dirección URL solicitada originalmente se pasa como argumento de cadena de consulta (por ejemplo: /Account/LogOn? ReturnUrl-%2fDinners%2fCreate). A continuación, AccountController redirigirá al usuario a la dirección URL solicitada originalmente una vez que inicie sesión.
 
-El filtro [Authorize] admite opcionalmente la capacidad de especificar una propiedad de "usuarios" o "roles" que se puede usar para requerir que el usuario inicie sesión y en una lista de usuarios permitidos o un miembro de un rol de seguridad permitido. Por ejemplo, el código siguiente solo permite que dos usuarios específicos, "scottgu" y "billg", tengan acceso a la dirección URL de/Dinners/Create:
+El filtro [Autorizar] admite opcionalmente la capacidad de especificar una propiedad "Usuarios" o "Roles" que se puede usar para requerir que el usuario haya iniciado sesión y esté dentro de una lista de usuarios permitidos o un miembro de un rol de seguridad permitido. Por ejemplo, el código siguiente solo permite que dos usuarios específicos, "scottgu" y "billg", accedan a la DIRECCIÓN URL /Dinners/Create:
 
 [!code-csharp[Main](secure-applications-using-authentication-and-authorization/samples/sample2.cs)]
 
-No obstante, la incrustación de nombres de usuario específicos en el código tiende a ser bastante fácil de mantener. Un enfoque mejor es definir "roles" de nivel superior con el que se comprueba el código y, a continuación, asignar usuarios al rol mediante una base de datos o un sistema de Active Directory (lo que permite que la lista de asignación de usuarios real se almacene externamente desde el código). ASP.NET incluye una API de administración de roles integrada, así como un conjunto integrado de proveedores de roles (incluidos los de SQL y Active Directory) que pueden ayudar a realizar esta asignación de roles o usuarios. A continuación, podríamos actualizar el código para permitir que los usuarios de un rol "admin" específico accedan a la dirección URL de/Dinners/Create:
+Incrustar nombres de usuario específicos en el código tiende a ser bastante inmantenible sin embargo. Un mejor enfoque consiste en definir "roles" de nivel superior con los que se comprueba el código y, a continuación, asignar a los usuarios al rol mediante una base de datos o un sistema de directorio activo (lo que permite que la lista de asignación de usuarios real se almacene externamente desde el código). ASP.NET incluye una API de administración de roles integrada, así como un conjunto integrado de proveedores de roles (incluidos los de SQL y Active Directory) que pueden ayudar a realizar esta asignación de usuario/rol. A continuación, podríamos actualizar el código para permitir que solo los usuarios dentro de un rol específico de "administrador" accedan a la dirección URL /Dinners/Create:
 
 [!code-csharp[Main](secure-applications-using-authentication-and-authorization/samples/sample3.cs)]
 
 ### <a name="using-the-useridentityname-property-when-creating-dinners"></a>Uso de la propiedad User.Identity.Name al crear cenas
 
-Podemos recuperar el nombre de usuario del usuario que ha iniciado sesión actualmente de una solicitud mediante la propiedad User.Identity.Name expuesta en la clase base del controlador.
+Podemos recuperar el nombre de usuario del usuario que ha iniciado sesión actualmente de una solicitud mediante la propiedad User.Identity.Name expuesta en la clase base Controller.
 
-Antes de implementar la versión HTTP-POST de nuestro método de acción Create (), hemos codificado la propiedad "HostedBy" de la cena en una cadena estática. Ahora podemos actualizar este código para usar en su lugar la propiedad User.Identity.Name, así como agregar automáticamente un RSVP para el host que crea la cena:
+Anteriormente, cuando implementamos la versión HTTP-POST de nuestro método de acción Create(), habíamos codificado de forma rígida la propiedad "HostedBy" de Dinner en una cadena estática. Ahora podemos actualizar este código para usar en su lugar la propiedad User.Identity.Name, así como agregar automáticamente un RSVP para el host que crea la cena:
 
 [!code-csharp[Main](secure-applications-using-authentication-and-authorization/samples/sample4.cs)]
 
-Dado que hemos agregado un atributo [Authorize] al método Create (), ASP.NET MVC garantiza que el método de acción solo se ejecute si el usuario que visita la dirección URL de/Dinners/Create está conectado en el sitio. Como tal, el valor de la propiedad User.Identity.Name siempre contendrá un nombre de usuario válido.
+Dado que hemos agregado un atributo [Authorize] al método Create(), ASP.NET MVC garantiza que el método action solo se ejecuta si el usuario que visita la dirección URL /Dinners/Create ha iniciado sesión en el sitio. Como tal, el valor de propiedad User.Identity.Name siempre contendrá un nombre de usuario válido.
 
 ### <a name="using-the-useridentityname-property-when-editing-dinners"></a>Uso de la propiedad User.Identity.Name al editar cenas
 
-Vamos a agregar ahora cierta lógica de autorización que restringe a los usuarios para que solo puedan editar las propiedades de las cenas que hospedan.
+Ahora vamos a agregar alguna lógica de autorización que restrinja a los usuarios para que solo puedan editar las propiedades de las cenas que ellos mismos hospedan.
 
-Para ayudarlo, primero agregaremos un método auxiliar "IsHostedBy (nombre de usuario)" a nuestro objeto cena (dentro de la clase parcial Dinner.cs que hemos creado anteriormente). Este método auxiliar devuelve true o false en función de si un nombre de usuario proporcionado coincide con la propiedad cena HostedBy y encapsula la lógica necesaria para realizar una comparación de cadenas que no distingue mayúsculas de minúsculas:
+Para ayudar con esto, primero agregaremos un método auxiliar "IsHostedBy(username)" a nuestro objeto Dinner (dentro de la clase Dinner.cs parcial que creamos anteriormente). Este método auxiliar devuelve true o false dependiendo de si un nombre de usuario proporcionado coincide con la propiedad Dinner HostedBy y encapsula la lógica necesaria para realizar una comparación de cadenas sin distinción entre mayúsculas y minúsculas de ellos:
 
 [!code-csharp[Main](secure-applications-using-authentication-and-authorization/samples/sample5.cs)]
 
-A continuación, agregaremos un atributo [Authorize] a los métodos de acción Edit () dentro de nuestra clase DinnersController. Esto garantizará que los usuarios deben iniciar sesión para solicitar una dirección URL de */Dinners/Edit/[id]* .
+A continuación, agregaremos un atributo [Authorize] a los métodos de acción Edit() dentro de nuestra clase DinnersController. Esto garantizará que los usuarios deben iniciar sesión para solicitar una dirección URL */Dinners/Edit/[id].*
 
-A continuación, podemos agregar código a los métodos de edición que usa el método auxiliar cena. IsHostedBy (nombre de usuario) para comprobar que el usuario que ha iniciado sesión coincide con el host de la cena. Si el usuario no es el host, se mostrará una vista "InvalidOwner" y finalizará la solicitud. El código para hacerlo tiene el siguiente aspecto:
+A continuación, podemos agregar código a nuestros métodos Edit que usa el método auxiliar Dinner.IsHostedBy(username) para comprobar que el usuario que ha iniciado sesión coincide con el host Dinner. Si el usuario no es el host, mostraremos una vista "InvalidOwner" y terminaremos la solicitud. El código para hacer esto se ve como a continuación:
 
 [!code-csharp[Main](secure-applications-using-authentication-and-authorization/samples/sample6.cs)]
 
-A continuación, podemos hacer clic con el botón derecho en el directorio \Views\Dinners y elegir el comando de menú Ver&gt;para crear una nueva vista "InvalidOwner". Lo rellenaremos con el siguiente mensaje de error:
+A continuación, podemos hacer clic con el botón derecho&gt;en el directorio "Vistas" y elegir el comando de menú Agregar- Vista para crear una nueva vista "InvalidOwner". Lo rellenaremos con el siguiente mensaje de error:
 
 [!code-aspx[Main](secure-applications-using-authentication-and-authorization/samples/sample7.aspx)]
 
-Y ahora cuando un usuario intenta editar una cena que no es de su propiedad, recibirá un mensaje de error:
+Y ahora, cuando un usuario intenta editar una cena que no es de su propiedad, recibirá un mensaje de error:
 
 ![](secure-applications-using-authentication-and-authorization/_static/image7.png)
 
-Podemos repetir los mismos pasos para los métodos de acción Delete () en nuestro controlador para bloquear el permiso para eliminar también las cenas y asegurarse de que solo el anfitrión de una cena puede eliminarla.
+Podemos repetir los mismos pasos para los métodos de acción Delete() dentro de nuestro controlador para bloquear el permiso para eliminar cenas también, y asegurarnos de que solo el host de una cena puede eliminarlo.
 
-### <a name="showinghiding-edit-and-delete-links"></a>Mostrar u ocultar vínculos de edición y eliminación
+### <a name="showinghiding-edit-and-delete-links"></a>Mostrar/Ocultar Editar y Eliminar enlaces
 
-Estamos vinculando al método de acción Edit y Delete de nuestra clase DinnersController de nuestra dirección URL de detalles:
+Estamos vinculando al método de acción Editar y eliminar de nuestra clase DinnersController desde nuestra URL de detalles:
 
 ![](secure-applications-using-authentication-and-authorization/_static/image8.png)
 
-Actualmente se muestran los vínculos de acción de edición y eliminación independientemente de si el visitante de la dirección URL de detalles es el host de la cena. Vamos a cambiar esto para que los vínculos solo se muestren si el usuario visitante es el propietario de la cena.
+Actualmente estamos mostrando los vínculos de acción Editar y Eliminar, independientemente de si el visitante de la URL de detalles es el anfitrión de la cena. Vamos a cambiar esto para que los enlaces solo se muestren si el usuario visitante es el propietario de la cena.
 
-El método de acción Details () de nuestro DinnersController recupera un objeto cena y, a continuación, lo pasa como el objeto de modelo a nuestra plantilla de vista:
+El método de acción Details() dentro de nuestro DinnersController recupera un objeto Dinner y, a continuación, lo pasa como el objeto de modelo a nuestra plantilla de vista:
 
 [!code-csharp[Main](secure-applications-using-authentication-and-authorization/samples/sample8.cs)]
 
-Podemos actualizar nuestra plantilla de vista para mostrar u ocultar condicionalmente los vínculos de edición y eliminación con el método auxiliar cena. IsHostedBy (), como se muestra a continuación:
+Podemos actualizar nuestra plantilla de vista para mostrar/ocultar condicionalmente los enlaces Editar y Eliminar utilizando el método auxiliar Dinner.IsHostedBy() como se muestra a continuación:
 
 [!code-aspx[Main](secure-applications-using-authentication-and-authorization/samples/sample9.aspx)]
 
 #### <a name="next-steps"></a>Pasos siguientes
 
-Ahora veremos cómo podemos habilitar a los usuarios autenticados para que consigan las cenaes mediante AJAX.
+Veamos ahora cómo podemos habilitar a los usuarios autenticados a RSVP para las cenas con AJAX.
 
 > [!div class="step-by-step"]
 > [Anterior](implement-efficient-data-paging.md)

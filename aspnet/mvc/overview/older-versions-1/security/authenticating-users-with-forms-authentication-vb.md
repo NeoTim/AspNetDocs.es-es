@@ -1,151 +1,151 @@
 ---
 uid: mvc/overview/older-versions-1/security/authenticating-users-with-forms-authentication-vb
-title: Autenticar a los usuarios con la autenticación de formularios (VB) | Microsoft Docs
-author: microsoft
-description: Aprenda a usar el atributo [Authorize] para proteger las páginas específicas de la aplicación MVC. También aprenderá a usar la administración de sitios Web...
+title: Autenticación de usuarios con autenticación de formularios (VB) Microsoft Docs
+author: rick-anderson
+description: Aprenda a usar el atributo [Authorize] para proteger con contraseña determinadas páginas de la aplicación MVC. También aprenderá a usar la administración del sitio web...
 ms.author: riande
 ms.date: 01/27/2009
 ms.assetid: 4341f5b1-6fe5-44c5-8b8a-18fa84f80177
 msc.legacyurl: /mvc/overview/older-versions-1/security/authenticating-users-with-forms-authentication-vb
 msc.type: authoredcontent
-ms.openlocfilehash: a2c2140631d59a7f8b21aa73613a92ea5c7a91d0
-ms.sourcegitcommit: e7e91932a6e91a63e2e46417626f39d6b244a3ab
+ms.openlocfilehash: 9e3117af55db2effed20b6421c2322f1c265f1c7
+ms.sourcegitcommit: 022f79dbc1350e0c6ffaa1e7e7c6e850cdabf9af
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78498937"
+ms.lasthandoff: 04/17/2020
+ms.locfileid: "81540823"
 ---
 # <a name="authenticating-users-with-forms-authentication-vb"></a>Autenticar a los usuarios con la autenticación de formularios (VB)
 
 por [Microsoft](https://github.com/microsoft)
 
-> Aprenda a usar el atributo [Authorize] para proteger las páginas específicas de la aplicación MVC. Aprenderá a usar la herramienta de administración de sitios web para crear y administrar usuarios y roles. También aprenderá a configurar dónde se almacena la información de la cuenta de usuario y el rol.
+> Aprenda a usar el atributo [Authorize] para proteger con contraseña determinadas páginas de la aplicación MVC. Aprenderá a usar la herramienta de administración de sitios web para crear y administrar usuarios y roles. También aprenderá a configurar dónde se almacena la información de la cuenta de usuario y del rol.
 
-El objetivo de este tutorial es explicar cómo puede utilizar la autenticación de formularios para proteger las vistas en las aplicaciones ASP.NET MVC. Aprenderá a usar la herramienta de administración de sitios web para crear usuarios y roles. También aprenderá a evitar que usuarios no autorizados invoquen acciones de controlador. Por último, aprenderá a configurar dónde se almacenan los nombres de usuario y las contraseñas.
+El objetivo de este tutorial es explicar cómo puede usar la autenticación de formularios para proteger con contraseña las vistas en las aplicaciones MVC ASP.NET. Aprenderá a usar la herramienta de administración de sitios web para crear usuarios y roles. También aprenderá a evitar que los usuarios no autorizados invoquen acciones de controlador. Por último, aprenderá a configurar dónde se almacenan los nombres de usuario y las contraseñas.
 
-#### <a name="using-the-web-site-administration-tool"></a>Usar la herramienta de administración de sitios web
+#### <a name="using-the-web-site-administration-tool"></a>Uso de la herramienta de administración del sitio web
 
-Antes de hacer nada más, debemos empezar por crear algunos usuarios y roles. La forma más fácil de crear nuevos usuarios y roles es aprovechar la herramienta de administración de sitios web de Visual Studio 2008. Puede iniciar esta herramienta seleccionando la opción de menú **proyecto, configuración de ASP.net**. Como alternativa, puede iniciar la herramienta de administración de sitios web haciendo clic en el icono de (en cierto modo) del martillo que llega al mundo que aparece en la parte superior de la ventana de Explorador de soluciones (consulte la figura 1).
+Antes de hacer cualquier otra cosa, debemos empezar por crear algunos usuarios y roles. La forma más fácil de crear nuevos usuarios y roles es aprovechar la herramienta de administración del sitio web de Visual Studio 2008. Puede iniciar esta herramienta seleccionando la opción de menú **Proyecto, ASP.NET Configuración**. Como alternativa, puede iniciar la herramienta de administración de sitios web haciendo clic en el icono (algo aterrador) del martillo que golpea el mundo que aparece en la parte superior de la ventana del Explorador de soluciones (consulte la figura 1).
 
-**Figura 1: Inicio de la herramienta de administración de sitios web**
+**Figura 1 – Lanzamiento de la herramienta de administración de sitios web**
 
 ![clip_image002[4]](authenticating-users-with-forms-authentication-vb/_static/image1.jpg)
 
-Dentro de la herramienta de administración de sitios web, puede crear nuevos usuarios y roles; para ello, seleccione la pestaña seguridad. Haga clic en el vínculo **crear usuario** para crear un nuevo usuario llamado Stephen (consulte la figura 2). Proporcione al usuario Stephen la contraseña que desee (por ejemplo, *Secret*).
+En la Herramienta de administración de sitios web, puede crear **Create user** nuevos usuarios y roles seleccionando la ficha Seguridad. Proporcione al usuario Stephen cualquier contraseña que desee (por ejemplo, *secreta).*
 
-**Figura 2: creación de un nuevo usuario**
+**Figura 2 – Creación de un nuevo usuario**
 
 ![clip_image004[4]](authenticating-users-with-forms-authentication-vb/_static/image2.jpg)
 
-Para crear nuevos roles, primero se habilitan los roles y se definen uno o varios roles. Habilite los roles haciendo clic en el vínculo **habilitar funciones** . A continuación, cree un rol denominado *administradores* ; para ello, haga clic en el vínculo **crear o administrar roles** (consulte la figura 3).
+Puede crear nuevos roles habilitando primero roles y definiendo uno o varios roles. Habilite los roles haciendo clic en el vínculo **Habilitar roles.** A continuación, cree un rol denominado *Administradores* haciendo clic en el vínculo **Crear o administrar roles** (consulte la figura 3).
 
-**Figura 3: creación de un nuevo rol**
+**Figura 3 – Creación de un nuevo rol**
 
 ![clip_image006[4]](authenticating-users-with-forms-authentication-vb/_static/image3.jpg)
 
-Por último, cree un nuevo usuario llamado Sally y asocie Sally con el rol administradores; para ello, haga clic en el vínculo crear usuario y seleccione administradores al crear Sally (consulte la figura 4).
+Por último, cree un nuevo usuario denominado Sally y asocie Sally con el rol Administradores haciendo clic en el vínculo Crear usuario y seleccionando Administradores al crear Sally (consulte la figura 4).
 
-**Ilustración 4: agregar un usuario a un rol**
+**Figura 4 – Agregar un usuario a un rol**
 
 ![clip_image008[4]](authenticating-users-with-forms-authentication-vb/_static/image4.jpg)
 
-Cuando se dice y se hace todo, debe tener dos nuevos usuarios denominados Stephen y Sally. También debe tener un nuevo rol denominado administradores. Sally es un miembro del rol Administrators y Stephen no lo es.
+Cuando todo está dicho y hecho, usted debe tener dos nuevos usuarios llamados Stephen y Sally. También debe tener un nuevo rol denominado Administradores. Sally es miembro del rol Administradores y Stephen no.
 
-#### <a name="requiring-authorization"></a>Requerir autorización
+#### <a name="requiring-authorization"></a>Exigir autorización
 
-Puede requerir que un usuario se autentique antes de que el usuario invoque una acción del controlador agregando el atributo [Authorize] a la acción. Puede aplicar el atributo [Authorize] a una acción de controlador individual o puede aplicar este atributo a una clase de controlador completa.
+Puede requerir que un usuario se autentique antes de que el usuario invoque una acción de controlador agregando el atributo [Authorize] a la acción. Puede aplicar el atributo [Authorize] a una acción de controlador individual o puede aplicar este atributo a una clase de controlador completa.
 
-Por ejemplo, el controlador de la lista 1 expone una acción denominada CompanySecrets (). Dado que esta acción está decorada con el atributo [Authorize], esta acción no se puede invocar a menos que se autentique un usuario.
+Por ejemplo, el controlador del listado 1 expone una acción denominada CompanySecrets(). Dado que esta acción está decorada con el atributo [Authorize], esta acción no se puede invocar a menos que se autentique un usuario.
 
-**Lista 1: Controllers\HomeController.vb**
+**Listado 1 – Controllers-HomeController.vb**
 
 [!code-vb[Main](authenticating-users-with-forms-authentication-vb/samples/sample1.vb)]
 
-Si invoca la acción CompanySecrets () escribiendo la dirección URL/Home/CompanySecrets en la barra de direcciones del explorador y no es un usuario autenticado, se le redirigirá a la vista de inicio de sesión automáticamente (consulte la figura 5).
+Si invoca la acción CompanySecrets() introduciendo la dirección URL /Home/CompanySecrets en la barra de direcciones de su navegador y no es un usuario autenticado, se le redirigirá automáticamente a la vista Inicio de sesión (consulte la figura 5).
 
-**Figura 5: la vista de inicio de sesión**
+**Figura 5 – La vista de inicio de sesión**
 
 ![clip_image010[4]](authenticating-users-with-forms-authentication-vb/_static/image5.jpg)
 
-Puede usar la vista inicio de sesión para escribir su nombre de usuario y contraseña. Si no es un usuario registrado, puede hacer clic en el vínculo **registrar** para ir a la vista de registro (vea la figura 6). Puede usar la vista registro para crear una nueva cuenta de usuario.
+Puede utilizar la vista Inicio de sesión para introducir su nombre de usuario y contraseña. Si usted no es un usuario registrado entonces usted puede hacer clic el link del **registro** para navegar a la vista del registro (véase el cuadro 6). Puede usar la vista Registrar para crear una nueva cuenta de usuario.
 
-**Ilustración 6: vista de registro**
+**Figura 6 – La vista Registro**
 
 ![clip_image012](authenticating-users-with-forms-authentication-vb/_static/image6.jpg)
 
-Después de iniciar sesión correctamente, puede ver la vista CompanySecrets (consulte la figura 7). De forma predeterminada, seguirá iniciando sesión hasta que cierre la ventana del explorador.
+Después de iniciar sesión correctamente, puede ver la vista CompanySecrets (consulte la figura 7). De forma predeterminada, seguirá sesión hasta que cierre la ventana del navegador.
 
-**Ilustración 7: vista de CompanySecrets**
+**Figura 7 – La vista CompanySecrets**
 
 ![clip_image014](authenticating-users-with-forms-authentication-vb/_static/image7.jpg)
 
 #### <a name="authorizing-by-user-name-or-user-role"></a>Autorización por nombre de usuario o rol de usuario
 
-Puede usar el atributo [Authorize] para restringir el acceso a una acción de controlador a un conjunto determinado de usuarios o a un conjunto determinado de roles de usuario. Por ejemplo, el controlador de inicio modificado en la lista 2 contiene dos nuevas acciones denominadas StephenSecrets () y AdministratorSecrets ().
+Puede usar el atributo [Authorize] para restringir el acceso a una acción de controlador a un conjunto determinado de usuarios o a un conjunto determinado de roles de usuario. Por ejemplo, el controlador Home modificado en el listado 2 contiene dos nuevas acciones denominadas StephenSecrets() y AdministratorSecrets().
 
-**Lista 2: Controllers\HomeController.vb**
+**Listado 2 – Controllers-HomeController.vb**
 
 [!code-vb[Main](authenticating-users-with-forms-authentication-vb/samples/sample2.vb)]
 
-Solo un usuario con el nombre de usuario Stephen puede invocar la acción StephenSecrets (). Todos los demás usuarios se redirigen a la vista de inicio de sesión. La propiedad users acepta una lista separada por comas de nombres de cuentas de usuario.
+Solo un usuario con el nombre de usuario Stephen puede invocar la acción StephenSecrets(). Todos los demás usuarios se redirigen a la vista de inicio de sesión. La propiedad Users acepta una lista separada por comas de nombres de cuenta de usuario.
 
-Solo los usuarios del rol administradores pueden invocar la acción AdministratorSecrets (). Por ejemplo, dado que Sally es un miembro del grupo administradores, puede invocar la acción AdministratorSecrets (). Todos los demás usuarios se redirigen a la vista de inicio de sesión. La propiedad roles acepta una lista separada por comas de nombres de rol.
+Solo los usuarios del rol Administradores pueden invocar la acción AdministratorSecrets(). Por ejemplo, dado que Sally es miembro del grupo Administradores, puede invocar la acción AdministratorSecrets(). Todos los demás usuarios se redirigen a la vista de inicio de sesión. La propiedad Roles acepta una lista separada por comas de nombres de rol.
 
 #### <a name="configuring-authentication"></a>Configuración de la autenticación
 
-Llegados a este punto, es posible que se pregunte dónde se almacena la información de la cuenta de usuario y el rol. De forma predeterminada, la información se almacena en una base de datos SQL Express de (RANU) denominada ASPNETDB. MDF que se encuentra en la aplicación de la aplicación MVC\_la carpeta Data. Esta base de datos la genera el marco de trabajo de ASP.NET automáticamente al empezar a usar la pertenencia.
+En este punto, es posible que se pregunte dónde se almacena la información de la cuenta de usuario y del rol. De forma predeterminada, la información se almacena en una base de datos SQL Express (RANU) denominada ASPNETDB.mdf ubicada en la carpeta App\_Data de la aplicación MVC. Esta base de datos se genera automáticamente por el marco de trabajo de ASP.NET cuando se empieza a usar la pertenencia.
 
-Para ver la base de datos ASPNETDB. MDF en la ventana Explorador de soluciones, primero debe seleccionar la opción de menú proyecto, Mostrar todos los archivos.
+Para ver la base de datos ASPNETDB.mdf en la ventana Explorador de soluciones, primero debe seleccionar la opción de menú Proyecto, Mostrar todos los archivos.
 
-El uso de la base de datos SQL Express predeterminada es adecuado al desarrollar una aplicación. Sin embargo, lo más probable es que no desee usar la base de datos predeterminada ASPNETDB. MDF para una aplicación de producción. En ese caso, puede cambiar la ubicación en la que se almacena la información de la cuenta de usuario; para ello, complete los dos pasos siguientes:
+El uso de la base de datos SQL Express predeterminada está bien al desarrollar una aplicación. Sin embargo, lo más probable es que no desee usar la base de datos ASPNETDB.mdf predeterminada para una aplicación de producción. En ese caso, puede cambiar dónde se almacena la información de la cuenta de usuario completando los dos pasos siguientes:
 
-1. Agregue el Servicios de aplicación objetos de base de datos a la base de datos de producción: cambie la cadena de conexión de la aplicación para que apunte a la base de datos de producción.
+1. Agregar los objetos de base de datos de Application Services a la base de datos de producción: cambie la cadena de conexión de la aplicación para que apunte a la base de datos de producción
 
-El primer paso consiste en Agregar todos los objetos de base de datos necesarios (tablas y procedimientos almacenados) a la base de datos de producción. La forma más fácil de agregar estos objetos a una nueva base de datos es aprovechar las ventajas del Asistente para la instalación de ASP.NET SQL Server (vea la figura 8). Puede iniciar esta herramienta abriendo el símbolo del sistema de Visual Studio 2008 desde el grupo de programas Microsoft Visual Studio 2008 y ejecutando el siguiente comando desde el símbolo del sistema:
+El primer paso es agregar todos los objetos de base de datos necesarios (tablas y procedimientos almacenados) a la base de datos de producción. La forma más fácil de agregar estos objetos a una nueva base de datos es aprovechar las ventajas del Asistente para la instalación de ASP.NET SQL Server (consulte la figura 8). Puede iniciar esta herramienta abriendo el símbolo del sistema de Visual Studio 2008 desde el grupo de programas de Microsoft Visual Studio 2008 y ejecutando el siguiente comando desde el símbolo del sistema:
 
-ASPNET\_regsql
+aspnet\_regsql
 
-**Figura 8: Asistente para la instalación de ASP.NET SQL Server**
+**Figura 8: asistente de instalación de ASP.NET SQL Server**
 
 ![clip_image016](authenticating-users-with-forms-authentication-vb/_static/image8.jpg)
 
-El Asistente para la instalación de ASP.NET SQL Server le permite seleccionar una base de datos SQL Server en la red e instalar todos los objetos de base de datos necesarios para los servicios de aplicación de ASP.NET. No es necesario que el servidor de base de datos se encuentre en el equipo local.
+El Asistente para la instalación de SQL ServerSQL Server ASP.NET permite seleccionar una base de datos de SQL Server en la red e instalar todos los objetos de base de datos requeridos por los servicios de aplicación ASP.NET. No es necesario que el servidor de base de datos se encuentre en el equipo local.
 
 > [!NOTE]
-> Si no desea usar el Asistente para la instalación de ASP.NET SQL Server, puede encontrar scripts SQL para agregar los objetos de base de datos de servicios de aplicación en la siguiente carpeta:
+> Si no desea utilizar el Asistente para la instalación de SQL Serversql Server ASP.NET, puede encontrar scripts SQL para agregar los objetos de base de datos de servicios de aplicación en la carpeta siguiente:
 > 
 > 
-> C:\Windows\Microsoft.NET\Framework\v2.0.50727
+> C:-Windows-Microsoft.NET-Framework-v2.0.50727
 
-Después de crear los objetos de base de datos necesarios, debe modificar la conexión de base de datos utilizada por la aplicación MVC. Modifique la cadena de conexión de ApplicationServices en el archivo de configuración Web (Web. config) para que apunte a la base de datos de producción. Por ejemplo, la conexión modificada de la lista 3 apunta a una base de datos denominada MyProductionDB (la cadena de conexión de ApplicationServices original se ha comentado).
+Después de crear los objetos de base de datos necesarios, debe modificar la conexión de base de datos utilizada por la aplicación MVC. Modifique la cadena de conexión ApplicationServices en el archivo de configuración web (web.config) para que apunte a la base de datos de producción. Por ejemplo, la conexión modificada en el listado 3 apunta a una base de datos denominada MyProductionDB (se ha comentado la cadena de conexión original de ApplicationServices).
 
-**Lista 3: Web. config**
+**Listado 3 – Web.config**
 
 [!code-xml[Main](authenticating-users-with-forms-authentication-vb/samples/sample3.xml)]
 
 #### <a name="configuring-database-permissions"></a>Configuración de permisos de base de datos
 
-Si usa la seguridad integrada para conectarse a la base de datos, tendrá que agregar la cuenta de usuario de Windows correcta como inicio de sesión en la base de datos. La cuenta correcta depende de si utiliza el Servidor de desarrollo de ASP.NET o Internet Information Services como servidor Web. La cuenta de usuario correcta también depende del sistema operativo.
+Si utiliza Integrated Security para conectarse a la base de datos, deberá agregar la cuenta de usuario de Windows correcta como inicio de sesión a la base de datos. La cuenta correcta depende de si está utilizando el servidor de desarrollo de ASP.NET o Internet Information Services como servidor web. La cuenta de usuario correcta también depende de su sistema operativo.
 
-Si usa el Servidor de desarrollo de ASP.NET (el servidor Web predeterminado que usa Visual Studio), la aplicación se ejecuta en el contexto de su cuenta de usuario de Windows. En ese caso, debe agregar la cuenta de usuario de Windows como un inicio de sesión de servidor de bases de datos.
+Si usa el servidor de desarrollo de ASP.NET (el servidor web predeterminado utilizado por Visual Studio), la aplicación se ejecuta en el contexto de su cuenta de usuario de Windows. En ese caso, debe agregar su cuenta de usuario de Windows como inicio de sesión del servidor de base de datos.
 
-Como alternativa, si usa Internet Information Services, debe agregar la cuenta ASPNET o la cuenta NT AUTHORITY/NETWORK SERVICE como un inicio de sesión de servidor de bases de datos. Si usa Windows XP, agregue la cuenta ASPNET como un inicio de sesión a la base de datos. Si usa un sistema operativo más reciente, como Windows Vista o Windows Server 2008, agregue la cuenta NT AUTHORITY/NETWORK SERVICE como el inicio de sesión de la base de datos.
+Como alternativa, si usa Internet Information Services, debe agregar la cuenta ASPNET o la cuenta NT AUTHORITY/NETWORK SERVICE como inicio de sesión del servidor de base de datos. Si usa Windows XP, agregue la cuenta ASPNET como inicio de sesión a la base de datos. Si utiliza un sistema operativo más reciente, como Windows Vista o Windows Server 2008, agregue la cuenta NT AUTHORITY/NETWORK SERVICE como inicio de sesión de base de datos.
 
-Puede Agregar una nueva cuenta de usuario a la base de datos mediante Microsoft SQL Server Management Studio (consulte la figura 9).
+Puede agregar una nueva cuenta de usuario a la base de datos mediante Microsoft SQL Server Management Studio (consulte la figura 9).
 
-**Figura 9: creación de un nuevo inicio de sesión de Microsoft SQL Server**
+**Figura 9 – Creación de un nuevo inicio de sesión de Microsoft SQL Server**
 
 ![clip_image018](authenticating-users-with-forms-authentication-vb/_static/image9.jpg)
 
-Después de crear el inicio de sesión necesario, debe asignar el inicio de sesión a un usuario de base de datos con los roles de base de datos correctos. Haga doble clic en el inicio de sesión y seleccione la pestaña asignación de usuarios. Seleccione uno o varios roles de base de datos de servicios de aplicación. Por ejemplo, para autenticar a los usuarios, debe habilitar el rol de base de datos ASPNET\_Membership\_BasicAccess. Para crear nuevos usuarios, debe habilitar el rol de base de datos ASPNET\_Membership\_FullAccess (vea la figura 10).
+Después de crear el inicio de sesión necesario, debe asignar el inicio de sesión a un usuario de base de datos con los roles de base de datos adecuados. Haga doble clic en el inicio de sesión y seleccione la pestaña Asignación de usuarios. Por ejemplo, para autenticar a los usuarios,\_\_debe habilitar el rol de base de datos aspnet Membership BasicAccess. Para crear nuevos usuarios, debe habilitar\_el\_rol de base de datos FullAccess de pertenencia a aspnet (consulte la figura 10).
 
-**Figura 10: adición de roles de base de datos Servicios de aplicación**
+**Figura 10 – Adición de roles de base de datos de Application Services**
 
 ![clip_image020](authenticating-users-with-forms-authentication-vb/_static/image10.jpg)
 
 #### <a name="summary"></a>Resumen
 
-En este tutorial, aprendió a usar la autenticación de formularios al compilar una aplicación ASP.NET MVC. En primer lugar, aprendió a crear nuevos usuarios y roles aprovechando la herramienta de administración de sitios Web. A continuación, aprendió a usar el atributo [Authorize] para evitar que usuarios no autorizados invoquen acciones de controlador. Por último, ha aprendido a configurar la aplicación MVC para almacenar información de usuarios y roles en una base de datos de producción.
+En este tutorial, aprendió a usar la autenticación de formularios al compilar una aplicación mvc ASP.NET. En primer lugar, aprendió a crear nuevos usuarios y roles aprovechando la herramienta de administración de sitios web. A continuación, aprendió a usar el atributo [Authorize] para evitar que los usuarios no autorizados invoquen acciones de controlador. Por último, aprendió a configurar la aplicación MVC para almacenar información de usuario y rol en una base de datos de producción.
 
 > [!div class="step-by-step"]
 > [Anterior](preventing-javascript-injection-attacks-cs.md)
