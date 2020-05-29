@@ -9,12 +9,12 @@ ms.topic: tutorial
 ms.assetid: d4dfc435-bda6-4621-9762-9ba270f8de4e
 msc.legacyurl: /mvc/overview/getting-started/getting-started-with-ef-using-mvc/migrations-and-deployment-with-the-entity-framework-in-an-asp-net-mvc-application
 msc.type: authoredcontent
-ms.openlocfilehash: 989dd0f0e18b338be057b9c5657586eff996d8ea
-ms.sourcegitcommit: e7e91932a6e91a63e2e46417626f39d6b244a3ab
+ms.openlocfilehash: 21a3efa865e5b5498dfb0f2adec199800fc70c58
+ms.sourcegitcommit: a4c3c7e04e5f53cf8cd334f036d324976b78d154
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78499369"
+ms.lasthandoff: 05/29/2020
+ms.locfileid: "84172981"
 ---
 # <a name="tutorial-use-ef-migrations-in-an-aspnet-mvc-app-and-deploy-to-azure"></a>Tutorial: uso de migraciones de EF en una aplicación ASP.NET MVC e implementación en Azure
 
@@ -25,23 +25,23 @@ Hasta ahora, la aplicación Web de ejemplo contoso University se ha ejecutado lo
 
 Se recomienda utilizar un proceso de integración continua con control de código fuente para la implementación, pero en este tutorial no se tratan los temas. Para más información, consulte los capítulos sobre el [control de código fuente](xref:aspnet/overview/developing-apps-with-windows-azure/building-real-world-cloud-apps-with-windows-azure/source-control) y la [integración continua](xref:aspnet/overview/developing-apps-with-windows-azure/building-real-world-cloud-apps-with-windows-azure/continuous-integration-and-continuous-delivery) de la [creación de aplicaciones en la nube reales con Azure](xref:aspnet/overview/developing-apps-with-windows-azure/building-real-world-cloud-apps-with-windows-azure/introduction).
 
-En este tutorial va a:
+En este tutorial ha:
 
 > [!div class="checklist"]
 > * Habilitación de migraciones de Code First
 > * Implementación de la aplicación en Azure (opcional)
 
-## <a name="prerequisites"></a>Requisitos previos
+## <a name="prerequisites"></a>Prerrequisitos
 
 - [Resistencia de la conexión e intercepción de comandos](connection-resiliency-and-command-interception-with-the-entity-framework-in-an-asp-net-mvc-application.md)
 
 ## <a name="enable-code-first-migrations"></a>Habilitación de migraciones de Code First
 
-Al desarrollar una aplicación nueva, el modelo de datos cambia con frecuencia y, cada vez que lo hace, se deja de sincronizar con la base de datos. Ha configurado el Entity Framework para quitar y volver a crear la base de datos automáticamente cada vez que cambia el modelo de datos. Al agregar, quitar o cambiar las clases de entidad o cambiar la clase `DbContext`, la próxima vez que ejecute la aplicación, se eliminará automáticamente la base de datos existente, se creará una nueva que coincida con el modelo y se inicializará con los datos de prueba.
+Al desarrollar una aplicación nueva, el modelo de datos cambia con frecuencia y, cada vez que lo hace, se deja de sincronizar con la base de datos. Ha configurado el Entity Framework para quitar y volver a crear la base de datos automáticamente cada vez que cambia el modelo de datos. Al agregar, quitar o cambiar las clases de entidad o cambiar la `DbContext` clase, la próxima vez que se ejecute la aplicación, se eliminará automáticamente la base de datos existente, se creará una nueva que coincida con el modelo y se inicializará con los datos de prueba.
 
 Este método para mantener la base de datos sincronizada con el modelo de datos funciona bien hasta que la aplicación se implemente en producción. Cuando la aplicación se ejecuta en producción, normalmente almacena los datos que desea conservar y no desea perder todo cada vez que realice un cambio, como agregar una nueva columna. La característica [migraciones de Code First](https://msdn.microsoft.com/data/jj591621) resuelve este problema habilitando Code First para actualizar el esquema de la base de datos en lugar de quitar y volver a crear la base de datos. En este tutorial, va a implementar la aplicación y a prepararse para habilitar las migraciones.
 
-1. Deshabilite el inicializador que configuró anteriormente; para ello, agregue un comentario o elimine el elemento `contexts` que ha agregado al archivo Web. config de la aplicación.
+1. Deshabilite el inicializador que configuró anteriormente; para ello, agregue un comentario o elimine el `contexts` elemento que agregó al archivo Web. config de la aplicación.
 
     [!code-xml[Main](migrations-and-deployment-with-the-entity-framework-in-an-asp-net-mvc-application/samples/sample1.xml?highlight=2,6)]
 2. También en el archivo *Web. config* de la aplicación, cambie el nombre de la base de datos en la cadena de conexión a ContosoUniversity2.
@@ -51,18 +51,18 @@ Este método para mantener la base de datos sincronizada con el modelo de datos 
     Este cambio configura el proyecto para que la primera migración cree una nueva base de datos. Esto no es necesario, pero verá más adelante por qué es una buena idea.
 3. En el menú **Herramientas**, seleccione **Administrador de paquetes NuGet** > **Consola del Administrador de paquetes**.
 
-1. En el símbolo del sistema de `PM>`, escriba los siguientes comandos:
+1. En el `PM>` símbolo del sistema, escriba los siguientes comandos:
 
     ```text
     enable-migrations
     add-migration InitialCreate
     ```
 
-    El comando `enable-migrations` crea una carpeta *Migrations* en el proyecto ContosoUniversity y coloca en esa carpeta un archivo *Configuration.CS* que se puede editar para configurar las migraciones.
+    El `enable-migrations` comando crea una carpeta *Migrations* en el proyecto ContosoUniversity y coloca en esa carpeta un archivo *Configuration.CS* que se puede editar para configurar las migraciones.
 
-    (Si se perdió el paso anterior que le indica cambiar el nombre de la base de datos, las migraciones buscarán la base de datos existente y realizarán automáticamente el comando `add-migration`. Esto es correcto, simplemente significa que no se ejecutará ninguna prueba del código de las migraciones antes de implementar la base de datos. Más adelante, cuando ejecute el comando `update-database` no ocurrirá nada porque la base de datos ya existe.
+    (Si se perdió el paso anterior que le indica cambiar el nombre de la base de datos, las migraciones buscarán la base de datos existente y realizarán el `add-migration` comando automáticamente. Esto es correcto, simplemente significa que no se ejecutará ninguna prueba del código de las migraciones antes de implementar la base de datos. Más adelante, cuando ejecute el `update-database` comando, no ocurrirá nada porque la base de datos ya existe.
 
-    Abra el archivo *ContosoUniversity\Migrations\Configuration.CS* . Al igual que la clase de inicializador que vio anteriormente, la clase `Configuration` incluye un método `Seed`.
+    Abra el archivo *ContosoUniversity\Migrations\Configuration.CS* . Al igual que la clase de inicializador que vio anteriormente, la `Configuration` clase incluye un `Seed` método.
 
     [!code-csharp[Main](migrations-and-deployment-with-the-entity-framework-in-an-asp-net-mvc-application/samples/sample3.cs)]
 
@@ -70,9 +70,9 @@ Este método para mantener la base de datos sincronizada con el modelo de datos 
 
 ### <a name="set-up-the-seed-method"></a>Configurar el método de inicialización
 
-Cuando se quita y se vuelve a crear la base de datos para cada cambio de modelo de datos, se usa el método `Seed` de la clase de inicializador para insertar los datos de prueba, porque después de cada cambio de modelo se quita la base de datos y se pierden todos los datos de prueba. Con Migraciones de Code First, los datos de prueba se conservan después de los cambios en la base de datos, por lo que normalmente no es necesario incluir datos de prueba en el método de [inicialización](https://msdn.microsoft.com/library/hh829453(v=vs.103).aspx) . De hecho, no desea que el método `Seed` Inserte los datos de prueba si va a usar las migraciones para implementar la base de datos en producción, ya que el método `Seed` se ejecutará en producción. En ese caso, desea que el método `Seed` Inserte en la base de datos solo los datos que necesita en producción. Por ejemplo, puede que desee que la base de datos incluya nombres de Departamento reales en la tabla `Department` cuando la aplicación esté disponible en producción.
+Cuando se quita y se vuelve a crear la base de datos para cada cambio de modelo de datos, se usa el método de la clase de inicializador `Seed` para insertar los datos de prueba, porque después de cada cambio de modelo se quita la base de datos y se pierden todos los datos de prueba. Con Migraciones de Code First, los datos de prueba se conservan después de los cambios en la base de datos, por lo que normalmente no es necesario incluir datos de prueba en el método de [inicialización](https://msdn.microsoft.com/library/hh829453(v=vs.103).aspx) . De hecho, no desea que el `Seed` método Inserte los datos de prueba si va a usar las migraciones para implementar la base de datos en producción, ya que el `Seed` método se ejecutará en producción. En ese caso, desea que el `Seed` método Inserte en la base de datos solo los datos que necesita en producción. Por ejemplo, puede que desee que la base de datos incluya nombres de Departamento reales en la `Department` tabla cuando la aplicación esté disponible en producción.
 
-En este tutorial, va a usar las migraciones para la implementación, pero el método de `Seed` insertará los datos de prueba para que sea más fácil ver cómo funciona la funcionalidad de la aplicación sin tener que insertar manualmente una gran cantidad de datos.
+En este tutorial, usará migraciones para la implementación, pero el `Seed` método insertará los datos de prueba para que sea más fácil ver cómo funciona la funcionalidad de la aplicación sin tener que insertar manualmente una gran cantidad de datos.
 
 1. Reemplace el contenido del archivo *Configuration.CS* por el código siguiente, que carga los datos de prueba en la nueva base de datos.
 
@@ -80,9 +80,9 @@ En este tutorial, va a usar las migraciones para la implementación, pero el mé
 
     El método de [inicialización](https://msdn.microsoft.com/library/hh829453(v=vs.103).aspx) toma el objeto de contexto de base de datos como parámetro de entrada y el código del método usa ese objeto para agregar nuevas entidades a la base de datos. Para cada tipo de entidad, el código crea una colección de nuevas entidades, las agrega a la propiedad [DbSet](https://msdn.microsoft.com/library/system.data.entity.dbset(v=vs.103).aspx) adecuada y, a continuación, guarda los cambios en la base de datos. No es necesario llamar al método [SaveChanges](https://msdn.microsoft.com/library/system.data.entity.dbcontext.savechanges(v=VS.103).aspx) después de cada grupo de entidades, como se hace aquí, pero hacerlo le ayuda a localizar el origen de un problema si se produce una excepción mientras el código está escribiendo en la base de datos.
 
-    Algunas de las instrucciones que insertan datos usan el método [AddOrUpdate](https://msdn.microsoft.com/library/system.data.entity.migrations.idbsetextensions.addorupdate(v=vs.103).aspx) para realizar una operación "Upsert". Dado que el método de `Seed` se ejecuta cada vez que se ejecuta el comando `update-database`, normalmente después de cada migración, no se pueden insertar datos, ya que las filas que está intentando agregar ya estarán allí después de la primera migración que crea la base de datos. La operación "Upsert" evita errores que podrían producirse si se intenta insertar una fila que ya existe, pero ***reemplaza*** cualquier cambio en los datos que haya realizado al probar la aplicación. En el caso de los datos de prueba de algunas tablas, es posible que no desee que suceda: en algunos casos, cuando cambie los datos mientras realiza las pruebas desea que los cambios permanezcan después de las actualizaciones de la base de datos. En ese caso, desea realizar una operación de inserción condicional: Inserte una fila solo si aún no existe. El método de inicialización utiliza ambos enfoques.
+    Algunas de las instrucciones que insertan datos usan el método [AddOrUpdate](https://msdn.microsoft.com/library/system.data.entity.migrations.idbsetextensions.addorupdate(v=vs.103).aspx) para realizar una operación "Upsert". Dado que el `Seed` método se ejecuta cada vez que se ejecuta el `update-database` comando, normalmente después de cada migración, no se pueden insertar datos, ya que las filas que está intentando agregar ya estarán allí después de la primera migración que crea la base de datos. La operación "Upsert" evita errores que podrían producirse si se intenta insertar una fila que ya existe, pero ***reemplaza*** cualquier cambio en los datos que haya realizado al probar la aplicación. En el caso de los datos de prueba de algunas tablas, es posible que no desee que suceda: en algunos casos, cuando cambie los datos mientras realiza las pruebas desea que los cambios permanezcan después de las actualizaciones de la base de datos. En ese caso, desea realizar una operación de inserción condicional: Inserte una fila solo si aún no existe. El método de inicialización utiliza ambos enfoques.
 
-    El primer parámetro que se pasa al método [AddOrUpdate](https://msdn.microsoft.com/library/system.data.entity.migrations.idbsetextensions.addorupdate(v=vs.103).aspx) especifica la propiedad que se va a usar para comprobar si ya existe una fila. En el caso de los datos de estudiante de prueba que se proporcionan, se puede usar la propiedad `LastName` para este propósito, ya que cada apellido de la lista es único:
+    El primer parámetro que se pasa al método [AddOrUpdate](https://msdn.microsoft.com/library/system.data.entity.migrations.idbsetextensions.addorupdate(v=vs.103).aspx) especifica la propiedad que se va a usar para comprobar si ya existe una fila. En el caso de los datos de estudiante de prueba que se proporcionan, la `LastName` propiedad se puede usar para este propósito, ya que los apellidos de la lista son únicos:
 
     [!code-csharp[Main](migrations-and-deployment-with-the-entity-framework-in-an-asp-net-mvc-application/samples/sample5.cs)]
 
@@ -90,15 +90,15 @@ En este tutorial, va a usar las migraciones para la implementación, pero el mé
 
     **La secuencia contiene más de un elemento**
 
-    Para obtener información acerca de cómo administrar datos redundantes, como dos estudiantes denominados "Alexander Carson", consulte las bases de datos de [propagación y Depuración Entity Framework (EF)](https://blogs.msdn.com/b/rickandy/archive/2013/02/12/seeding-and-debugging-entity-framework-ef-dbs.aspx) en el blog de Rick Anderson. Para obtener más información sobre el método `AddOrUpdate`, consulte el método de encargarse [con EF 4,3 AddOrUpdate](http://thedatafarm.com/blog/data-access/take-care-with-ef-4-3-addorupdate-method/) en el blog de Julia Lerman.
+    Para obtener información acerca de cómo administrar datos redundantes, como dos estudiantes denominados "Alexander Carson", consulte las bases de datos de [propagación y Depuración Entity Framework (EF)](https://blogs.msdn.com/b/rickandy/archive/2013/02/12/seeding-and-debugging-entity-framework-ef-dbs.aspx) en el blog de Rick Anderson. Para obtener más información sobre el método, consulte el blog sobre cómo encargarse `AddOrUpdate` [con el método EF 4,3 AddOrUpdate](http://thedatafarm.com/blog/data-access/take-care-with-ef-4-3-addorupdate-method/) en el blog de Julia Lerman.
 
-    El código que crea entidades `Enrollment` supone que tiene el valor `ID` en las entidades de la colección `students`, aunque no estableció esa propiedad en el código que crea la colección.
+    El código que crea `Enrollment` entidades supone que tiene el `ID` valor en las entidades de la `students` colección, aunque no estableció esa propiedad en el código que crea la colección.
 
     [!code-csharp[Main](migrations-and-deployment-with-the-entity-framework-in-an-asp-net-mvc-application/samples/sample6.cs?highlight=2)]
 
-    Aquí puede usar la propiedad `ID` porque se establece el valor de `ID` cuando se llama a `SaveChanges` para la colección de `students`. EF obtiene automáticamente el valor de la clave principal cuando inserta una entidad en la base de datos y actualiza la propiedad `ID` de la entidad en la memoria.
+    Puede usar la `ID` propiedad aquí porque el `ID` valor se establece cuando se llama a `SaveChanges` para la `students` colección. EF obtiene automáticamente el valor de la clave principal cuando inserta una entidad en la base de datos y actualiza la `ID` propiedad de la entidad en la memoria.
 
-    El código que agrega cada entidad `Enrollment` al conjunto de entidades `Enrollments` no usa el método `AddOrUpdate`. Comprueba si ya existe una entidad e inserta la entidad si no existe. Este enfoque conservará los cambios que realice en una calificación de inscripción mediante la interfaz de usuario de la aplicación. El código recorre en bucle cada miembro de la [lista](https://msdn.microsoft.com/library/6sh2ey19.aspx) de `Enrollment`y, si no se encuentra la inscripción en la base de datos, agrega la inscripción a la base de datos. La primera vez que actualice la base de datos, la base de datos estará vacía, por lo que agregará cada inscripción.
+    El código que agrega cada `Enrollment` entidad al `Enrollments` conjunto de entidades no usa el `AddOrUpdate` método. Comprueba si ya existe una entidad e inserta la entidad si no existe. Este enfoque conservará los cambios que realice en una calificación de inscripción mediante la interfaz de usuario de la aplicación. El código recorre en bucle cada miembro de la `Enrollment` [lista](https://msdn.microsoft.com/library/6sh2ey19.aspx) y, si no se encuentra la inscripción en la base de datos, agrega la inscripción a la base de datos. La primera vez que actualice la base de datos, la base de datos estará vacía, por lo que agregará cada inscripción.
 
     [!code-csharp[Main](migrations-and-deployment-with-the-entity-framework-in-an-asp-net-mvc-application/samples/sample7.cs)]
 
@@ -106,21 +106,21 @@ En este tutorial, va a usar las migraciones para la implementación, pero el mé
 
 ### <a name="execute-the-first-migration"></a>Ejecutar la primera migración
 
-Al ejecutar el comando `add-migration`, las migraciones generaron el código que crearía la base de datos desde cero. Este código también se encuentra en la carpeta *Migrations* , en el archivo denominado *&lt;timestamp&gt;\_InitialCreate.CS*. El método `Up` de la clase `InitialCreate` crea las tablas de base de datos que corresponden a los conjuntos de entidades del modelo de datos y el método `Down` las elimina.
+Al ejecutar el `add-migration` comando, las migraciones generaron el código que crearía la base de datos desde cero. Este código también se encuentra en la carpeta *Migrations* , en el archivo denominado * &lt; timestamp &gt; \_ InitialCreate.CS*. El `Up` método de la `InitialCreate` clase crea las tablas de base de datos que corresponden a los conjuntos de entidades del modelo de datos y el `Down` método las elimina.
 
 [!code-csharp[Main](migrations-and-deployment-with-the-entity-framework-in-an-asp-net-mvc-application/samples/sample8.cs)]
 
 Las migraciones llaman al método `Up` para implementar los cambios del modelo de datos para una migración. Cuando se escribe un comando para revertir la actualización, las migraciones llaman al método `Down`.
 
-Se trata de la migración inicial que se creó al escribir el comando `add-migration InitialCreate`. El parámetro (`InitialCreate` en el ejemplo) se usa para el nombre de archivo y puede ser el que desee. Normalmente, se elige una palabra o frase que resume lo que se hace en la migración. Por ejemplo, puede asignar un nombre a una migración posterior &quot;AddDepartmentTable&quot;.
+Se trata de la migración inicial que se creó al escribir el `add-migration InitialCreate` comando. El parámetro ( `InitialCreate` en el ejemplo) se usa para el nombre de archivo y puede ser el que desee; normalmente, se elige una palabra o frase que resume lo que se hace en la migración. Por ejemplo, puede asignar un nombre a una AddDepartmentTable de migración posterior &quot; &quot; .
 
-Si creó la migración inicial cuando la base de datos ya existía, se genera el código de creación de la base de datos pero no es necesario ejecutarlo porque la base de datos ya coincide con el modelo de datos. Al implementar la aplicación en otro entorno donde la base de datos todavía no existe, se ejecutará este código para crear la base de datos, por lo que es recomendable probarlo primero. Esta es la razón por la que cambió el nombre de la base de datos en la cadena de conexión anterior&mdash;para que las migraciones puedan crear una nueva desde cero.
+Si creó la migración inicial cuando la base de datos ya existía, se genera el código de creación de la base de datos pero no es necesario ejecutarlo porque la base de datos ya coincide con el modelo de datos. Al implementar la aplicación en otro entorno donde la base de datos todavía no existe, se ejecutará este código para crear la base de datos, por lo que es recomendable probarlo primero. Esta es la razón por la que cambió el nombre de la base de datos en la cadena de conexión antes de &mdash; que las migraciones puedan crear una nueva desde el principio.
 
-1. En la ventana **Consola del Administrador de paquetas** , escriba el siguiente comando:
+1. En la ventana de la **consola del administrador de paquetes** , escriba el siguiente comando:
 
     `update-database`
 
-    El comando `update-database` ejecuta el método `Up` para crear la base de datos y, a continuación, ejecuta el método `Seed` para rellenar la base de datos. El mismo proceso se ejecutará automáticamente en producción después de implementar la aplicación, como verá en la sección siguiente.
+    El `update-database` comando ejecuta el `Up` método para crear la base de datos y, a continuación, ejecuta el `Seed` método para rellenar la base de datos. El mismo proceso se ejecutará automáticamente en producción después de implementar la aplicación, como verá en la sección siguiente.
 2. Use **Explorador de servidores** para inspeccionar la base de datos como hizo en el primer tutorial y ejecute la aplicación para comprobar que todo funciona igual que antes.
 
 ## <a name="deploy-to-azure"></a>Implementar en Azure
@@ -129,11 +129,11 @@ Hasta ahora, la aplicación se ejecuta localmente en IIS Express en el equipo de
 
 ### <a name="use-code-first-migrations-to-deploy-the-database"></a>Usar migraciones de Code First para implementar la base de datos
 
-Para implementar la base de datos, usará Migraciones de Code First. Al crear el perfil de publicación que se usa para configurar las opciones de implementación desde Visual Studio, se activará la casilla **Actualizar base de datos**. Esta configuración hace que el proceso de implementación configure automáticamente el archivo *Web. config* de la aplicación en el servidor de destino para que Code First utilice la clase de inicializador `MigrateDatabaseToLatestVersion`.
+Para implementar la base de datos, usará Migraciones de Code First. Al crear el perfil de publicación que se usa para configurar las opciones de implementación desde Visual Studio, se activará la casilla **Actualizar base de datos**. Esta configuración hace que el proceso de implementación configure automáticamente el archivo *Web. config* de la aplicación en el servidor de destino para que Code First utilice la `MigrateDatabaseToLatestVersion` clase de inicializador.
 
-Visual Studio no hace nada con la base de datos durante el proceso de implementación mientras está copiando el proyecto en el servidor de destino. Cuando se ejecuta la aplicación implementada y se obtiene acceso a la base de datos por primera vez después de la implementación, Code First comprueba si la base de datos coincide con el modelo de datos. Si hay un error de coincidencia, Code First crea automáticamente la base de datos (si aún no existe) o actualiza el esquema de la base de datos a la versión más reciente (si existe una base de datos pero no coincide con el modelo). Si la aplicación implementa un método de `Seed` migraciones, el método se ejecuta después de que se cree la base de datos o se actualice el esquema.
+Visual Studio no hace nada con la base de datos durante el proceso de implementación mientras está copiando el proyecto en el servidor de destino. Cuando se ejecuta la aplicación implementada y se obtiene acceso a la base de datos por primera vez después de la implementación, Code First comprueba si la base de datos coincide con el modelo de datos. Si hay un error de coincidencia, Code First crea automáticamente la base de datos (si aún no existe) o actualiza el esquema de la base de datos a la versión más reciente (si existe una base de datos pero no coincide con el modelo). Si la aplicación implementa un método de migración `Seed` , el método se ejecuta después de que se cree la base de datos o se actualice el esquema.
 
-El método Migrations `Seed` inserta datos de prueba. Si estuviera implementando en un entorno de producción, tendría que cambiar el método de `Seed` para que solo inserte los datos que desea insertar en la base de datos de producción. Por ejemplo, en el modelo de datos actual podría querer tener cursos reales pero estudiantes ficticios en la base de datos de desarrollo. Puede escribir un método `Seed` para cargarlo tanto en el entorno de desarrollo como para, a continuación, comentar los estudiantes ficticios antes de realizar la implementación en producción. O bien, puede escribir un método `Seed` para cargar solo los cursos, y especificar los estudiantes ficticios en la base de datos de prueba manualmente mediante la interfaz de usuario de la aplicación.
+El método Migrations `Seed` inserta datos de prueba. Si estuviera implementando en un entorno de producción, tendría que cambiar el método para `Seed` que solo inserte los datos que desea insertar en la base de datos de producción. Por ejemplo, en el modelo de datos actual podría querer tener cursos reales pero estudiantes ficticios en la base de datos de desarrollo. Puede escribir un `Seed` método para cargarlo en el entorno de desarrollo y, a continuación, comentar a los estudiantes ficticios antes de realizar la implementación en producción. O bien, puede escribir un `Seed` método para cargar solo los cursos y escribir los estudiantes ficticios en la base de datos de prueba manualmente mediante la interfaz de usuario de la aplicación.
 
 ### <a name="get-an-azure-account"></a>Obtener una cuenta de Azure
 
@@ -182,7 +182,7 @@ Implementará la base de datos en Azure SQL Database. SQL Database es un servici
 
 2. En la página **seleccionar un destino de publicación** , elija **App Service** y, a continuación, **Seleccione existente**y, a continuación, elija **publicar**.
 
-    ![Seleccionar una página de destino de publicación](migrations-and-deployment-with-the-entity-framework-in-an-asp-net-mvc-application/_static/publish-select-existing-azure-app-service.png)
+    ![Seleccionar una página de destino de publicación](migrations-and-deployment-with-the-entity-framework-in-an-asp-net-mvc-application/_static/select-existing-app-service.png)
 
 3. Si no ha agregado previamente su suscripción de Azure en Visual Studio, siga los pasos de la pantalla. Estos pasos permiten que Visual Studio se conecte a su suscripción de Azure para que la lista de **App Services** incluya el sitio Web.
 
@@ -196,11 +196,11 @@ Implementará la base de datos en Azure SQL Database. SQL Database es un servici
 
     La aplicación se ejecuta ahora en la nube.
 
-En este momento, la base de datos *SchoolContext* se ha creado en la base de datos SQL de Azure porque seleccionó **Ejecutar migraciones de Code First (se ejecuta al iniciar la aplicación)** . El archivo *Web. config* del sitio Web implementado se ha cambiado para que el inicializador [MigrateDatabaseToLatestVersion](https://msdn.microsoft.com/library/hh829476(v=vs.103).aspx) se ejecute la primera vez que el código lea o escriba datos en la base de datos (que se produjo al seleccionar la pestaña **Students** ):
+En este momento, la base de datos *SchoolContext* se ha creado en la base de datos SQL de Azure porque seleccionó **Ejecutar migraciones de Code First (se ejecuta al iniciar la aplicación)**. El archivo *Web. config* del sitio Web implementado se ha cambiado para que el inicializador [MigrateDatabaseToLatestVersion](https://msdn.microsoft.com/library/hh829476(v=vs.103).aspx) se ejecute la primera vez que el código lea o escriba datos en la base de datos (que se produjo al seleccionar la pestaña **Students** ):
 
 ![Extracto del archivo Web. config](https://asp.net/media/4367421/mig.png)
 
-El proceso de implementación también ha creado una nueva cadena de conexión *(SchoolContext\_DatabasePublish*) para que migraciones de Code First la pueda usar para actualizar el esquema de la base de datos y para inicializar la base de datos.
+El proceso de implementación también creó una nueva cadena de conexión *(SchoolContext \_ DatabasePublish*) para migraciones de Code First que se va a usar para actualizar el esquema de la base de datos y para inicializar la base de datos.
 
 ![Cadena de conexión en el archivo Web. config](migrations-and-deployment-with-the-entity-framework-in-an-asp-net-mvc-application/_static/image26.png)
 
@@ -221,21 +221,21 @@ Para obtener información sobre otros escenarios de migración, consulte la [ser
 
 `update-database -target MigrationName`
 
-El comando `update-database -target MigrationName` ejecuta la migración de destino.
+El `update-database -target MigrationName` comando ejecuta la migración de destino.
 
 ## <a name="ignore-migration-changes-to-database"></a>Omitir cambios de migración en la base de datos
 
 `Add-migration MigrationName -ignoreChanges`
 
-`ignoreChanges` crea una migración vacía con el modelo actual como una instantánea.
+`ignoreChanges`crea una migración vacía con el modelo actual como una instantánea.
 
 ## <a name="code-first-initializers"></a>Inicializadores de Code First
 
-En la sección implementación, vio el inicializador [MigrateDatabaseToLatestVersion](https://msdn.microsoft.com/library/hh829476(v=vs.103).aspx) que se usaba. Code First también proporciona otros inicializadores, como [CreateDatabaseIfNotExists](https://msdn.microsoft.com/library/gg679221(v=vs.103).aspx) (el valor predeterminado), [DropCreateDatabaseIfModelChanges](https://msdn.microsoft.com/library/gg679604(v=VS.103).aspx) (que usó anteriormente) y [DropCreateDatabaseAlways](https://msdn.microsoft.com/library/gg679506(v=VS.103).aspx). El inicializador de `DropCreateAlways` puede ser útil para configurar las condiciones de las pruebas unitarias. También puede escribir sus propios inicializadores, y puede llamar a un inicializador explícitamente si no desea esperar hasta que la aplicación lea o escriba en la base de datos.
+En la sección implementación, vio el inicializador [MigrateDatabaseToLatestVersion](https://msdn.microsoft.com/library/hh829476(v=vs.103).aspx) que se usaba. Code First también proporciona otros inicializadores, como [CreateDatabaseIfNotExists](https://msdn.microsoft.com/library/gg679221(v=vs.103).aspx) (el valor predeterminado), [DropCreateDatabaseIfModelChanges](https://msdn.microsoft.com/library/gg679604(v=VS.103).aspx) (que usó anteriormente) y [DropCreateDatabaseAlways](https://msdn.microsoft.com/library/gg679506(v=VS.103).aspx). El `DropCreateAlways` inicializador puede ser útil para configurar las condiciones de las pruebas unitarias. También puede escribir sus propios inicializadores, y puede llamar a un inicializador explícitamente si no desea esperar hasta que la aplicación lea o escriba en la base de datos.
 
 Para obtener más información sobre los inicializadores, vea [Descripción de los inicializadores de base de datos en Entity Framework Code First](http://www.codeguru.com/csharp/article.php/c19999/Understanding-Database-Initializers-in-Entity-Framework-Code-First.htm) y el capítulo 6 del libro [Programming Entity Framework: Code First](http://shop.oreilly.com/product/0636920022220.do) by Julia Lerman y Rowan Miller.
 
-## <a name="get-the-code"></a>Obtención del código
+## <a name="get-the-code"></a>Obtener el código
 
 [Descargar el proyecto completado](https://webpifeed.blob.core.windows.net/webpifeed/Partners/ASP.NET%20MVC%20Application%20Using%20Entity%20Framework%20Code%20First.zip)
 
@@ -245,7 +245,7 @@ Los vínculos a otros recursos de Entity Framework pueden encontrarse en [el acc
 
 ## <a name="next-steps"></a>Pasos siguientes
 
-En este tutorial va a:
+En este tutorial ha:
 
 > [!div class="checklist"]
 > * Migraciones de Code First habilitadas

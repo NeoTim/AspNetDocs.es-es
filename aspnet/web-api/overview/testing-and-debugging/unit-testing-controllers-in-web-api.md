@@ -8,12 +8,12 @@ ms.date: 06/11/2014
 ms.assetid: 43a6cce7-a3ef-42aa-ad06-90d36d49f098
 msc.legacyurl: /web-api/overview/testing-and-debugging/unit-testing-controllers-in-web-api
 msc.type: authoredcontent
-ms.openlocfilehash: cdb1700537021e276669de1a9e0330a62659746c
-ms.sourcegitcommit: e7e91932a6e91a63e2e46417626f39d6b244a3ab
+ms.openlocfilehash: 3b89009a375e766f1c5b439dfe3fffd43b4963b3
+ms.sourcegitcommit: a4c3c7e04e5f53cf8cd334f036d324976b78d154
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78447007"
+ms.lasthandoff: 05/29/2020
+ms.locfileid: "84172931"
 ---
 # <a name="unit-testing-controllers-in-aspnet-web-api-2"></a>Controladores de pruebas unitarias en ASP.NET Web API 2
 
@@ -30,7 +30,7 @@ por [Mike Wasson](https://github.com/MikeWasson)
 > [!NOTE]
 > He usado MOQ, pero la misma idea se aplica a cualquier marco ficticio. MOQ 4.5.30 (y versiones posteriores) es compatible con Visual Studio 2017, Roslyn y .NET 4,5 y versiones posteriores.
 
-Un patrón común en las pruebas unitarias es &quot;Arrange-Act-Assert&quot;:
+Un patrón común en las pruebas unitarias es &quot; Arrange-Act-Assert &quot; :
 
 - Organizar: Configure los requisitos previos para que se ejecute la prueba.
 - Act: realice la prueba.
@@ -53,7 +53,7 @@ A continuación se muestra un ejemplo de un controlador cuyas acciones devuelven
 
 [!code-csharp[Main](unit-testing-controllers-in-web-api/samples/sample1.cs)]
 
-Observe que el controlador utiliza la inserción de dependencias para insertar un `IProductRepository`. Esto hace que el controlador sea más comprobable, ya que puede insertar un repositorio ficticio. La prueba unitaria siguiente comprueba que el método `Get` escribe un `Product` en el cuerpo de la respuesta. Supongamos que `repository` es un `IProductRepository`ficticio.
+Observe que el controlador utiliza la inserción de dependencias para insertar un `IProductRepository` . Esto hace que el controlador sea más comprobable, ya que puede insertar un repositorio ficticio. La prueba unitaria siguiente comprueba que el `Get` método escribe un `Product` en el cuerpo de la respuesta. Supongamos que `repository` es un simulacro `IProductRepository` .
 
 [!code-csharp[Main](unit-testing-controllers-in-web-api/samples/sample2.cs)]
 
@@ -61,13 +61,13 @@ Es importante establecer la **solicitud** y la **configuración** en el controla
 
 ## <a name="testing-link-generation"></a>Probar la generación de vínculos
 
-El método `Post` llama a **UrlHelper. Link** para crear vínculos en la respuesta. Esto requiere un poco más de configuración en la prueba unitaria:
+El `Post` método llama a **UrlHelper. Link** para crear vínculos en la respuesta. Esto requiere un poco más de configuración en la prueba unitaria:
 
 [!code-csharp[Main](unit-testing-controllers-in-web-api/samples/sample3.cs)]
 
 La clase **UrlHelper** necesita la dirección URL de la solicitud y los datos de ruta, por lo que la prueba tiene que establecer valores para ellos. Otra opción es Mock o stub **UrlHelper**. Con este enfoque, reemplazará el valor predeterminado de [ApiController. URL](https://msdn.microsoft.com/library/system.web.http.apicontroller.url.aspx) por una versión de código auxiliar o ficticio que devuelva un valor fijo.
 
-Vamos a escribir la prueba con el marco [MOQ](https://github.com/Moq) . Instale el paquete NuGet de `Moq` en el proyecto de prueba.
+Vamos a escribir la prueba con el marco [MOQ](https://github.com/Moq) . Instale el `Moq` paquete NuGet en el proyecto de prueba.
 
 [!code-csharp[Main](unit-testing-controllers-in-web-api/samples/sample4.cs)]
 
@@ -85,7 +85,7 @@ En este ejemplo se muestran algunos patrones comunes con **IHttpActionResult**. 
 
 ### <a name="action-returns-200-ok-with-a-response-body"></a>La acción devuelve 200 (correcto) con un cuerpo de respuesta
 
-El método `Get` llama a `Ok(product)` si se encuentra el producto. En la prueba unitaria, asegúrese de que el tipo de valor devuelto es **OkNegotiatedContentResult** y que el producto devuelto tiene el identificador correcto.
+El `Get` método llama a `Ok(product)` si se encuentra el producto. En la prueba unitaria, asegúrese de que el tipo de valor devuelto es **OkNegotiatedContentResult** y que el producto devuelto tiene el identificador correcto.
 
 [!code-csharp[Main](unit-testing-controllers-in-web-api/samples/sample6.cs)]
 
@@ -93,30 +93,30 @@ Tenga en cuenta que la prueba unitaria no ejecuta el resultado de la acción. Pu
 
 ### <a name="action-returns-404-not-found"></a>La acción devuelve 404 (no encontrado)
 
-El método `Get` llama a `NotFound()` si no se encuentra el producto. En este caso, la prueba unitaria solo comprueba si el tipo de valor devuelto es **NotFoundResult**.
+El `Get` método llama a `NotFound()` si no se encuentra el producto. En este caso, la prueba unitaria solo comprueba si el tipo de valor devuelto es **NotFoundResult**.
 
 [!code-csharp[Main](unit-testing-controllers-in-web-api/samples/sample7.cs)]
 
 ### <a name="action-returns-200-ok-with-no-response-body"></a>La acción devuelve 200 (correcto) sin cuerpo de respuesta
 
-El método `Delete` llama a `Ok()` para devolver una respuesta HTTP 200 vacía. Al igual que en el ejemplo anterior, la prueba unitaria comprueba el tipo de valor devuelto, en este caso **OkResult**.
+El `Delete` método llama `Ok()` a para devolver una respuesta http 200 vacía. Al igual que en el ejemplo anterior, la prueba unitaria comprueba el tipo de valor devuelto, en este caso **OkResult**.
 
 [!code-csharp[Main](unit-testing-controllers-in-web-api/samples/sample8.cs)]
 
 ### <a name="action-returns-201-created-with-a-location-header"></a>La acción devuelve 201 (creado) con un encabezado de ubicación
 
-El método `Post` llama a `CreatedAtRoute` para devolver una respuesta HTTP 201 con un URI en el encabezado Location. En la prueba unitaria, compruebe que la acción establece los valores de enrutamiento correctos.
+El `Post` método llama `CreatedAtRoute` a para devolver una respuesta http 201 con un URI en el encabezado de ubicación. En la prueba unitaria, compruebe que la acción establece los valores de enrutamiento correctos.
 
 [!code-csharp[Main](unit-testing-controllers-in-web-api/samples/sample9.cs)]
 
 ### <a name="action-returns-another-2xx-with-a-response-body"></a>La acción devuelve otro 2xx con un cuerpo de respuesta
 
-El método `Put` llama a `Content` para devolver una respuesta HTTP 202 (aceptado) con un cuerpo de respuesta. Este caso es similar a devolver 200 (correcto), pero la prueba unitaria también debe comprobar el código de estado.
+El `Put` método llama `Content` a para devolver una respuesta http 202 (aceptada) con un cuerpo de respuesta. Este caso es similar a devolver 200 (correcto), pero la prueba unitaria también debe comprobar el código de estado.
 
 [!code-csharp[Main](unit-testing-controllers-in-web-api/samples/sample10.cs)]
 
 ## <a name="additional-resources"></a>Recursos adicionales
 
 - [Entity Framework ficticios cuando las pruebas unitarias ASP.NET Web API 2](mocking-entity-framework-when-unit-testing-aspnet-web-api-2.md)
-- [Escritura de pruebas para un servicio de ASP.net web API](https://blogs.msdn.com/b/youssefm/archive/2013/01/28/writing-tests-for-an-asp-net-webapi-service.aspx) (entrada de blog de Youssef Moussaoui).
-- [Depurar ASP.NET Web API con Route Debugger](https://blogs.msdn.com/b/webdev/archive/2013/04/04/debugging-asp-net-web-api-with-route-debugger.aspx)
+- [Escritura de pruebas para un servicio de ASP.net web API](https://docs.microsoft.com/en-gb/archive/blogs/youssefm/writing-tests-for-an-asp-net-web-api-service) (entrada de blog de Youssef Moussaoui).
+- [Depuración de ASP.NET Web API con Route Debugger](https://blogs.msdn.com/b/webdev/archive/2013/04/04/debugging-asp-net-web-api-with-route-debugger.aspx)

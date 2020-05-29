@@ -1,6 +1,6 @@
 ---
 uid: web-api/overview/advanced/calling-a-web-api-from-a-net-client
-title: Llamada a una API Web desde un cliente .NETC#()-ASP.net 4. x
+title: Llamada a una API Web desde un cliente .NET (C#)-ASP.NET 4. x
 author: MikeWasson
 description: En este tutorial se muestra cómo llamar a una API Web desde una aplicación .NET 4. x.
 ms.author: riande
@@ -8,14 +8,14 @@ ms.date: 11/24/2017
 ms.custom: seoapril2019
 msc.legacyurl: /web-api/overview/advanced/calling-a-web-api-from-a-net-client
 msc.type: authoredcontent
-ms.openlocfilehash: ab3ba71839123e848dffaa59871f9dac8c1a88d0
-ms.sourcegitcommit: e7e91932a6e91a63e2e46417626f39d6b244a3ab
+ms.openlocfilehash: 484d927eeb0ba49f5f00d476f4658ebc081d0a4a
+ms.sourcegitcommit: a4c3c7e04e5f53cf8cd334f036d324976b78d154
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78504961"
+ms.lasthandoff: 05/29/2020
+ms.locfileid: "84172944"
 ---
-# <a name="call-a-web-api-from-a-net-client-c"></a>Llamada a una API Web desde un cliente .NETC#()
+# <a name="call-a-web-api-from-a-net-client-c"></a>Llamada a una API Web desde un cliente .NET (C#)
 
 por [Mike Wasson](https://github.com/MikeWasson) y [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -25,17 +25,22 @@ En este tutorial se muestra cómo llamar a una API Web desde una aplicación .NE
 
 En este tutorial, se escribe una aplicación cliente que usa la siguiente API Web:
 
-| Acción | Método HTTP | URI relativo |
+| Acción | HTTP method | URI relativo |
 | --- | --- | --- |
-| Obtener un producto por identificador | GET | *identificador* de/API/Products/ |
-| Crear un nuevo producto | EXPONER | /api/products |
+| Obtener un producto según el id. | GET | *identificador* de/API/Products/ |
+| Crear un nuevo producto | POST | /api/products |
 | Actualizar un producto | PUT | *identificador* de/API/Products/ |
-| Eliminar un producto | SUPRIMIR | *identificador* de/API/Products/ |
+| Eliminar un producto | Delete | *identificador* de/API/Products/ |
 
 Para obtener información sobre cómo implementar esta API con ASP.NET Web API, consulte [creación de una API Web que admita operaciones CRUD](xref:web-api/overview/getting-started-with-aspnet-web-api/tutorial-your-first-web-api
 ).
 
 Para simplificar, la aplicación cliente de este tutorial es una aplicación de consola de Windows. **HttpClient** también se admite para las aplicaciones de Windows Phone y de la tienda Windows. Para obtener más información, consulte [escritura de código de cliente de API Web para varias plataformas mediante bibliotecas portátiles](https://blogs.msdn.com/b/webdev/archive/2013/07/19/writing-web-api-client-code-for-multiple-platforms-using-portable-libraries.aspx) .
+
+**Nota:** Si pasa URL base y URI relativos como valores codificados de forma rígida, tenga en cuentan las reglas para usar la `HttpClient` API. La `HttpClient.BaseAddress` propiedad se debe establecer en una dirección con una barra diagonal final ( `/` ). Por ejemplo, al pasar URI de recursos codificados de forma rígida al `HttpClient.GetAsync` método, no incluya una barra diagonal inicial. Para obtener un `Product` por identificador:
+
+1. Establezca`client.BaseAddress = new Uri("https://localhost:5001/");`.
+1. Solicitar un `Product` . Por ejemplo: `client.GetAsync<Product>("api/products/4");`.
 
 <a id="CreateConsoleApp"></a>
 ## <a name="create-the-console-application"></a>Crear la aplicación de consola
@@ -46,7 +51,7 @@ En Visual Studio, cree una nueva aplicación de consola de Windows denominada **
 
 El código anterior es la aplicación cliente completa.
 
-`RunAsync` ejecuta y se bloquea hasta que se completa. La mayoría de los métodos **HttpClient** son asincrónicos, ya que realizan operaciones de e/s de red. Todas las tareas asincrónicas se realizan dentro de `RunAsync`. Normalmente, una aplicación no bloquea el subproceso principal, pero esta aplicación no permite ninguna interacción.
+`RunAsync`ejecuta y se bloquea hasta que se completa. La mayoría de los métodos **HttpClient** son asincrónicos, ya que realizan operaciones de e/s de red. Todas las tareas asincrónicas se realizan dentro de `RunAsync` . Normalmente, una aplicación no bloquea el subproceso principal, pero esta aplicación no permite ninguna interacción.
 
 [!code-csharp[Main](calling-a-web-api-from-a-net-client/sample/client/Program.cs?name=snippet_run)]
 
@@ -61,7 +66,7 @@ En el menú **Herramientas**, seleccione **Administrador de paquetes NuGet** > *
 
 El comando anterior agrega los siguientes paquetes de NuGet al proyecto:
 
-* Microsoft.AspNet.WebApi.Client
+* Microsoft. AspNet. WebApi. Client
 * Newtonsoft.Json
 
 Netwonsoft. JSON (también conocido como Json.NET) es un marco JSON de alto rendimiento muy conocido para .NET.
@@ -73,7 +78,7 @@ Examine la clase `Product`:
 
 [!code-csharp[Main](calling-a-web-api-from-a-net-client/sample/client/Program.cs?name=snippet_prod)]
 
-Esta clase coincide con el modelo de datos que usa la API Web. Una aplicación puede usar **HttpClient** para leer una instancia de `Product` de una respuesta http. La aplicación no tiene que escribir ningún código de deserialización.
+Esta clase coincide con el modelo de datos que usa la API Web. Una aplicación puede usar **HttpClient** para leer una `Product` instancia de una respuesta http. La aplicación no tiene que escribir ningún código de deserialización.
 
 <a id="InitClient"></a>
 ## <a name="create-and-initialize-httpclient"></a>Creación e inicialización de HttpClient
@@ -105,9 +110,9 @@ El código siguiente envía una solicitud GET para un producto:
 
 [!code-csharp[Main](calling-a-web-api-from-a-net-client/sample/client/Program.cs?name=snippet_GetProductAsync)]
 
-El método **GetAsync** envía la solicitud HTTP GET. Cuando el método se completa, devuelve un **HttpResponseMessage** que contiene la respuesta http. Si el código de estado de la respuesta es un código de éxito, el cuerpo de respuesta contiene la representación JSON de un producto. Llame a **ReadAsAsync** para deserializar la carga de JSON en una instancia de `Product`. El método **ReadAsAsync** es asincrónico porque el cuerpo de la respuesta puede ser arbitrariamente grande.
+El método **GetAsync** envía la solicitud HTTP GET. Cuando el método se completa, devuelve un **HttpResponseMessage** que contiene la respuesta http. Si el código de estado de la respuesta es un código de éxito, el cuerpo de respuesta contiene la representación JSON de un producto. Llame a **ReadAsAsync** para deserializar la carga de JSON en una `Product` instancia de. El método **ReadAsAsync** es asincrónico porque el cuerpo de la respuesta puede ser arbitrariamente grande.
 
-**HttpClient** no inicia una excepción cuando la respuesta http contiene un código de error. En su lugar, la propiedad **IsSuccessStatusCode** es **false** si el estado es un código de error. Si prefiere tratar los códigos de error HTTP como excepciones, llame a [HttpResponseMessage. EnsureSuccessStatusCode](https://msdn.microsoft.com/library/system.net.http.httpresponsemessage.ensuresuccessstatuscode(v=vs.110).aspx) en el objeto de respuesta. `EnsureSuccessStatusCode` produce una excepción si el código de estado está fuera del intervalo 200&ndash;299. Tenga en cuenta que **HttpClient** puede producir excepciones por otras razones &mdash; por ejemplo, si se agota el tiempo de espera de la solicitud.
+**HttpClient** no inicia una excepción cuando la respuesta http contiene un código de error. En su lugar, la propiedad **IsSuccessStatusCode** es **false** si el estado es un código de error. Si prefiere tratar los códigos de error HTTP como excepciones, llame a [HttpResponseMessage. EnsureSuccessStatusCode](https://msdn.microsoft.com/library/system.net.http.httpresponsemessage.ensuresuccessstatuscode(v=vs.110).aspx) en el objeto de respuesta. `EnsureSuccessStatusCode`produce una excepción si el código de estado está fuera del intervalo 200 &ndash; 299. Tenga en cuenta que **HttpClient** puede producir excepciones por otras razones &mdash; , por ejemplo, si se agota el tiempo de espera de la solicitud.
 
 <a id="MediaTypeFormatters"></a>
 ### <a name="media-type-formatters-to-deserialize"></a>Formateadores de tipo de medio para deserializar
@@ -129,7 +134,7 @@ Para obtener más información, consulte [formateadores de medios en ASP.net web
 
 ## <a name="sending-a-post-request-to-create-a-resource"></a>Envío de una solicitud POST para crear un recurso
 
-El código siguiente envía una solicitud POST que contiene una instancia de `Product` en formato JSON:
+El código siguiente envía una solicitud POST que contiene una `Product` instancia en formato JSON:
 
 [!code-csharp[Main](calling-a-web-api-from-a-net-client/sample/client/Program.cs?name=snippet_CreateProductAsync)]
 
