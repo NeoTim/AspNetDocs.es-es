@@ -8,12 +8,12 @@ ms.date: 02/20/2013
 ms.assetid: a3cef801-a54b-4ebd-93c3-55764e2e14b1
 msc.legacyurl: /visual-studio/overview/2012/windows-azure-authentication
 msc.type: authoredcontent
-ms.openlocfilehash: ce98effe18dd739504fb0d5453bae8a46c3ba102
-ms.sourcegitcommit: e7e91932a6e91a63e2e46417626f39d6b244a3ab
+ms.openlocfilehash: ab75218cbe3817c14a064e9816388aebc7e431f7
+ms.sourcegitcommit: 0cf7d06071a8ff986e6c028ac9daf0c0e7490412
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78449467"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85240565"
 ---
 # <a name="windows-azure-authentication"></a>Autenticación de Windows Azure
 
@@ -25,7 +25,7 @@ por [Rick Anderson](https://twitter.com/RickAndMSFT)
 >
 > Para obtener más información sobre cómo configurar la sincronización entre el Active Directory local y el inquilino de Windows Azure Active Directory, consulte [usar AD FS 2,0 para implementar y administrar el inicio de sesión único](https://technet.microsoft.com/library/jj205462.aspx).
 >
-> Windows Azure Active Directory está disponible actualmente como [servicio de vista previa gratis](https://azure.microsoft.com/free/?WT.mc_id=A443DD604).
+> Windows Azure Active Directory está disponible actualmente como [servicio de vista previa gratis](https://azure.microsoft.com/free/dotnet/).
 
 ## <a name="requirements"></a>Requisitos:
 
@@ -65,7 +65,7 @@ Si no tiene privilegios de administrador global para el inquilino de Windows Azu
 ![](windows-azure-authentication/_static/image6.png)
 
 El cuadro de diálogo mostrará el **dominio**, el **identificador** de la entidad de seguridad de la aplicación y la **dirección URL de respuesta** necesarios para aprovisionar la aplicación con un Azure Active Directory principio. Debe proporcionar esta información a alguien que tenga privilegios suficientes para aprovisionar la aplicación. Consulte[cómo implementar el inicio de sesión único con la aplicación Azure Active Directory-ASP.net de Windows](https://github.com/Azure-Samples/active-directory-dotnet-webapp-openidconnect) para obtener más información sobre cómo usar el cmdlet para crear la entidad de servicio manualmente.
-Una vez que la aplicación se haya aprovisionado correctamente, puede hacer clic en **continuar para actualizar Web. config con la configuración seleccionada**. Si desea continuar desarrollando la aplicación mientras espera a que se produzca el aprovisionamiento, puede hacer clic en **Cerrar para recordar la configuración del archivo de proyecto**. La próxima vez que se invoque habilitar autenticación de Windows Azure y desactive la casilla aprovisionamiento, verá la misma configuración y podrá hacer clic en **continuar**y, a continuación, en **aplicar esta configuración en el archivo Web. config**.
+Una vez que la aplicación se haya aprovisionado correctamente, puede hacer clic en **continuar para actualizar web.config con la configuración seleccionada**. Si desea continuar desarrollando la aplicación mientras espera a que se produzca el aprovisionamiento, puede hacer clic en **Cerrar para recordar la configuración del archivo de proyecto**. La próxima vez que se invoque habilitar autenticación de Windows Azure y desactive la casilla aprovisionamiento, verá la misma configuración y podrá hacer clic en **continuar**y, a continuación, en **aplicar esta configuración en web.config**.
 
 1. Espere mientras la aplicación está configurada para la autenticación de Windows Azure y aprovisionada con Windows Azure Active Directory.
 2. Una vez que se haya habilitado la autenticación de Windows Azure para su aplicación, haga clic en **Cerrar:**
@@ -85,9 +85,9 @@ Una vez que la aplicación se haya aprovisionado correctamente, puede hacer clic
 
 La habilitación de la autenticación de Windows Azure realiza los siguientes cambios en la aplicación:
 
-- Se agrega una clase de falsificación de solicitud entre sitios ([CSRF](https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF))) ( *App\_Start\AntiXsrfConfig.CS* ) al proyecto.
+- Se agrega al proyecto una clase de falsificación de solicitud entre sitios ([CSRF](https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF))) ( * \_ Start\AntiXsrfConfig.CS de aplicación* ).
 - Los paquetes NuGet `System.IdentityModel.Tokens.ValidatingIssuerNameRegistry` se agregan al proyecto.
-- La configuración de Windows Identity Foundation en la aplicación se configurará para aceptar los tokens de seguridad del inquilino de Windows Azure Active Directory. Haga clic en la imagen siguiente para ver una vista expandida de los cambios realizados en el archivo *Web. config* .
+- La configuración de Windows Identity Foundation en la aplicación se configurará para aceptar los tokens de seguridad del inquilino de Windows Azure Active Directory. Haga clic en la imagen siguiente para ver una vista expandida de los cambios realizados en el archivo de *Web.config* .
 
      ![](windows-azure-authentication/_static/image9.png)
 - Se aprovisionará una entidad de servicio para la aplicación en el inquilino de Windows Azure Active Directory.
@@ -141,7 +141,7 @@ La autenticación de Windows Azure no proporciona actualmente la demanda de rol 
 
 #### <a name="browsing-to-an-application-with-windows-azure-authentication-results-in-the-error-acs20016-the-domain-of-the-logged-in-user-livecom-does-not-match-any-allowed-domain-of-this-sts"></a>Al buscar una aplicación con la autenticación de Windows Azure se produce el error "ACS20016 el dominio del usuario que ha iniciado sesión (live.com) no coincide con ningún dominio permitido de este STS"
 
-Si ya ha iniciado sesión en una cuenta de Microsoft (por ejemplo, hotmail.com, live.com, outlook.com) e intenta acceder a una aplicación que tiene habilitada la autenticación de Windows Azure, es posible que reciba una respuesta de error 400 porque el dominio de su cuenta de Microsoft Windows Azure Active Directory no reconoce. Para iniciar sesión en la aplicación, primero cierre la sesión de su cuenta de Microsoft.
+Si ya ha iniciado sesión en una cuenta de Microsoft (por ejemplo, hotmail.com, live.com, outlook.com) e intenta tener acceso a una aplicación que tiene habilitada la autenticación de Windows Azure, puede obtener una respuesta de error 400 porque Windows Azure Active Directory no reconoce el dominio de su cuenta de Microsoft. Para iniciar sesión en la aplicación, primero cierre la sesión de su cuenta de Microsoft.
 
 #### <a name="logging-into-an-application-with-windows-azure-authentication-enabled-and-a-x509certificatevalidationmode-other-than-none-results-in-certificate-validation-errors-for-the-accountsaccesscontrolwindowsnet-certificate"></a>El inicio de sesión en una aplicación con la autenticación de Windows Azure habilitada y un X509CertificateValidationMode distinto de None produce errores de validación de certificados para el certificado accounts.accesscontrol.windows.net
 

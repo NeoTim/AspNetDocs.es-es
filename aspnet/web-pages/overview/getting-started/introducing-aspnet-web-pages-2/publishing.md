@@ -8,16 +8,16 @@ ms.date: 05/28/2015
 ms.assetid: 7e85c70e-1a88-4408-8b3d-29611c7713ed
 msc.legacyurl: /web-pages/overview/getting-started/introducing-aspnet-web-pages-2/publishing
 msc.type: authoredcontent
-ms.openlocfilehash: 49a841dbda183bf1d59153b83f694c9f517e0b94
-ms.sourcegitcommit: e7e91932a6e91a63e2e46417626f39d6b244a3ab
+ms.openlocfilehash: a09339a833ea0b4a2d3c3a9323cce777577ea048
+ms.sourcegitcommit: 0cf7d06071a8ff986e6c028ac9daf0c0e7490412
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78514387"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85240586"
 ---
 # <a name="introducing-aspnet-web-pages---publishing-a-site-by-using-webmatrix"></a>Presentación de ASP.NET Web Pages: publicación de un sitio mediante WebMatrix
 
-por [Tom FitzMacken](https://github.com/tfitzmac)
+ por [Tom FitzMacken](https://github.com/tfitzmac)
 
 > Este tutorial es la última instalación del conjunto de tutoriales que presenta ASP.NET Web Pages y Microsoft WebMatrix. Describe cómo publicar su sitio en Internet para que otros usuarios puedan trabajar con él. Se supone que ha completado la serie a través [de la creación de un aspecto coherente para los sitios de ASP.NET Web pages](https://go.microsoft.com/fwlink/?LinkId=251585).
 > 
@@ -48,7 +48,7 @@ Este tutorial contiene cuatro secciones:
 <a id="defaultpage"></a>
 ## <a name="setting-up-the-default-page"></a>Configuración de la página predeterminada
 
-Cuando un usuario navega a la dirección base del sitio web, se muestra al usuario la página predeterminada del sitio. Por ejemplo, si *default. htm* se establece como la página predeterminada del sitio en `www.contoso.com`, desplazarse a `www.contoso.com` es igual que navegar a `www.contoso.com/Default.htm`.
+Cuando un usuario navega a la dirección base del sitio web, se muestra al usuario la página predeterminada del sitio. Por ejemplo, cuando *Default.htm* se establece como la página predeterminada para el sitio en `www.contoso.com` , desplazarse a `www.contoso.com` es lo mismo que navegar a `www.contoso.com/Default.htm` .
 
 Actualmente, el sitio usa **default. cshtml** como la página predeterminada. Esta página es correcta para la página predeterminada, pero en este tutorial no ha agregado ningún contenido a esa página para que muestre una página en blanco. Abra default. cshtml y reemplace el contenido por el código siguiente.
 
@@ -59,7 +59,7 @@ Ahora su sitio está listo para la publicación. En primer lugar, verá cómo im
 <a id="azure"></a>
 ## <a name="publishing-your-site-to-microsoft-azure"></a>Publicar el sitio en Microsoft Azure
 
-En este tutorial se mostrará primero cómo implementar el sitio en Microsoft Azure. Al iniciar sesión con un cuenta de Microsoft, puede crear hasta 10 sitios gratuitos en Azure. Estos sitios gratuitos proporcionan una manera cómoda de probar los sitios. Siempre puede eliminar este sitio de ejemplo más adelante para evitar el uso de todos los sitios gratuitos. Puede crear una cuenta de evaluación gratuita en pocos minutos. Para obtener más información, consulte [Evaluación gratuita de Azure](https://azure.microsoft.com/free/?WT.mc_id=A443DD604).
+En este tutorial se mostrará primero cómo implementar el sitio en Microsoft Azure. Al iniciar sesión con un cuenta de Microsoft, puede crear hasta 10 sitios gratuitos en Azure. Estos sitios gratuitos proporcionan una manera cómoda de probar los sitios. Siempre puede eliminar este sitio de ejemplo más adelante para evitar el uso de todos los sitios gratuitos. Puede crear una cuenta de evaluación gratuita en pocos minutos. Para obtener más información, consulte [Evaluación gratuita de Azure](https://azure.microsoft.com/free/dotnet/).
 
 En la cinta WebMatrix, haga clic en el botón **publicar** .
 
@@ -71,7 +71,7 @@ Se muestra el cuadro de diálogo **publicar el sitio** . Si no ha iniciado sesi�
 
 Si no ha iniciado sesión en un cuenta de Microsoft, volverá a tener la oportunidad de iniciar sesión. Debe iniciar sesión en una cuenta de Microsoft para publicar el sitio en Azure.
 
-![Iniciar sesión](publishing/_static/image3.png)
+![Sign In](publishing/_static/image3.png)
 
 Después de iniciar sesión en el cuenta de Microsoft, el cuadro de diálogo contiene vínculos para crear un nuevo sitio en Azure o conectarse a uno de los sitios existentes en Azure.
 
@@ -87,7 +87,7 @@ Cambie el nombre del sitio a algo que esté disponible y seleccione una ubicaci�
 
 ![nombre de sitio cambiado](publishing/_static/image6.png)
 
-Haga clic en **Aceptar**.
+Haga clic en **OK**.
 
 WebMatrix proporciona una prueba para determinar si el servidor es compatible con el sitio.
 
@@ -170,7 +170,7 @@ Si está listo, continúe y haga clic en **continuar** para iniciar el proceso d
 
 La lista de archivos que se van a publicar incluye las páginas web que ha creado como *movies. cshtml*. La lista también incluye archivos para las aplicaciones auxiliares que ha instalado, los archivos para ejecutar SQL Server Compact Edition para la base de datos, etc. Como resultado, el proceso de publicación inicial puede ser considerable.
 
-Haga clic en **Continuar**. WebMatrix copia los archivos en el servidor del proveedor de hospedaje. Cuando haya terminado, los resultados se mostrarán en la barra de estado:
+Haga clic en **Continue**. WebMatrix copia los archivos en el servidor del proveedor de hospedaje. Cuando haya terminado, los resultados se mostrarán en la barra de estado:
 
 ![Mensaje de la barra de estado cuando el proceso de publicación ha finalizado correctamente](publishing/_static/image20.png)
 
@@ -181,9 +181,9 @@ Para ver el sitio activo, haga clic en el vínculo de la barra de estado. Agregu
 <a id="update"></a>
 ## <a name="updating-the-live-site-republishing"></a>Actualización del sitio activo: volver a publicar
 
-Una vez que haya publicado su sitio (en Azure o en una empresa de hospedaje web), hay dos copias de él &mdash; la versión del equipo y la versión del proveedor de servicios. Probablemente querrá seguir desarrollando el sitio (si no hay nada más, como parte del siguiente conjunto de tutoriales). Cuando lo haga, tendrá que volver a publicar el sitio para copiar los cambios del equipo en el proveedor de servicios. El proceso de publicación en WebMatrix puede determinar qué archivos han cambiado en el sitio y publicar solo esos archivos.
+Una vez que haya publicado su sitio (en Azure o en una empresa de hospedaje web), hay dos copias de ella &mdash; en el equipo y la versión en el proveedor de servicios. Probablemente querrá seguir desarrollando el sitio (si no hay nada más, como parte del siguiente conjunto de tutoriales). Cuando lo haga, tendrá que volver a publicar el sitio para copiar los cambios del equipo en el proveedor de servicios. El proceso de publicación en WebMatrix puede determinar qué archivos han cambiado en el sitio y publicar solo esos archivos.
 
-Para ver cómo funciona la republicación, abra el sitio de *movies. cshtml* , realice algunos cambios pequeños y, a continuación, guarde el archivo. Por ejemplo, cambie el título a `Movies - Updated`.
+Para ver cómo funciona la republicación, abra el sitio de *movies. cshtml* , realice algunos cambios pequeños y, a continuación, guarde el archivo. Por ejemplo, cambie el título a `Movies - Updated` .
 
 Haga clic en el botón **publicar** en la cinta de opciones. WebMatrix determina lo que ha cambiado y muestra una vista previa de los archivos que se van a publicar.
 
@@ -193,7 +193,7 @@ Haga clic en el botón **publicar** en la cinta de opciones. WebMatrix determina
 > 
 > De forma predeterminada, WebMatrix solo publica la base de datos (archivo *. sdf* ) la primera vez que publica el sitio. Una vez que se publica el sitio y los usuarios interactúan con el sitio web, la base de datos del sitio activo suele tener los datos reales del sitio. Tendrá que tener mucho cuidado de no sobrescribir la base de datos activa con el archivo *. sdf* que se encuentra en el equipo, que normalmente solo contiene datos de prueba. Por ese motivo, la publicación de advertencias **sobrescribirá las bases de datos remotas**y por qué la casilla de *WebPagesMovies. sdf* está desactivada de forma predeterminada.
 
-Haga clic en **Continuar**. WebMatrix publica los archivos modificados y muestra un mensaje de operación correcta, como lo hacía la primera vez que publicó.
+Haga clic en **Continue**. WebMatrix publica los archivos modificados y muestra un mensaje de operación correcta, como lo hacía la primera vez que publicó.
 
 Vaya al sitio activo (puede hacer clic en el vínculo del mensaje de operación correcta si todavía se está mostrando) y comprobar que el cambio se ha publicado.
 

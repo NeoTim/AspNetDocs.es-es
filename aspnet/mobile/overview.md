@@ -1,6 +1,6 @@
 ---
 uid: mobile/overview
-title: Mobile Apps y sitios con ASP.NET
+title: Mobile Apps sitios de & con ASP.NET | Microsoft Docs
 author: rick-anderson
 description: Obtenga información sobre cómo ASP.NET facilita la creación de aplicaciones web móviles
 ms.author: riande
@@ -8,12 +8,12 @@ ms.date: 01/28/2011
 ms.assetid: 1febce65-cdd4-47da-bdb5-1e6022ccd20a
 msc.legacyurl: /mobile
 msc.type: content
-ms.openlocfilehash: 7f631f5052060b3523a23fb8ee7799cc07a68e1c
-ms.sourcegitcommit: e7e91932a6e91a63e2e46417626f39d6b244a3ab
+ms.openlocfilehash: 769484ee505599eef48ff4a106ddd4f7ec7d99af
+ms.sourcegitcommit: 0cf7d06071a8ff986e6c028ac9daf0c0e7490412
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78471565"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85240738"
 ---
 # <a name="mobile-apps--sites-with-aspnet"></a>Mobile Apps sitios de & con ASP.NET
 
@@ -61,6 +61,6 @@ En este artículo se describen las distintas formas de atender las páginas opti
 
 En esta comunicación presentada en la Conferencia de Microsoft MIX, Scott Hanselman explica cómo puede crear sitios web descriptivos para dispositivos móviles con ASP.NET MVC.
 
-### <a name="develop-iphone-applications-with-aspnet"></a>[Desarrollo de aplicaciones de iPhone con ASP.NET](http://labs.componentone.com/iPhone/)
+### <a name="develop-iphone-applications-with-aspnet"></a>[Desarrollo de aplicaciones de iPhone con ASP.NET](https://www.componentsource.com/product/componentone-studio-for-iphone)
 
 ComponentOne Studio para iPhone es un conjunto de controles ASP.NET que imitan la apariencia de las interfaces de usuario de iPhone y iPod Touch cuando se representan en Mobile Safari.

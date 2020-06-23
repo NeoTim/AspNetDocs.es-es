@@ -8,12 +8,12 @@ ms.date: 02/27/2014
 ms.assetid: 9f24fb82-c7ac-48da-b8e2-51b3da17e365
 msc.legacyurl: /web-forms/overview/presenting-and-managing-data/model-binding/retrieving-data
 msc.type: authoredcontent
-ms.openlocfilehash: 81cca22cb4752d071d2a68986ae9ac2bed737594
-ms.sourcegitcommit: e7e91932a6e91a63e2e46417626f39d6b244a3ab
+ms.openlocfilehash: d5f1982196c5985b001ca42c2711174e036bb1ec
+ms.sourcegitcommit: 0cf7d06071a8ff986e6c028ac9daf0c0e7490412
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78520027"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85240743"
 ---
 # <a name="retrieving-and-displaying-data-with-model-binding-and-web-forms"></a>Recuperar y Mostrar datos con el enlace de modelos y formularios Web Forms
 
@@ -26,7 +26,7 @@ ms.locfileid: "78520027"
 > Puede [Descargar](https://go.microsoft.com/fwlink/?LinkId=286116) el proyecto completo en C# o Visual Basic. El código descargable funciona con Visual Studio 2012 y versiones posteriores. Usa la plantilla de Visual Studio 2012, que es ligeramente diferente de la plantilla de Visual Studio 2017 que se muestra en este tutorial.
 > 
 > En el tutorial, ejecute la aplicación en Visual Studio. También puede implementar la aplicación en un proveedor de hospedaje y hacer que esté disponible a través de Internet. Microsoft ofrece hospedaje web gratuito para hasta 10 sitios web en un  
-> [cuenta de evaluación gratuita de Azure](https://azure.microsoft.com/free/?WT.mc_id=A443DD604). Para obtener información sobre cómo implementar un proyecto Web de Visual Studio en Azure App Service Web Apps, consulte [implementación web de ASP.net con Visual Studio](../../deployment/visual-studio-web-deployment/introduction.md) series. En este tutorial también se muestra cómo usar Migraciones de Entity Framework Code First para implementar la base de datos SQL Server en Azure SQL Database.
+> [cuenta de evaluación gratuita de Azure](https://azure.microsoft.com/free/dotnet/). Para obtener información sobre cómo implementar un proyecto Web de Visual Studio en Azure App Service Web Apps, consulte [implementación web de ASP.net con Visual Studio](../../deployment/visual-studio-web-deployment/introduction.md) series. En este tutorial también se muestra cómo usar Migraciones de Entity Framework Code First para implementar la base de datos SQL Server en Azure SQL Database.
 > 
 > ## <a name="software-versions-used-in-the-tutorial"></a>Versiones de software usadas en el tutorial
 > 
@@ -43,7 +43,7 @@ En este tutorial, hará lo siguiente:
 * Rellenar la base de datos con datos de prueba
 * Mostrar datos en un formulario Web Forms
 
-## <a name="create-the-project"></a>Crear el proyecto
+## <a name="create-the-project"></a>Creación del proyecto
 
 1. En Visual Studio 2017, cree un proyecto de **aplicación Web de ASP.net (.NET Framework)** denominado **ContosoUniversityModelBinding**.
 
@@ -99,7 +99,7 @@ En este tutorial, hará lo siguiente:
 
 En la carpeta **Models** , agregue una clase denominada **UniversityModels.CS**.
 
-   1. Haga clic con el botón derecho en **modelos**, seleccione **Agregar**y, a continuación, **nuevo elemento**. Aparecerá el cuadro de diálogo **Agregar nuevo elemento**.
+   1. Haga clic con el botón derecho en **modelos**, seleccione **Agregar**y, a continuación, **nuevo elemento**. Aparecerá el cuadro de diálogo **Agregar nuevo elemento** .
 
    2. En el menú de navegación izquierdo, seleccione **código**y, a continuación, **clase**.
 
@@ -107,13 +107,13 @@ En la carpeta **Models** , agregue una clase denominada **UniversityModels.CS**.
 
    3. Asigne a la clase el nombre **UniversityModels.CS** y seleccione **Agregar**.
 
-      En este archivo, defina las clases `SchoolContext`, `Student`, `Enrollment`y `Course` de la siguiente manera:
+      En este archivo, defina las `SchoolContext` `Student` clases,, `Enrollment` y `Course` como se indica a continuación:
 
       [!code-csharp[Main](retrieving-data/samples/sample4.cs)]
 
-      La clase `SchoolContext` deriva de `DbContext`, que administra la conexión a la base de datos y los cambios en los datos.
+      La `SchoolContext` clase se deriva de `DbContext` , que administra la conexión a la base de datos y los cambios en los datos.
 
-      En la clase `Student`, observe los atributos que se aplican a las propiedades `FirstName`, `LastName`y `Year`. En este tutorial se usan estos atributos para la validación de datos. Para simplificar el código, solo estas propiedades se marcan con los atributos de validación de datos. En un proyecto real, aplicaría atributos de validación a todas las propiedades que necesitan validación.
+      En la `Student` clase, observe los atributos que se aplican a las `FirstName` `LastName` propiedades, y `Year` . En este tutorial se usan estos atributos para la validación de datos. Para simplificar el código, solo estas propiedades se marcan con los atributos de validación de datos. En un proyecto real, aplicaría atributos de validación a todas las propiedades que necesitan validación.
 
    4. Guarde UniversityModels.cs.
 
@@ -130,13 +130,13 @@ En este tutorial se usa [migraciones de Code First](https://docs.microsoft.com/e
 
       ![habilitar migraciones](retrieving-data/_static/image8.png)
 
-      Observe que se ha creado un archivo denominado *Configuration.CS* . La clase `Configuration` tiene un método `Seed`, que puede rellenar previamente las tablas de base de datos con datos de prueba.
+      Observe que se ha creado un archivo denominado *Configuration.CS* . La `Configuration` clase tiene un `Seed` método, que puede rellenar previamente las tablas de base de datos con datos de prueba.
 
 ## <a name="pre-populate-the-database"></a>Rellenar previamente la base de datos
 
    1. Abra Configuration.cs.
    
-   2. Agregue el código siguiente al método `Seed` . Además, agregue una instrucción `using` para el espacio de nombres `ContosoUniversityModelBinding. Models`.
+   2. Agregue el código siguiente al método `Seed` . Además, agregue una `using` instrucción para el `ContosoUniversityModelBinding. Models` espacio de nombres.
 
       [!code-csharp[Main](retrieving-data/samples/sample5.cs)]
 
@@ -146,7 +146,7 @@ En este tutorial se usa [migraciones de Code First](https://docs.microsoft.com/e
 
    5. Ejecute el comando **Update-Database**.
 
-      Si recibe una excepción al ejecutar este comando, los valores `StudentID` y `CourseID` pueden ser diferentes de los valores del método `Seed`. Abra esas tablas de base de datos y busque los valores existentes para `StudentID` y `CourseID`. Agregue esos valores al código para inicializar la tabla `Enrollments`.
+      Si recibe una excepción al ejecutar este comando, los `StudentID` valores y pueden `CourseID` ser diferentes de los `Seed` valores del método. Abra esas tablas de base de datos y busque los valores existentes para `StudentID` y `CourseID` . Agregue esos valores al código para inicializar la `Enrollments` tabla.
 
 ## <a name="add-a-gridview-control"></a>Agregar un control GridView
 
@@ -154,36 +154,36 @@ Con datos de base de datos rellenados, ahora está listo para recuperar los dato
 
 1. Abra Students. aspx.
 
-2. Busque el marcador de posición `MainContent`. Dentro de ese marcador de posición, agregue un control **GridView** que incluya este código.
+2. Busque el `MainContent` marcador de posición. Dentro de ese marcador de posición, agregue un control **GridView** que incluya este código.
 
    [!code-aspx-csharp[Main](retrieving-data/samples/sample6.aspx)]
 
    Cosas que hay que tener en cuenta:
-   * Observe el valor establecido para la propiedad `SelectMethod` en el elemento GridView. Este valor especifica el método usado para recuperar los datos de GridView, que se crean en el paso siguiente. 
+   * Observe el valor establecido para la `SelectMethod` propiedad en el elemento GridView. Este valor especifica el método usado para recuperar los datos de GridView, que se crean en el paso siguiente. 
    
-   * La propiedad `ItemType` se establece en la clase `Student` creada anteriormente. Esta configuración le permite hacer referencia a las propiedades de clase en el marcado. Por ejemplo, la clase `Student` tiene una colección denominada `Enrollments`. Puede usar `Item.Enrollments` para recuperar esa colección y, a continuación, utilizar la [Sintaxis de LINQ](https://docs.microsoft.com/dotnet/csharp/programming-guide/concepts/linq/query-syntax-and-method-syntax-in-linq) para recuperar la suma de los créditos inscritos de cada estudiante.
+   * La `ItemType` propiedad se establece en la `Student` clase creada anteriormente. Esta configuración le permite hacer referencia a las propiedades de clase en el marcado. Por ejemplo, la `Student` clase tiene una colección denominada `Enrollments` . Puede usar `Item.Enrollments` para recuperar la colección y, a continuación, utilizar la [Sintaxis de LINQ](https://docs.microsoft.com/dotnet/csharp/programming-guide/concepts/linq/query-syntax-and-method-syntax-in-linq) para recuperar la suma de los créditos inscritos de cada estudiante.
    
 3. Guarde Students. aspx.
 
 ## <a name="add-code-to-retrieve-data"></a>Agregar código para recuperar datos
 
-   En el archivo de código subyacente Students. aspx, agregue el método especificado para el valor `SelectMethod`. 
+   En el archivo de código subyacente Students. aspx, agregue el método especificado para el `SelectMethod` valor. 
    
    1. Abra Students.aspx.cs.
    
-   2. Agregue `using` instrucciones para los espacios de nombres `ContosoUniversityModelBinding. Models` y `System.Data.Entity`.
+   2. Agregue `using` instrucciones para los `ContosoUniversityModelBinding. Models` `System.Data.Entity` espacios de nombres y.
 
       [!code-csharp[Main](retrieving-data/samples/sample7.cs)]
 
-   3. Agregue el método especificado para `SelectMethod`:
+   3. Agregue el método especificado para `SelectMethod` :
 
       [!code-csharp[Main](retrieving-data/samples/sample8.cs)]
 
-      La cláusula `Include` mejora el rendimiento de las consultas, pero no es necesario. Sin la cláusula `Include`, los datos se recuperan mediante la [*carga diferida*](https://en.wikipedia.org/wiki/Lazy_loading), lo que implica el envío de una consulta independiente a la base de datos cada vez que se recuperan los datos relacionados. Con la cláusula `Include`, los datos se recuperan mediante la *carga diligente*, lo que significa que una consulta de base de datos única recupera todos los datos relacionados. Si no se usan datos relacionados, la carga diligente es menos eficaz porque se recuperan más datos. Sin embargo, en este caso, la carga diligente le ofrece el mejor rendimiento, ya que los datos relacionados se muestran para cada registro.
+      La `Include` cláusula mejora el rendimiento de las consultas, pero no es necesario. Sin la `Include` cláusula, los datos se recuperan mediante la [*carga diferida*](https://en.wikipedia.org/wiki/Lazy_loading), que implica el envío de una consulta independiente a la base de datos cada vez que se recuperan los datos relacionados. Con la `Include` cláusula, los datos se recuperan mediante la *carga diligente*, lo que significa que una consulta de base de datos única recupera todos los datos relacionados. Si no se usan datos relacionados, la carga diligente es menos eficaz porque se recuperan más datos. Sin embargo, en este caso, la carga diligente le ofrece el mejor rendimiento, ya que los datos relacionados se muestran para cada registro.
 
       Para obtener más información sobre las consideraciones de rendimiento al cargar datos relacionados, consulte la sección sobre la **carga diferida, diligente y explícita de datos relacionados** en el artículo sobre la [lectura de datos relacionados con el Entity Framework en una aplicación ASP.NET MVC](../../../../mvc/overview/getting-started/getting-started-with-ef-using-mvc/reading-related-data-with-the-entity-framework-in-an-asp-net-mvc-application.md) .
 
-      De forma predeterminada, los datos se ordenan por los valores de la propiedad marcada como la clave. Puede Agregar una cláusula `OrderBy` para especificar un valor de ordenación diferente. En este ejemplo, la propiedad `StudentID` predeterminada se usa para la ordenación. En el artículo [ordenación, paginación y filtrado de datos](sorting-paging-and-filtering-data.md) , el usuario está habilitado para seleccionar una columna para la ordenación.
+      De forma predeterminada, los datos se ordenan por los valores de la propiedad marcada como la clave. Puede Agregar una `OrderBy` cláusula para especificar un valor de ordenación diferente. En este ejemplo, la `StudentID` propiedad predeterminada se usa para la ordenación. En el artículo [ordenación, paginación y filtrado de datos](sorting-paging-and-filtering-data.md) , el usuario está habilitado para seleccionar una columna para la ordenación.
  
    4. Guarde Students.aspx.cs.
 
@@ -197,11 +197,11 @@ Ejecute la aplicación web (**F5**) y vaya a la página **Students** , que muest
 
 Al trabajar en esta serie de tutoriales, simplemente puede copiar el código del tutorial al proyecto. Sin embargo, una desventaja de este enfoque es que es posible que no sea consciente de la característica proporcionada por Visual Studio para generar automáticamente código para los métodos de enlace de modelos. Cuando trabaje en sus propios proyectos, la generación automática de código puede ahorrarle tiempo y ayudarle a tener una idea de cómo implementar una operación. En esta sección se describe la característica de generación automática de código. Esta sección solo es informativa y no contiene ningún código que deba implementar en el proyecto. 
 
-Al establecer un valor para las propiedades `SelectMethod`, `UpdateMethod`, `InsertMethod`o `DeleteMethod` en el código de marcado, puede seleccionar la opción **crear nuevo método** .
+Al establecer un valor para las `SelectMethod` `UpdateMethod` propiedades,, `InsertMethod` o `DeleteMethod` en el código de marcado, puede seleccionar la opción **crear nuevo método** .
 
 ![crear un método](retrieving-data/_static/image18.png)
 
-Visual Studio no solo crea un método en el código subyacente con la firma correcta, sino que también genera código de implementación para realizar la operación. Si primero establece la propiedad `ItemType` antes de utilizar la característica de generación automática de código, el código generado utiliza ese tipo para las operaciones. Por ejemplo, al establecer la propiedad `UpdateMethod`, se genera automáticamente el código siguiente:
+Visual Studio no solo crea un método en el código subyacente con la firma correcta, sino que también genera código de implementación para realizar la operación. Si primero establece la `ItemType` propiedad antes de usar la característica de generación automática de código, el código generado utiliza ese tipo para las operaciones. Por ejemplo, al establecer la `UpdateMethod` propiedad, se genera automáticamente el código siguiente:
 
 [!code-csharp[Main](retrieving-data/samples/sample9.cs)]
 
