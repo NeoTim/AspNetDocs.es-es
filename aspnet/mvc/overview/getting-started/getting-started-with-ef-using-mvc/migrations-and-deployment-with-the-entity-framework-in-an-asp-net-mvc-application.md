@@ -9,12 +9,12 @@ ms.topic: tutorial
 ms.assetid: d4dfc435-bda6-4621-9762-9ba270f8de4e
 msc.legacyurl: /mvc/overview/getting-started/getting-started-with-ef-using-mvc/migrations-and-deployment-with-the-entity-framework-in-an-asp-net-mvc-application
 msc.type: authoredcontent
-ms.openlocfilehash: 21a3efa865e5b5498dfb0f2adec199800fc70c58
-ms.sourcegitcommit: a4c3c7e04e5f53cf8cd334f036d324976b78d154
+ms.openlocfilehash: 2f3a6d57a7963eb7aafde62e344ae6b970af87e2
+ms.sourcegitcommit: 8d34fb54e790cfba2d64097afc8276da5b22283e
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 05/29/2020
-ms.locfileid: "84172981"
+ms.lasthandoff: 06/27/2020
+ms.locfileid: "85484235"
 ---
 # <a name="tutorial-use-ef-migrations-in-an-aspnet-mvc-app-and-deploy-to-azure"></a>Tutorial: uso de migraciones de EF en una aplicación ASP.NET MVC e implementación en Azure
 
@@ -25,13 +25,13 @@ Hasta ahora, la aplicación Web de ejemplo contoso University se ha ejecutado lo
 
 Se recomienda utilizar un proceso de integración continua con control de código fuente para la implementación, pero en este tutorial no se tratan los temas. Para más información, consulte los capítulos sobre el [control de código fuente](xref:aspnet/overview/developing-apps-with-windows-azure/building-real-world-cloud-apps-with-windows-azure/source-control) y la [integración continua](xref:aspnet/overview/developing-apps-with-windows-azure/building-real-world-cloud-apps-with-windows-azure/continuous-integration-and-continuous-delivery) de la [creación de aplicaciones en la nube reales con Azure](xref:aspnet/overview/developing-apps-with-windows-azure/building-real-world-cloud-apps-with-windows-azure/introduction).
 
-En este tutorial ha:
+En este tutorial, hizo lo siguiente:
 
 > [!div class="checklist"]
 > * Habilitación de migraciones de Code First
 > * Implementación de la aplicación en Azure (opcional)
 
-## <a name="prerequisites"></a>Prerrequisitos
+## <a name="prerequisites"></a>Requisitos previos
 
 - [Resistencia de la conexión e intercepción de comandos](connection-resiliency-and-command-interception-with-the-entity-framework-in-an-asp-net-mvc-application.md)
 
@@ -41,10 +41,10 @@ Al desarrollar una aplicación nueva, el modelo de datos cambia con frecuencia y
 
 Este método para mantener la base de datos sincronizada con el modelo de datos funciona bien hasta que la aplicación se implemente en producción. Cuando la aplicación se ejecuta en producción, normalmente almacena los datos que desea conservar y no desea perder todo cada vez que realice un cambio, como agregar una nueva columna. La característica [migraciones de Code First](https://msdn.microsoft.com/data/jj591621) resuelve este problema habilitando Code First para actualizar el esquema de la base de datos en lugar de quitar y volver a crear la base de datos. En este tutorial, va a implementar la aplicación y a prepararse para habilitar las migraciones.
 
-1. Deshabilite el inicializador que configuró anteriormente; para ello, agregue un comentario o elimine el `contexts` elemento que agregó al archivo Web. config de la aplicación.
+1. Deshabilite el inicializador que configuró anteriormente; para ello, agregue un comentario o elimine el `contexts` elemento que ha agregado al archivo de Web.config de la aplicación.
 
     [!code-xml[Main](migrations-and-deployment-with-the-entity-framework-in-an-asp-net-mvc-application/samples/sample1.xml?highlight=2,6)]
-2. También en el archivo *Web. config* de la aplicación, cambie el nombre de la base de datos en la cadena de conexión a ContosoUniversity2.
+2. También en el archivo de *Web.config* de la aplicación, cambie el nombre de la base de datos en la cadena de conexión a ContosoUniversity2.
 
     [!code-xml[Main](migrations-and-deployment-with-the-entity-framework-in-an-asp-net-mvc-application/samples/sample2.xml?highlight=2)]
 
@@ -129,7 +129,7 @@ Hasta ahora, la aplicación se ejecuta localmente en IIS Express en el equipo de
 
 ### <a name="use-code-first-migrations-to-deploy-the-database"></a>Usar migraciones de Code First para implementar la base de datos
 
-Para implementar la base de datos, usará Migraciones de Code First. Al crear el perfil de publicación que se usa para configurar las opciones de implementación desde Visual Studio, se activará la casilla **Actualizar base de datos**. Esta configuración hace que el proceso de implementación configure automáticamente el archivo *Web. config* de la aplicación en el servidor de destino para que Code First utilice la `MigrateDatabaseToLatestVersion` clase de inicializador.
+Para implementar la base de datos, usará Migraciones de Code First. Al crear el perfil de publicación que se usa para configurar las opciones de implementación desde Visual Studio, se activará la casilla **Actualizar base de datos**. Esta configuración hace que el proceso de implementación configure automáticamente el archivo de *Web.config* de la aplicación en el servidor de destino para que Code First utilice la `MigrateDatabaseToLatestVersion` clase de inicializador.
 
 Visual Studio no hace nada con la base de datos durante el proceso de implementación mientras está copiando el proyecto en el servidor de destino. Cuando se ejecuta la aplicación implementada y se obtiene acceso a la base de datos por primera vez después de la implementación, Code First comprueba si la base de datos coincide con el modelo de datos. Si hay un error de coincidencia, Code First crea automáticamente la base de datos (si aún no existe) o actualiza el esquema de la base de datos a la versión más reciente (si existe una base de datos pero no coincide con el modelo). Si la aplicación implementa un método de migración `Seed` , el método se ejecuta después de que se cree la base de datos o se actualice el esquema.
 
@@ -138,7 +138,7 @@ El método Migrations `Seed` inserta datos de prueba. Si estuviera implementando
 ### <a name="get-an-azure-account"></a>Obtener una cuenta de Azure
 
 Necesitará una cuenta de Azure. Si aún no tiene una, pero tiene una suscripción de Visual Studio, puede [activar las ventajas de la suscripción](https://azure.microsoft.com/pricing/member-offers/credit-for-visual-studio-subscribers/
-). De lo contrario, puede crear una cuenta de evaluación gratuita en un par de minutos. Para obtener más información, consulte [Evaluación gratuita de Azure](https://azure.microsoft.com/free/).
+). De lo contrario, puede crear una cuenta de evaluación gratuita en un par de minutos. Para obtener más información, consulte [Evaluación gratuita de Azure](https://azure.microsoft.com/free/dotnet/).
 
 ### <a name="create-a-web-site-and-a-sql-database-in-azure"></a>Creación de un sitio web y una base de datos SQL en Azure
 
@@ -176,7 +176,7 @@ Implementará la base de datos en Azure SQL Database. SQL Database es un servici
 
     El Portal de administración vuelve a la página panel y el área **notificaciones** en la parte superior de la página muestra que se está creando el sitio. Después de un tiempo (normalmente menos de un minuto), hay una notificación de que la implementación se realizó correctamente. En la barra de navegación de la izquierda, el nuevo App Service aparece en la sección **App Services** y la nueva base de datos SQL aparece en la sección bases de datos **SQL** .
 
-### <a name="deploy-the-app-to-azure"></a>Implementación de la aplicación en Azure
+### <a name="deploy-the-app-to-azure"></a>Implementar la aplicación en Azure
 
 1. En Visual Studio, haga clic con el botón derecho en el proyecto, en el **Explorador de soluciones** y seleccione **Publicar** en el menú contextual.
 
@@ -196,15 +196,15 @@ Implementará la base de datos en Azure SQL Database. SQL Database es un servici
 
     La aplicación se ejecuta ahora en la nube.
 
-En este momento, la base de datos *SchoolContext* se ha creado en la base de datos SQL de Azure porque seleccionó **Ejecutar migraciones de Code First (se ejecuta al iniciar la aplicación)**. El archivo *Web. config* del sitio Web implementado se ha cambiado para que el inicializador [MigrateDatabaseToLatestVersion](https://msdn.microsoft.com/library/hh829476(v=vs.103).aspx) se ejecute la primera vez que el código lea o escriba datos en la base de datos (que se produjo al seleccionar la pestaña **Students** ):
+En este momento, la base de datos *SchoolContext* se ha creado en la base de datos SQL de Azure porque seleccionó **Ejecutar migraciones de Code First (se ejecuta al iniciar la aplicación)**. El archivo *Web.config* del sitio Web implementado se ha cambiado para que el inicializador [MigrateDatabaseToLatestVersion](https://msdn.microsoft.com/library/hh829476(v=vs.103).aspx) se ejecute la primera vez que el código lea o escriba datos en la base de datos (que se produjo al seleccionar la pestaña **Students** ):
 
-![Extracto del archivo Web. config](https://asp.net/media/4367421/mig.png)
+![Extracto de archivo de Web.config](https://asp.net/media/4367421/mig.png)
 
 El proceso de implementación también creó una nueva cadena de conexión *(SchoolContext \_ DatabasePublish*) para migraciones de Code First que se va a usar para actualizar el esquema de la base de datos y para inicializar la base de datos.
 
-![Cadena de conexión en el archivo Web. config](migrations-and-deployment-with-the-entity-framework-in-an-asp-net-mvc-application/_static/image26.png)
+![Cadena de conexión en el archivo de Web.config](migrations-and-deployment-with-the-entity-framework-in-an-asp-net-mvc-application/_static/image26.png)
 
-Puede encontrar la versión implementada del archivo Web. config en su propio equipo en *ContosoUniversity\obj\Release\Package\PackageTmp\Web.config*. Puede tener acceso al propio archivo *Web. config* implementado mediante FTP. Para obtener instrucciones, consulte [ASP.net web Deployment Using Visual Studio: Deploying a Code Update](xref:web-forms/overview/deployment/visual-studio-web-deployment/deploying-a-code-update). Siga las instrucciones que comienzan con "para usar una herramienta de FTP, necesita tres cosas: la dirección URL de FTP, el nombre de usuario y la contraseña".
+Puede encontrar la versión implementada del archivo de Web.config en su propio equipo en *ContosoUniversity\obj\Release\Package\PackageTmp\Web.config*. Puede tener acceso al propio archivo de *Web.config* implementado mediante FTP. Para obtener instrucciones, consulte [ASP.net web Deployment Using Visual Studio: Deploying a Code Update](xref:web-forms/overview/deployment/visual-studio-web-deployment/deploying-a-code-update). Siga las instrucciones que comienzan con "para usar una herramienta de FTP, necesita tres cosas: la dirección URL de FTP, el nombre de usuario y la contraseña".
 
 > [!NOTE]
 > La aplicación web no implementa la seguridad, por lo que cualquiera que encuentre la dirección URL puede cambiar los datos. Para obtener instrucciones sobre cómo proteger el sitio web, vea [implementación de una aplicación ASP.NET MVC segura con suscripción, OAuth y SQL Database en Azure](/aspnet/core/security/authorization/secure-data). Puede impedir que otras personas usen el sitio al detener el servicio con Azure Portal de administración o **Explorador de servidores** en Visual Studio.
@@ -213,7 +213,7 @@ Puede encontrar la versión implementada del archivo Web. config en su propio eq
 
 ## <a name="advanced-migrations-scenarios"></a>Escenarios de migraciones avanzadas
 
-Si implementa una base de datos mediante la ejecución de migraciones automáticamente, tal y como se muestra en este tutorial, y está implementando en un sitio web que se ejecuta en varios servidores, puede obtener varios servidores que intenten ejecutar migraciones al mismo tiempo. Las migraciones son atómicas, por lo que si dos servidores intentan ejecutar la misma migración, una se realizará correctamente y la otra producirá un error (suponiendo que las operaciones no se pueden realizar dos veces). En ese escenario, si desea evitar estos problemas, puede llamar a las migraciones manualmente y configurar su propio código para que solo se produzca una vez. Para obtener más información, consulte [ejecución y scripting de migraciones desde código](http://romiller.com/2012/02/09/running-scripting-migrations-from-code/) en el blog de Rowan Miller y [Migrate. exe](/ef/ef6/modeling/code-first/migrations/migrate-exe) (para ejecutar migraciones desde la línea de comandos).
+Si implementa una base de datos mediante la ejecución de migraciones automáticamente, tal y como se muestra en este tutorial, y está implementando en un sitio web que se ejecuta en varios servidores, puede obtener varios servidores que intenten ejecutar migraciones al mismo tiempo. Las migraciones son atómicas, por lo que si dos servidores intentan ejecutar la misma migración, una se realizará correctamente y la otra producirá un error (suponiendo que las operaciones no se pueden realizar dos veces). En ese escenario, si desea evitar estos problemas, puede llamar a las migraciones manualmente y configurar su propio código para que solo se produzca una vez. Para obtener más información, consulte [ejecución y scripting de migraciones desde código](http://romiller.com/2012/02/09/running-scripting-migrations-from-code/) en el blog de Rowan Miller y [Migrate.exe](/ef/ef6/modeling/code-first/migrations/migrate-exe) (para ejecutar migraciones desde la línea de comandos).
 
 Para obtener información sobre otros escenarios de migración, consulte la [serie de presentaciones](https://blogs.msdn.com/b/adonet/archive/2014/03/12/migrations-screencast-series.aspx)en pantalla de migraciones.
 
@@ -235,7 +235,7 @@ En la sección implementación, vio el inicializador [MigrateDatabaseToLatestVer
 
 Para obtener más información sobre los inicializadores, vea [Descripción de los inicializadores de base de datos en Entity Framework Code First](http://www.codeguru.com/csharp/article.php/c19999/Understanding-Database-Initializers-in-Entity-Framework-Code-First.htm) y el capítulo 6 del libro [Programming Entity Framework: Code First](http://shop.oreilly.com/product/0636920022220.do) by Julia Lerman y Rowan Miller.
 
-## <a name="get-the-code"></a>Obtener el código
+## <a name="get-the-code"></a>Obtención del código
 
 [Descargar el proyecto completado](https://webpifeed.blob.core.windows.net/webpifeed/Partners/ASP.NET%20MVC%20Application%20Using%20Entity%20Framework%20Code%20First.zip)
 
@@ -245,7 +245,7 @@ Los vínculos a otros recursos de Entity Framework pueden encontrarse en [el acc
 
 ## <a name="next-steps"></a>Pasos siguientes
 
-En este tutorial ha:
+En este tutorial, hizo lo siguiente:
 
 > [!div class="checklist"]
 > * Migraciones de Code First habilitadas
