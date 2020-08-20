@@ -10,10 +10,10 @@ ms.assetid: f35a9b0c-49ef-4cde-b06d-19d1543feb0b
 msc.legacyurl: /mvc/overview/getting-started/getting-started-with-ef-using-mvc/advanced-entity-framework-scenarios-for-an-mvc-web-application
 msc.type: authoredcontent
 ms.openlocfilehash: d7cc83a5b78a60f575f5c3065079679189296a0c
-ms.sourcegitcommit: ce28244209db8615bc9bdd576a2e2c88174d318d
+ms.sourcegitcommit: c9d9210e0d16fbb3829b7688cfb832dc263c79cc
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 04/06/2020
+ms.lasthandoff: 08/20/2020
 ms.locfileid: "86188734"
 ---
 # <a name="tutorial-learn-about-advanced-ef-scenarios-for-an-mvc-5-web-app"></a>Tutorial: información sobre los escenarios avanzados de EF para una aplicación web MVC 5
@@ -103,7 +103,7 @@ Ejecute el método `UpdateCourseCredits` seleccionando la pestaña **Courses**, 
 
 ![Update_Course_Credits_initial_page_with_2_entered](advanced-entity-framework-scenarios-for-an-mvc-web-application/_static/image1.png)
 
-Haga clic en **Actualizar**. Verá el número de filas afectadas.
+Haga clic en **Update**(Actualizar). Verá el número de filas afectadas.
 
 Haga clic en **Volver a la lista** para ver la lista de cursos con el número de créditos revisado.
 
@@ -236,7 +236,7 @@ Aunque el código fuente está abierto, Entity Framework es totalmente compatibl
 - [Rick Anderson](https://blogs.msdn.com/b/rickandy/) (Twitter [@RickAndMSFT](http://twitter.com/RickAndMSFT) ) ha realizado la mayor parte del trabajo al actualizar el tutorial de EF 5 y MVC 4 y coautor de la actualización de EF 6. Rick es un redactor de programación Senior para Microsoft que se centra en Azure y MVC.
 - [Rowan Miller](http://www.romiller.com) y otros miembros del equipo de Entity Framework asistieron a las revisiones de código y ayudó a depurar muchos problemas con las migraciones que surgieron mientras actualizamos el tutorial para EF 5 y EF 6.
 
-## <a name="troubleshoot-common-errors"></a>Solución de errores comunes
+## <a name="troubleshoot-common-errors"></a>Solucionar problemas de errores comunes
 
 ### <a name="cannot-createshadow-copy"></a>No se puede crear o copiar instantáneas
 
@@ -282,7 +282,7 @@ Una manera de obtener este error es que se pueden obtener varias copias de la so
 
 Mensaje de error:
 
-> Error relacionado con la red o específico de la instancia mientras se establecía una conexión con el servidor SQL Server. No se encontró el servidor o éste no estaba accesible. Compruebe que el nombre de la instancia es correcto y que SQL Server está configurado para admitir conexiones remotas. (proveedor: Interfaces de red SQL, error: 26: error al buscar el servidor o la instancia especificados)
+> Error relacionado con la red o específico de la instancia mientras se establecía una conexión con el servidor SQL Server. No se encontró el servidor o no era accesible. Compruebe que el nombre de la instancia es correcto y que SQL Server está configurado para admitir conexiones remotas. (proveedor: Interfaces de red SQL, error: 26: error al buscar el servidor o la instancia especificados)
 
 Solución
 
