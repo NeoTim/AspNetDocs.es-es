@@ -8,14 +8,14 @@ ms.date: 04/21/2011
 ms.assetid: b3193d33-2d0b-4d98-9712-58bd897c62ec
 msc.legacyurl: /mvc/overview/older-versions/mvc-music-store/mvc-music-store-part-6
 msc.type: authoredcontent
-ms.openlocfilehash: bc031dd5be61cc6707c522f85f6af77a420c8b31
-ms.sourcegitcommit: e7e91932a6e91a63e2e46417626f39d6b244a3ab
+ms.openlocfilehash: 24d3f028a9a720e5b526518624c9c1c2ce2c37d4
+ms.sourcegitcommit: 4e6d586faadbe4d9ef27122f86335ec9385134af
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78433537"
+ms.lasthandoff: 08/28/2020
+ms.locfileid: "89044953"
 ---
-# <a name="part-6-using-data-annotations-for-model-validation"></a>Parte 6: uso de anotaciones de datos para la validación del modelo
+# <a name="part-6-using-data-annotations-for-model-validation"></a>Parte 6: Usar anotaciones de datos para la validación del modelo
 
 por [Jon Galloway](https://github.com/jongalloway)
 
@@ -34,13 +34,13 @@ Podemos agregar fácilmente la validación a nuestra aplicación agregando anota
 Usaremos los siguientes atributos de anotación de datos:
 
 - **Requerido** : indica que la propiedad es un campo obligatorio.
-- **DisplayName** : define el texto que se desea usar en los campos de formulario y en los mensajes de validación.
+- **DisplayName** : define el texto que se va a usar en los campos de formulario y en los mensajes de validación.
 - **StringLength** : define una longitud máxima para un campo de cadena.
 - **Intervalo** : proporciona un valor máximo y mínimo para un campo numérico.
 - **BIND** : enumera los campos que se van a excluir o incluir al enlazar valores de parámetro o formulario a las propiedades del modelo
 - **ScaffoldColumn** : permite ocultar campos de los formularios del editor
 
-*Nota: para obtener más información sobre la validación de modelos mediante atributos de anotación de datos, consulte la documentación de MSDN en* [`https://go.microsoft.com/fwlink/?LinkId=159063`](https://go.microsoft.com/fwlink/?LinkId=159063)
+*Nota: para obtener más información sobre la validación de modelos mediante atributos de anotación de datos, vea la documentación de MSDN en*[`https://go.microsoft.com/fwlink/?LinkId=159063`](https://go.microsoft.com/fwlink/?LinkId=159063)
 
 Abra la clase album y agregue las siguientes instrucciones *using* a la parte superior.
 

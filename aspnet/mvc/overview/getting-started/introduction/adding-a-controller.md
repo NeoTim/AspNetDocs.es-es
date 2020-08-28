@@ -8,18 +8,18 @@ ms.date: 10/17/2013
 ms.assetid: cc764f3b-6921-486a-8f44-c6ccd1249acd
 msc.legacyurl: /mvc/overview/getting-started/introduction/adding-a-controller
 msc.type: authoredcontent
-ms.openlocfilehash: 194a8a7398e163f0c37164a8724f98b16444984b
-ms.sourcegitcommit: e7e91932a6e91a63e2e46417626f39d6b244a3ab
+ms.openlocfilehash: ae3258872df798f52d8e031dc8ebf01b4f0a7358
+ms.sourcegitcommit: 4e6d586faadbe4d9ef27122f86335ec9385134af
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78499135"
+ms.lasthandoff: 08/28/2020
+ms.locfileid: "89045135"
 ---
 # <a name="adding-a-controller"></a>Agregar un controlador
 
 por [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-[!INCLUDE [Tutorial Note](index.md)]
+[!INCLUDE [consider RP](~/includes/razor.md)]
 
 MVC representa el *controlador de vista de modelos*. MVC es un patrón para desarrollar aplicaciones que están bien diseñadas, comprobables y fáciles de mantener. Las aplicaciones basadas en MVC contienen:
 
@@ -49,7 +49,7 @@ Reemplace el contenido del archivo por el código siguiente.
 
 [!code-csharp[Main](adding-a-controller/samples/sample1.cs)]
 
-Los métodos de controlador devolverán una cadena de HTML como ejemplo. El controlador se denomina `HelloWorldController` y el primer método se denomina `Index`. Vamos a invocarlo desde un explorador. Ejecute la aplicación (presione F5 o Ctrl + F5). En el explorador, anexe &quot;HelloWorld&quot; a la ruta de acceso en la barra de direcciones. (Por ejemplo, en la ilustración siguiente, es `http://localhost:1234/HelloWorld.`) La página en el explorador tendrá un aspecto similar al de la captura de pantalla siguiente. En el método anterior, el código devolvió una cadena directamente. Ha indicado al sistema que solo devuelva algún código HTML y lo hizo.
+Los métodos de controlador devolverán una cadena de HTML como ejemplo. El controlador se denomina `HelloWorldController` y el primer método se denomina `Index` . Vamos a invocarlo desde un explorador. Ejecute la aplicación (presione F5 o Ctrl + F5). En el explorador, anexe &quot; HelloWorld &quot; a la ruta de acceso en la barra de direcciones. (Por ejemplo, en la ilustración siguiente, es `http://localhost:1234/HelloWorld.` ) La página en el explorador tendrá un aspecto similar al de la captura de pantalla siguiente. En el método anterior, el código devolvió una cadena directamente. Ha indicado al sistema que solo devuelva algún código HTML y lo hizo.
 
 ![](adding-a-controller/_static/image5.png)
 
@@ -57,30 +57,30 @@ ASP.NET MVC invoca diferentes clases de controlador (y métodos de acción difer
 
 `/[Controller]/[ActionName]/[Parameters]`
 
-Establezca el formato de enrutamiento en la *aplicación\_archivo Start/RouteConfig. CS* .
+El formato para el enrutamiento se establece en el archivo inicio de la *aplicación \_ /RouteConfig. CS* .
 
 [!code-csharp[Main](adding-a-controller/samples/sample2.cs?highlight=7-8)]
 
 Al ejecutar la aplicación y no proporcionar ningún segmento de dirección URL, el valor predeterminado es el controlador de "Inicio" y el método de acción "índice" especificado en la sección de valores predeterminados del código anterior.
 
-La primera parte de la dirección URL determina la clase de controlador que se va a ejecutar. Por lo tanto, */HelloWorld* se asigna a la clase `HelloWorldController`. La segunda parte de la dirección URL determina el método de acción de la clase que se va a ejecutar. Por lo tanto, */HelloWorld/index* haría que se ejecutara el método `Index` de la clase `HelloWorldController`. Tenga en cuenta que solo tuvimos que ir a */HelloWorld* y el método de `Index` se usó de forma predeterminada. Esto se debe a que un método denominado `Index` es el método predeterminado al que se llamará en un controlador si no se especifica uno explícitamente. La tercera parte del segmento de dirección URL (`Parameters`) es para los datos de ruta. Veremos los datos de ruta más adelante en este tutorial.
+La primera parte de la dirección URL determina la clase de controlador que se va a ejecutar. Por lo tanto, */HelloWorld* se asigna a la `HelloWorldController` clase. La segunda parte de la dirección URL determina el método de acción de la clase que se va a ejecutar. Por lo tanto, */HelloWorld/index* haría que el `Index` método de la `HelloWorldController` clase se ejecutara. Tenga en cuenta que solo tuvimos que ir a */HelloWorld* y el `Index` método se usó de forma predeterminada. Esto se debe a que un método denominado `Index` es el método predeterminado al que se llamará en un controlador si no se especifica uno explícitamente. La tercera parte del segmento de dirección URL (`Parameters`) es para los datos de ruta. Veremos los datos de ruta más adelante en este tutorial.
 
-Vaya a `http://localhost:xxxx/HelloWorld/Welcome`. El método `Welcome` se ejecuta y devuelve la cadena &quot;este es el método de acción de bienvenida...&quot;. La asignación MVC predeterminada es `/[Controller]/[ActionName]/[Parameters]`. Para esta dirección URL, el controlador es `HelloWorld` y `Welcome` es el método de acción. Todavía no ha usado el elemento `[Parameters]` de la dirección URL.
+Vaya a `http://localhost:xxxx/HelloWorld/Welcome`. El `Welcome` método se ejecuta y devuelve la cadena &quot; . este es el método de acción de bienvenida... &quot; . La asignación MVC predeterminada es `/[Controller]/[ActionName]/[Parameters]` . Para esta dirección URL, el controlador es `HelloWorld` y `Welcome` es el método de acción. Todavía no ha usado el elemento `[Parameters]` de la dirección URL.
 
 ![](adding-a-controller/_static/image6.png)
 
-Vamos a modificar ligeramente el ejemplo para que pueda pasar parte de la información de parámetros de la dirección URL al controlador (por ejemplo, */HelloWorld/Welcome? Name = Scott&amp;numtimes = 4*). Cambie el método de `Welcome` para que incluya dos parámetros, como se muestra a continuación. Tenga en cuenta que el código C# usa la característica opcional-Parameter para indicar que el parámetro `numTimes` debe tener como valor predeterminado 1 si no se pasa ningún valor para ese parámetro.
+Vamos a modificar ligeramente el ejemplo para que pueda pasar parte de la información de parámetros de la dirección URL al controlador (por ejemplo, */HelloWorld/Welcome? Name = Scott &amp; numtimes = 4*). Cambie el `Welcome` método para que incluya dos parámetros, como se muestra a continuación. Tenga en cuenta que el código usa la característica de parámetros opcionales de C# para indicar que el `numTimes` parámetro debe tener como valor predeterminado 1 si no se pasa ningún valor para ese parámetro.
 
 [!code-csharp[Main](adding-a-controller/samples/sample3.cs)]
 
 > [!NOTE]
-> Nota de seguridad: el código anterior usa [HttpUtility. HtmlEncode](https://msdn.microsoft.com/library/ee360286(v=vs.110).aspx) para proteger la aplicación de entradas malintencionadas (es decir, JavaScript). Para obtener más información [, consulte Cómo: proteger contra ataques de scripts en una aplicación Web mediante la aplicación de codificación HTML a cadenas](https://msdn.microsoft.com/library/a2a4yykt(v=vs.100).aspx).
+> Nota de seguridad: el código anterior usa [HttpUtility.HtmlEncode](https://msdn.microsoft.com/library/ee360286(v=vs.110).aspx) para proteger la aplicación de entradas malintencionadas (es decir, JavaScript). Para obtener más información [, consulte Cómo: proteger contra ataques de scripts en una aplicación Web mediante la aplicación de codificación HTML a cadenas](https://msdn.microsoft.com/library/a2a4yykt(v=vs.100).aspx).
 
- Ejecute la aplicación y vaya a la dirección URL de ejemplo (`http://localhost:xxxx/HelloWorld/Welcome?name=Scott&numtimes=4`). Puede probar distintos valores para `name` y `numtimes` en la dirección URL. El [sistema de enlace de modelos de ASP.NET MVC](http://odetocode.com/Blogs/scott/archive/2009/04/27/6-tips-for-asp-net-mvc-model-binding.aspx) asigna automáticamente los parámetros con nombre de la cadena de consulta de la barra de direcciones a los parámetros del método.
+ Ejecute la aplicación y vaya a la dirección URL del ejemplo ( `http://localhost:xxxx/HelloWorld/Welcome?name=Scott&numtimes=4` ). Puede probar distintos valores para `name` y `numtimes` en la dirección URL. El [sistema de enlace de modelos de ASP.NET MVC](http://odetocode.com/Blogs/scott/archive/2009/04/27/6-tips-for-asp-net-mvc-model-binding.aspx) asigna automáticamente los parámetros con nombre de la cadena de consulta de la barra de direcciones a los parámetros del método.
 
 ![](adding-a-controller/_static/image7.png)
 
-En el ejemplo anterior, no se utiliza el segmento de dirección URL (`Parameters`), los parámetros `name` y `numTimes` se pasan como [cadenas de consulta](http://en.wikipedia.org/wiki/Query_string). El carácter comodín ? (signo de interrogación) en la dirección URL anterior es un separador y las cadenas de consulta siguen. El carácter &amp; separa las cadenas de consulta.
+En el ejemplo anterior, el segmento de dirección URL ( `Parameters` ) no se usa, `name` y los `numTimes` parámetros y se pasan como [cadenas de consulta](http://en.wikipedia.org/wiki/Query_string). El signo ? (signo de interrogación) en la dirección URL anterior es un separador y las cadenas de consulta siguen. El carácter &amp; separa las cadenas de consulta.
 
 Reemplace el método de bienvenida por el código siguiente:
 
@@ -90,21 +90,21 @@ Ejecute la aplicación y escriba la siguiente dirección URL: `http://localhost:
 
 ![](adding-a-controller/_static/image8.png)
 
-Esta vez, el tercer segmento de dirección URL coincidió con el parámetro Route `ID.` el método de acción `Welcome` contiene un parámetro (`ID`) que coincidía con la especificación de la dirección URL en el método `RegisterRoutes`.
+Esta vez, el tercer segmento de dirección URL coincidió con el parámetro de ruta `ID.` `Welcome` , el método de acción contiene un parámetro ( `ID` ) que coincidía con la especificación de la dirección URL en el `RegisterRoutes` método.
 
 [!code-csharp[Main](adding-a-controller/samples/sample5.cs?highlight=7)]
 
-En las aplicaciones ASP.NET MVC, es más habitual pasar parámetros como datos de ruta (como hicimos con el identificador anterior) que pasarlos como cadenas de consulta. También puede Agregar una ruta para pasar el `name` y `numtimes` en los parámetros como datos de ruta en la dirección URL. En el archivo *App\_Start\RouteConfig.CS* , agregue la ruta "Hello":
+En las aplicaciones ASP.NET MVC, es más habitual pasar parámetros como datos de ruta (como hicimos con el identificador anterior) que pasarlos como cadenas de consulta. También puede Agregar una ruta para pasar los `name` `numtimes` parámetros y in como datos de ruta en la dirección URL. En el *archivo \_ Start\RouteConfig.CS* de la aplicación, agregue la ruta "Hello":
 
 [!code-csharp[Main](adding-a-controller/samples/sample6.cs?highlight=13-16)]
 
-Ejecute la aplicación y vaya a `/localhost:XXX/HelloWorld/Welcome/Scott/3`.
+Ejecute la aplicación y vaya a `/localhost:XXX/HelloWorld/Welcome/Scott/3` .
 
 ![](adding-a-controller/_static/image9.png)
 
 Para muchas aplicaciones MVC, la ruta predeterminada funciona correctamente. Más adelante en este tutorial aprenderá a pasar datos mediante el enlazador de modelos y no tendrá que modificar la ruta predeterminada para ello.
 
-En estos ejemplos, el controlador ha estado realizando el &quot;VC&quot; parte de MVC, es decir, la vista y el controlador funcionan. El controlador devuelve HTML directamente. Normalmente, no desea que los controladores devuelvan HTML directamente, ya que es muy engorroso para el código. En su lugar, usaremos normalmente un archivo de plantilla de vista independiente para ayudar a generar la respuesta HTML. Vamos a ver cómo podemos hacerlo.
+En estos ejemplos, el controlador ha estado realizando &quot; la &quot; parte VC de MVC, es decir, la vista y el controlador funcionan. El controlador devuelve HTML directamente. Normalmente, no desea que los controladores devuelvan HTML directamente, ya que es muy engorroso para el código. En su lugar, usaremos normalmente un archivo de plantilla de vista independiente para ayudar a generar la respuesta HTML. Vamos a ver cómo podemos hacerlo.
 
 > [!div class="step-by-step"]
 > [Anterior](getting-started.md)

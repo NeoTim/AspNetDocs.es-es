@@ -8,12 +8,12 @@ ms.date: 08/28/2012
 ms.assetid: 41eb99ca-e88f-4720-ae6d-49a958da8116
 msc.legacyurl: /mvc/overview/older-versions/getting-started-with-aspnet-mvc4/examining-the-edit-methods-and-edit-view
 msc.type: authoredcontent
-ms.openlocfilehash: 85ad9a5758d70b5fe4ed792efb80217d7b3e2132
-ms.sourcegitcommit: e7e91932a6e91a63e2e46417626f39d6b244a3ab
+ms.openlocfilehash: 16ce02ba00e13b4cff2d6e86b2d9e0684aab096e
+ms.sourcegitcommit: 4e6d586faadbe4d9ef27122f86335ec9385134af
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "86163058"
+ms.lasthandoff: 08/28/2020
+ms.locfileid: "89044524"
 ---
 # <a name="examining-the-edit-methods-and-edit-view"></a>Examinar los métodos y la vista Edit
 
@@ -77,7 +77,7 @@ Si los valores expuestos no son válidos, se vuelven a mostrar en el formulario.
 ![abcNotValid](examining-the-edit-methods-and-edit-view/_static/image4.png)
 
 > [!NOTE]
-> para admitir la validación de jQuery para configuraciones regionales distintas del inglés que usan una coma ( &quot; , &quot; ) para un separador decimal, debe incluir *globalize.js* y el archivo de *globalize.cultures.jso referencia cultural* específico (de [https://github.com/jquery/globalize](https://github.com/jquery/globalize) ) y JavaScript que se va a usar `Globalize.parseFloat` . En el código siguiente se muestran las modificaciones en el archivo Views\Movies\Edit.cshtml para trabajar con la &quot; referencia cultural fr-FR &quot; :
+> para admitir la validación de jQuery para configuraciones regionales distintas del inglés que usan una coma ( &quot; , &quot; ) para un separador decimal, debe incluir *globalize.js* y el archivo de *globalize.cultures.jso referencia cultural * específico (de [https://github.com/jquery/globalize](https://github.com/jquery/globalize) ) y JavaScript que se va a usar `Globalize.parseFloat` . En el código siguiente se muestran las modificaciones en el archivo Views\Movies\Edit.cshtml para trabajar con la &quot; referencia cultural fr-FR &quot; :
 
 [!code-cshtml[Main](examining-the-edit-methods-and-edit-view/samples/sample7.cshtml)]
 
@@ -123,7 +123,7 @@ Ejecute la aplicación y vaya a */Movies/SearchIndex*. Anexe una cadena de consu
 
 Si cambia la firma del `SearchIndex` método para que tenga un parámetro denominado `id` , el `id` parámetro coincidirá con el `{id}` marcador de posición de las rutas predeterminadas establecidas en el archivo *global. asax* .
 
-[!code-json[Main](examining-the-edit-methods-and-edit-view/samples/sample13.json)]
+[!code-json[Main](examining-the-edit-methods-and-edit-view/samples/sample13.txt)]
 
 El método original tiene el siguiente `SearchIndex` aspecto::
 

@@ -8,12 +8,12 @@ ms.date: 06/26/2013
 ms.assetid: 23fc77da-2725-4434-99a0-ff872d96336b
 msc.legacyurl: /web-api/overview/web-api-routing-and-actions/create-a-rest-api-with-attribute-routing
 msc.type: authoredcontent
-ms.openlocfilehash: 6eac36767bf34857d5341188d0653e7fec7cade2
-ms.sourcegitcommit: e7e91932a6e91a63e2e46417626f39d6b244a3ab
+ms.openlocfilehash: f6ff5fa18a44b3e6717ec0141ebe101bcdc0bee4
+ms.sourcegitcommit: 4e6d586faadbe4d9ef27122f86335ec9385134af
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "86188918"
+ms.lasthandoff: 08/28/2020
+ms.locfileid: "89045187"
 ---
 # <a name="create-a-rest-api-with-attribute-routing-in-aspnet-web-api-2"></a>Creación de una API de REST con enrutamiento de atributos en ASP.NET Web API 2
 
@@ -38,7 +38,7 @@ En el nivel de datos, usaremos Entity Framework. Los registros del libro tendrá
 - Título
 - Género
 - fecha de publicación
-- Precio
+- Price
 - Descripción
 - AuthorID (clave externa a una tabla de autores)
 
@@ -56,7 +56,7 @@ Expanda la categoría **instalado**de  >  **Visual C#** . En **Visual C#**, sele
 
 ![](create-a-rest-api-with-attribute-routing/_static/image1.png)
 
-En el cuadro de diálogo **nueva aplicación Web de ASP.net** , seleccione la plantilla **vacía** . En "Agregar carpetas y referencias principales para", active la casilla **API Web** . Haga clic en **Aceptar**.
+En el cuadro de diálogo **nueva aplicación Web de ASP.net** , seleccione la plantilla **vacía** . En "Agregar carpetas y referencias principales para", active la casilla **API Web** . Haga clic en **OK**.
 
 ![](create-a-rest-api-with-attribute-routing/_static/image2.png)
 
@@ -238,7 +238,7 @@ También puede admitir un separador de barra diagonal ( `/api/books/date/yyyy/mm
 
 Hay un detalle sutil pero importante aquí. La segunda plantilla de ruta tiene un carácter comodín ( \* ) al principio del parámetro {pubDate}:
 
-[!code-json[Main](create-a-rest-api-with-attribute-routing/samples/sample21.json)]
+[!code-json[Main](create-a-rest-api-with-attribute-routing/samples/sample21.txt)]
 
 Esto indica al motor de enrutamiento que {pubDate} debe coincidir con el resto del URI. De forma predeterminada, un parámetro de plantilla coincide con un único segmento de URI. En este caso, queremos que {pubDate} abarque varios segmentos de URI:
 

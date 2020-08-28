@@ -8,16 +8,16 @@ ms.date: 01/17/2019
 ms.assetid: df001954-18bf-4550-b03d-43911a0ea186
 msc.legacyurl: /mvc/overview/getting-started/introduction/adding-search
 msc.type: authoredcontent
-ms.openlocfilehash: f6d6d32a648fed453be924790a1b55698c9cf209
-ms.sourcegitcommit: 0d583ed9253103f3e50b6d729276e667591cdd41
+ms.openlocfilehash: be4e4d13e574b0fcb77d2d0fb8c6f58041b1ece2
+ms.sourcegitcommit: 4e6d586faadbe4d9ef27122f86335ec9385134af
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86211480"
+ms.lasthandoff: 08/28/2020
+ms.locfileid: "89044926"
 ---
 # <a name="search"></a>Search
 
-[!INCLUDE [Tutorial Note](index.md)]
+[!INCLUDE [consider RP](~/includes/razor.md)]
 
 ## <a name="adding-a-search-method-and-search-view"></a>Agregar un método de búsqueda y una vista de búsqueda
 
@@ -27,7 +27,7 @@ En esta sección, agregará la funcionalidad de búsqueda al `Index` método de 
 
 Para que coincida con las capturas de pantallas de esta sección, debe ejecutar la aplicación (F5) y agregar las siguientes películas a la base de datos.
 
-| Título | Fecha de la versión | Género | Precio |
+| Título | Fecha de la versión | Género | Price |
 | ----- | ------------ | ----- | ----- |
 | Ghostbusters | 6/8/1984 | Comedia | 6,99 |
 | Ghostbusters II | 6/16/1989 | Comedia | 6,99 |
@@ -62,7 +62,7 @@ Ejecute la aplicación y vaya a */Movies/index*. Anexe una cadena de consulta co
 
 Si cambia la firma del `Index` método para que tenga un parámetro denominado `id` , el `id` parámetro coincidirá con el `{id}` marcador de posición de las rutas predeterminadas establecidas en el archivo * \_ Start\RouteConfig.CS* de la aplicación.
 
-[!code-json[Main](adding-search/samples/sample4.json)]
+[!code-json[Main](adding-search/samples/sample4.txt)]
 
 El método original tiene el siguiente `Index` aspecto::
 

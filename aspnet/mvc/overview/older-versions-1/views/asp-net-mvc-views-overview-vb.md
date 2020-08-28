@@ -8,12 +8,12 @@ ms.date: 02/16/2008
 ms.assetid: c28ba88d-3a93-47f5-a306-049bd766714d
 msc.legacyurl: /mvc/overview/older-versions-1/views/asp-net-mvc-views-overview-vb
 msc.type: authoredcontent
-ms.openlocfilehash: f02728ed248f29b09d654e509977ed43889cbb83
-ms.sourcegitcommit: e7e91932a6e91a63e2e46417626f39d6b244a3ab
+ms.openlocfilehash: a07d15cb14e9ef90b62c5a8702dee53f1a0a6032
+ms.sourcegitcommit: 4e6d586faadbe4d9ef27122f86335ec9385134af
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78435277"
+ms.lasthandoff: 08/28/2020
+ms.locfileid: "89044672"
 ---
 # <a name="aspnet-mvc-views-overview-vb"></a>Información general sobre las vistas de ASP.NET MVC (VB)
 
@@ -81,15 +81,15 @@ Observe que el cuerpo de la página HTML de la lista 2 contiene el siguiente scr
 
 &lt;% Response. Write (DateTime. Now)%&gt;
 
-Use los delimitadores de script &lt;% y%&gt; para marcar el principio y el final de un script. Este script se escribe en Visual Basic. Muestra la fecha y hora actuales llamando al método Response. Write () para representar el contenido en el explorador. Los delimitadores de script &lt;% y%&gt; se pueden usar para ejecutar una o más instrucciones.
+Use los delimitadores de script &lt; % y% &gt; para marcar el principio y el final de un script. Este script se escribe en Visual Basic. Muestra la fecha y hora actuales llamando al método Response. Write () para representar el contenido en el explorador. Los delimitadores de script &lt; % y% &gt; se pueden usar para ejecutar una o más instrucciones.
 
-Dado que llama a Response. Write () con tanta frecuencia, Microsoft le proporciona un acceso directo para llamar al método Response. Write (). La vista de la lista 3 usa los delimitadores &lt;% = y%&gt; como un acceso directo para llamar a Response. Write ().
+Dado que llama a Response. Write () con tanta frecuencia, Microsoft le proporciona un acceso directo para llamar al método Response. Write (). La vista de la lista 3 usa los delimitadores &lt; % = y% &gt; como método abreviado para llamar a Response. Write ().
 
 **Lista 3: Views\Home\Index2.aspx**
 
 [!code-aspx[Main](asp-net-mvc-views-overview-vb/samples/sample3.aspx)]
 
-Puede usar cualquier lenguaje .NET para generar contenido dinámico en una vista. Normalmente, se usa Visual Basic .NET o C# para escribir los controladores y las vistas.
+Puede usar cualquier lenguaje .NET para generar contenido dinámico en una vista. Normalmente, usará Visual Basic .NET o C# para escribir los controladores y las vistas.
 
 ## <a name="using-html-helpers-to-generate-view-content"></a>Usar aplicaciones auxiliares HTML para generar el contenido de la vista
 
@@ -101,13 +101,13 @@ Por ejemplo, la vista de la lista 4 aprovecha las ventajas de tres aplicaciones 
 
 [!code-aspx[Main](asp-net-mvc-views-overview-vb/samples/sample4.aspx)]
 
-[![el cuadro de diálogo nuevo proyecto](asp-net-mvc-views-overview-vb/_static/image1.jpg)](asp-net-mvc-views-overview-vb/_static/image1.png)
+[![Cuadro de diálogo Nuevo proyecto](asp-net-mvc-views-overview-vb/_static/image1.jpg)](asp-net-mvc-views-overview-vb/_static/image1.png)
 
 **Figura 01**: formulario de inicio de sesión estándar ([haga clic para ver la imagen de tamaño completo](asp-net-mvc-views-overview-vb/_static/image2.png))
 
 Se llama a todos los métodos auxiliares HTML en la propiedad HTML de la vista. Por ejemplo, si se representa un cuadro de texto, se llama al método html. TextBox ().
 
-Tenga en cuenta que usa los delimitadores de script &lt;% = y%&gt; al llamar a las aplicaciones auxiliares HTML. TextBox () y HTML. Password (). Estas aplicaciones auxiliares simplemente devuelven una cadena. Debe llamar a Response. Write () para representar la cadena en el explorador.
+Tenga en cuenta que usa los delimitadores de script &lt; % = y% &gt; cuando llama a las aplicaciones auxiliares HTML. TextBox () y HTML. Password (). Estas aplicaciones auxiliares simplemente devuelven una cadena. Debe llamar a Response. Write () para representar la cadena en el explorador.
 
 El uso de métodos auxiliares HTML es opcional. Facilitan su vida reduciendo la cantidad de HTML y el script que necesita escribir. La vista de la lista 5 representa el mismo formulario exacto que la vista de la lista 4 sin usar aplicaciones auxiliares HTML.
 
@@ -135,7 +135,7 @@ La vista de la lista 7 recupera el mensaje de los datos de la vista y representa
 
 Tenga en cuenta que la vista aprovecha el método auxiliar HTML. encode () HTML al representar el mensaje. La aplicación auxiliar html html. encode () codifica caracteres especiales como &lt; y &gt; en caracteres que se pueden mostrar de forma segura en una página web. Siempre que represente el contenido que un usuario envía a un sitio web, debe codificar el contenido para evitar ataques por inyección de código JavaScript.
 
-(Dado que hemos creado el mensaje en ProductController, no es necesario codificar el mensaje. Sin embargo, es un buen hábito llamar siempre al método html. encode () al mostrar el contenido recuperado de los datos de vista en una vista.
+(Dado que hemos creado el mensaje en ProductController, realmente no es necesario codificar el mensaje. Sin embargo, es un buen hábito llamar siempre al método html. encode () al mostrar el contenido recuperado de los datos de vista en una vista.
 
 En el listado 7, aprovechamos los datos de la vista para pasar un mensaje de cadena simple de un controlador a una vista. También puede usar ver datos para pasar otros tipos de datos, como una colección de registros de base de datos, de un controlador a una vista. Por ejemplo, si desea mostrar el contenido de la tabla de la base de datos Products en una vista, pasaría la colección de registros de base de datos en los datos de la vista.
 

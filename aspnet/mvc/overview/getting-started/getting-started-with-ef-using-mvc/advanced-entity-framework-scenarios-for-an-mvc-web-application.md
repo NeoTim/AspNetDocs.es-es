@@ -9,12 +9,12 @@ ms.topic: tutorial
 ms.assetid: f35a9b0c-49ef-4cde-b06d-19d1543feb0b
 msc.legacyurl: /mvc/overview/getting-started/getting-started-with-ef-using-mvc/advanced-entity-framework-scenarios-for-an-mvc-web-application
 msc.type: authoredcontent
-ms.openlocfilehash: d7cc83a5b78a60f575f5c3065079679189296a0c
-ms.sourcegitcommit: c9d9210e0d16fbb3829b7688cfb832dc263c79cc
+ms.openlocfilehash: 2bfa4401c73b56be87502ffbb189abab3c59c226
+ms.sourcegitcommit: 4e6d586faadbe4d9ef27122f86335ec9385134af
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 08/20/2020
-ms.locfileid: "86188734"
+ms.lasthandoff: 08/28/2020
+ms.locfileid: "89045005"
 ---
 # <a name="tutorial-learn-about-advanced-ef-scenarios-for-an-mvc-5-web-app"></a>Tutorial: información sobre los escenarios avanzados de EF para una aplicación web MVC 5
 
@@ -130,7 +130,7 @@ En *Controllers/CourseController*, reemplace el `Index` método por el código s
 
 Ahora, establezca un punto de interrupción en la `return` instrucción (F9 con el cursor en esa línea). Presione **F5** para ejecutar el proyecto en modo de depuración y seleccione la página índice del curso. Cuando el código alcance el punto de interrupción, examine la `sql` variable. Verá la consulta que se envía a SQL Server. Se trata de una `Select` instrucción sencilla.
 
-[!code-json[Main](advanced-entity-framework-scenarios-for-an-mvc-web-application/samples/sample7.json)]
+[!code-json[Main](advanced-entity-framework-scenarios-for-an-mvc-web-application/samples/sample7.sql)]
 
 Haga clic en la lupa para ver la consulta en el **visualizador de texto**.
 
@@ -236,7 +236,7 @@ Aunque el código fuente está abierto, Entity Framework es totalmente compatibl
 - [Rick Anderson](https://blogs.msdn.com/b/rickandy/) (Twitter [@RickAndMSFT](http://twitter.com/RickAndMSFT) ) ha realizado la mayor parte del trabajo al actualizar el tutorial de EF 5 y MVC 4 y coautor de la actualización de EF 6. Rick es un redactor de programación Senior para Microsoft que se centra en Azure y MVC.
 - [Rowan Miller](http://www.romiller.com) y otros miembros del equipo de Entity Framework asistieron a las revisiones de código y ayudó a depurar muchos problemas con las migraciones que surgieron mientras actualizamos el tutorial para EF 5 y EF 6.
 
-## <a name="troubleshoot-common-errors"></a>Solucionar problemas de errores comunes
+## <a name="troubleshoot-common-errors"></a>Solución de errores comunes
 
 ### <a name="cannot-createshadow-copy"></a>No se puede crear o copiar instantáneas
 

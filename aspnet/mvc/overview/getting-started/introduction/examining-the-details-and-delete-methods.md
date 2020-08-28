@@ -8,38 +8,38 @@ ms.date: 03/26/2015
 ms.assetid: f1d2a916-626c-4a54-8df4-77e6b9fff355
 msc.legacyurl: /mvc/overview/getting-started/introduction/examining-the-details-and-delete-methods
 msc.type: authoredcontent
-ms.openlocfilehash: da06815b5c1d76a939fdfb77ce11774081dfb881
-ms.sourcegitcommit: e7e91932a6e91a63e2e46417626f39d6b244a3ab
+ms.openlocfilehash: 9c4e66454d6995bd750b62ef8b461bcfbdfb4b4f
+ms.sourcegitcommit: 4e6d586faadbe4d9ef27122f86335ec9385134af
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78470593"
+ms.lasthandoff: 08/28/2020
+ms.locfileid: "89045096"
 ---
 # <a name="examining-the-details-and-delete-methods"></a>Examinar los métodos Details y Delete
 
 por [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-[!INCLUDE [Tutorial Note](index.md)]
+[!INCLUDE [consider RP](~/includes/razor.md)]
 
-En esta parte del tutorial, examinará los métodos `Details` y `Delete` generados automáticamente.
+En esta parte del tutorial, examinará los métodos y generados `Details` automáticamente `Delete` .
 
 ## <a name="examining-the-details-and-delete-methods"></a>Examinar los métodos Details y Delete
 
-Abra el controlador de `Movie` y examine el método `Details`.
+Abra el `Movie` controlador y examine el `Details` método.
 
 ![](examining-the-details-and-delete-methods/_static/image1.png)
 
 [!code-csharp[Main](examining-the-details-and-delete-methods/samples/sample1.cs)]
 
-El motor de scaffolding de MVC que creó este método de acción agrega un comentario que muestra una solicitud HTTP que invoca el método. En este caso, se trata de una solicitud `GET` con tres segmentos de dirección URL, el controlador de `Movies`, el método `Details` y un valor de `ID`.
+El motor de scaffolding de MVC que creó este método de acción agrega un comentario que muestra una solicitud HTTP que invoca el método. En este caso, se trata de una `GET` solicitud con tres segmentos de dirección URL, el `Movies` controlador, el `Details` método y un `ID` valor.
 
-Code First facilita la búsqueda de datos mediante el método `Find`. Una característica de seguridad importante integrada en el método es que el código comprueba que el método `Find` ha encontrado una película antes de que el código intente hacer nada con ella. Por ejemplo, un pirata informático podría introducir errores en el sitio cambiando la dirección URL creada por los vínculos de `http://localhost:xxxx/Movies/Details/1` a algo parecido a `http://localhost:xxxx/Movies/Details/12345` (o a algún otro valor que no represente una película real). Si no ha buscado una película nula, una película nula produciría un error de base de datos.
+Code First facilita la búsqueda de datos mediante el `Find` método. Una característica de seguridad importante integrada en el método es que el código comprueba que el `Find` método ha encontrado una película antes de que el código intente hacer nada con ella. Por ejemplo, un pirata informático podría introducir errores en el sitio cambiando la dirección URL creada por los vínculos de `http://localhost:xxxx/Movies/Details/1` a algo parecido a `http://localhost:xxxx/Movies/Details/12345` (o a algún otro valor que no represente una película real). Si no ha buscado una película nula, una película nula produciría un error de base de datos.
 
 Examine los métodos `Delete` y `DeleteConfirmed`.
 
 [!code-csharp[Main](examining-the-details-and-delete-methods/samples/sample2.cs?highlight=17)]
 
-Tenga en cuenta que el método HTTP GET `Delete` no elimina la película especificada, sino que devuelve una vista de la película en la que puede enviar (`HttpPost`) la eliminación. La acción de efectuar una operación de eliminación en respuesta a una solicitud GET (o con este propósito efectuar una operación de edición, creación o cualquier otra operación que modifique los datos) genera una vulnerabilidad de seguridad. Para obtener más información, consulte la entrada de blog de Stephen Walther [ASP.NET MVC Tip #46: no use los vínculos de eliminación porque crean carencias de seguridad](http://stephenwalther.com/blog/archive/2009/01/21/asp.net-mvc-tip-46-ndash-donrsquot-use-delete-links-because.aspx).
+Tenga en cuenta que el `Delete` método HTTP GET no elimina la película especificada, sino que devuelve una vista de la película en la que puede enviar ( `HttpPost` ) la eliminación. La acción de efectuar una operación de eliminación en respuesta a una solicitud GET (o con este propósito efectuar una operación de edición, creación o cualquier otra operación que modifique los datos) genera una vulnerabilidad de seguridad. Para obtener más información, consulte la entrada de blog de Stephen Walther [ASP.NET MVC Tip #46: no use los vínculos de eliminación porque crean carencias de seguridad](http://stephenwalther.com/blog/archive/2009/01/21/asp.net-mvc-tip-46-ndash-donrsquot-use-delete-links-because.aspx).
 
 El método `HttpPost` que elimina los datos se denomina `DeleteConfirmed` para proporcionar al método HTTP POST una firma o nombre únicos. Las dos firmas de método se muestran a continuación:
 
@@ -47,9 +47,9 @@ El método `HttpPost` que elimina los datos se denomina `DeleteConfirmed` para p
 
 Common Language Runtime (CLR) requiere métodos sobrecargados para disponer de una firma de parámetro única (mismo nombre de método, pero lista de parámetros diferente). Sin embargo, aquí necesita dos métodos de eliminación: uno para GET y otro para POST, que ambos tienen la misma firma de parámetro. (ambos deben aceptar un número entero como parámetro).
 
-Para ordenar esto, puede hacer un par de cosas. Uno es asignar nombres distintos a los métodos. que es lo que hizo el mecanismo de scaffolding en el ejemplo anterior. Pero esto implica un pequeño problema: ASP.NET asigna segmentos de una dirección URL a los métodos de acción por nombre y, si cambia el nombre de un método, normalmente el enrutamiento no podría encontrar ese método. La solución es la que ve en el ejemplo, que consiste en agregar el atributo `ActionName("Delete")` al método `DeleteConfirmed`. De este modo, se realiza la asignación del sistema de enrutamiento de forma eficaz para que una dirección URL que incluya */Delete/* para una solicitud post busque el método `DeleteConfirmed`.
+Para ordenar esto, puede hacer un par de cosas. Uno es asignar nombres distintos a los métodos. que es lo que hizo el mecanismo de scaffolding en el ejemplo anterior. Pero esto implica un pequeño problema: ASP.NET asigna los segmentos de una dirección URL a los métodos de acción por nombre, de modo que si cambia el nombre de un método, el enrutamiento seguramente no podrá encontrar dicho método. La solución es la que ve en el ejemplo, que consiste en agregar el atributo `ActionName("Delete")` al método `DeleteConfirmed`. De este modo, se realiza la asignación del sistema de enrutamiento de forma eficaz para que una dirección URL que incluya */Delete/* para una solicitud post encuentre el `DeleteConfirmed` método.
 
-Otra forma habitual de evitar un problema con los métodos que tienen nombres y firmas idénticos es cambiar artificialmente la firma del método POST para incluir un parámetro no utilizado. Por ejemplo, algunos desarrolladores agregan un tipo de parámetro `FormCollection` que se pasa al método POST y, a continuación, simplemente no usan el parámetro:
+Otra forma habitual de evitar un problema con los métodos que tienen nombres y firmas idénticos es cambiar artificialmente la firma del método POST para incluir un parámetro no utilizado. Por ejemplo, algunos desarrolladores agregan un tipo de parámetro `FormCollection` que se pasa al método post y, a continuación, simplemente no usan el parámetro:
 
 [!code-csharp[Main](examining-the-details-and-delete-methods/samples/sample4.cs)]
 
@@ -65,8 +65,8 @@ Después de compilar y probar una aplicación Web, el siguiente paso es ponerla 
 
 Los comentarios son bienvenidos.
 
-— [Rick Anderson](https://blogs.msdn.com/rickAndy) twitter: [@RickAndMSFT](https://twitter.com/RickAndMSFT)  
-: [Scott Hanselman](http://www.hanselman.com/blog/) twitter: [@shanselman](https://twitter.com/shanselman)
+— [Rick Anderson](https://blogs.msdn.com/rickAndy) Twitter: [@RickAndMSFT](https://twitter.com/RickAndMSFT)  
+: [Scott Hanselman](http://www.hanselman.com/blog/) Twitter: [@shanselman](https://twitter.com/shanselman)
 
 > [!div class="step-by-step"]
 > [Anterior](adding-validation.md)
