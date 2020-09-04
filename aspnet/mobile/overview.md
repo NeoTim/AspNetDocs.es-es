@@ -8,22 +8,24 @@ ms.date: 01/28/2011
 ms.assetid: 1febce65-cdd4-47da-bdb5-1e6022ccd20a
 msc.legacyurl: /mobile
 msc.type: content
-ms.openlocfilehash: 769484ee505599eef48ff4a106ddd4f7ec7d99af
-ms.sourcegitcommit: 0cf7d06071a8ff986e6c028ac9daf0c0e7490412
+ms.openlocfilehash: 41cf393f307808e457e0ab2529129ca8ecbc3b5d
+ms.sourcegitcommit: dfd3ce87ffc9e3a7076f8252abb5d5d6b991333b
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85240738"
+ms.lasthandoff: 09/04/2020
+ms.locfileid: "89449709"
 ---
 # <a name="mobile-apps--sites-with-aspnet"></a>Mobile Apps sitios de & con ASP.NET
 
 ## <a name="develop-mobile-apps"></a>Desarrollar Mobile Apps
 
-### <a name="cloud-connected-mobile-apps---create-a-web-service-with-azure-web-apps-and-webjobspart-1"></a>[Mobile Apps conectado a la nube: creación de un servicio Web con Azure Web Apps y webjobs](https://msdn.microsoft.com/magazine/mt185572)(parte 1)
+### <a name="cloud-connected-mobile-apps"></a>Mobile Apps conectado a la nube
+
+[Parte 1: creación de un servicio Web con Azure Web Apps y webjobs](https://msdn.microsoft.com/magazine/mt185572)
 
 En la primera parte de un artículo de dos partes, los autores exploran algunos de los problemas implicados en la creación de un back-end en la nube que agrega y procesa los datos y los atiende a los clientes móviles.
 
-### <a name="cloud-connected-mobile-apps---build-a-xamarin-app-with-authentication-and-offline-supportpart-2"></a>[Mobile Apps conectado a la nube: compilar una aplicación de Xamarin con autenticación y soporte sin conexión](https://msdn.microsoft.com/magazine/mt422581.aspx)(parte 2)
+[Parte 2: creación de una aplicación de Xamarin con compatibilidad sin conexión y autenticación](https://msdn.microsoft.com/magazine/mt422581.aspx)
 
 En el segundo artículo de la serie, los autores describen cómo usan Xamarin para tener como destino varias plataformas de cliente móvil y muestran cómo implementar la autenticación y mantener una memoria caché del lado cliente sincronizada de los datos.
 
