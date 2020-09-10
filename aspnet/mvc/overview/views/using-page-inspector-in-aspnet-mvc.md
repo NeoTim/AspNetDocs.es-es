@@ -8,12 +8,12 @@ ms.date: 08/15/2012
 ms.assetid: c7e4e1ab-4932-4614-9f53-aaf7c706d498
 msc.legacyurl: /mvc/overview/views/using-page-inspector-in-aspnet-mvc
 msc.type: authoredcontent
-ms.openlocfilehash: 5da3e142c52a770f59222c21d9f9a53cbbdbf498
-ms.sourcegitcommit: e7e91932a6e91a63e2e46417626f39d6b244a3ab
+ms.openlocfilehash: 42d5683ce75467a159c9d13edf302bd6bf24a11d
+ms.sourcegitcommit: 45754124123403520b9fa2e706a4d1292494159b
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78432457"
+ms.lasthandoff: 09/10/2020
+ms.locfileid: "89643692"
 ---
 # <a name="using-page-inspector-in-aspnet-mvc"></a>Usar el Inspector de página en ASP.NET MVC
 
@@ -53,11 +53,11 @@ Inspector de página se incluye con Microsoft Web Developer Tools. La versión m
 
 ## <a name="create-a-web-application"></a>Crear una aplicación Web
 
-En primer lugar, cree una aplicación web que utilizará Inspector de página con. En Visual Studio, elija **archivo** &gt; **nuevo proyecto**. A la izquierda, expanda **C#visualmente**, seleccione **Web**y, a continuación, seleccione **aplicación Web de ASP.net MVC4**.
+En primer lugar, cree una aplicación web que utilizará Inspector de página con. En Visual Studio, seleccione **Archivo** &gt; **Nuevo proyecto**. A la izquierda, expanda **Visual C#**, seleccione **Web**y, a continuación, seleccione **aplicación Web de ASP.net MVC4**.
 
 ![Nueva aplicación ASP.NET MVC](using-page-inspector-in-aspnet-mvc/_static/image2.png)
 
-Haga clic en **Aceptar**.
+Haga clic en **OK**.
 
 En el cuadro de diálogo **nuevo proyecto de ASP.NET MVC 4** , seleccione **aplicación de Internet**. Deje **Razor** como el motor de vista predeterminado.
 
@@ -111,23 +111,23 @@ Inspector de página permite buscar el marcado cuya ubicación podría no ser ob
 
 Para verlo, haga clic en **inspeccionar** y, a continuación, desplácese hasta la parte inferior de la página en la ventana de inspector de página.
 
-Al colocar el puntero del mouse en el área de pie de página, Inspector de página abre el archivo \_layout. cshtml y resalta la sección de la página de diseño que ha seleccionado. Como puede ver, el pie de página se define en el archivo de diseño y no en la propia vista.
+Al colocar el puntero del mouse en el área de pie de página, Inspector de página abre el \_ archivo layout. cshtml y resalta la sección de la página de diseño que ha seleccionado. Como puede ver, el área de pie de página se define en el archivo de diseño y no en la propia vista.
 
 ![Pie de página](using-page-inspector-in-aspnet-mvc/_static/image16.png)
 
-Ahora, mueva el puntero del mouse sobre la línea con <a id="a"> </a>el aviso de propiedad intelectual. En la página \_layout. cshtml, se resalta la línea correspondiente.
+Ahora, mueva el puntero del mouse sobre la línea con el aviso de propiedad intelectual <a id="a"></a> . En la \_ Página layout. cshtml, se resalta la línea correspondiente.
 
 ![Línea de copyright de pie de página resaltada](using-page-inspector-in-aspnet-mvc/_static/image18.png)
 
-Agregue texto al final de la línea en el archivo \_layout. cshtml.
+Agregue texto al final de la línea en el \_ archivo layout. cshtml.
 
-&lt;p&gt;&amp;Copy; @DateTime.Now.Year de la aplicación ASP.NET MVC Rocks!&lt;/p&gt;
+&lt;p &gt; &amp; Copy; @DateTime.Now.Year -mi ASP.net de aplicaciones MVC Rock! &lt; /p&gt;
 
 Ahora, presione Ctrl + Alt + entrar o haga clic en la barra de actualización para ver los resultados en la ventana del explorador Inspector de página.
 
 ![¡ Mi aplicación ASP.NET Rock!](using-page-inspector-in-aspnet-mvc/_static/image20.png)
 
-Es posible que haya pensado que el pie de página está definido en index. cshtml, pero que está en el \_layout. cshtml y Inspector de página lo ha encontrado.
+Es posible que haya pensado que el pie de página está definido en index. cshtml, pero que resultó estar en \_ layout. cshtml y inspector de página lo ha encontrado.
 
 <a id="_inspection_mode_and_1"></a><a id="_6_inspection_mode"></a>
 
@@ -143,7 +143,7 @@ Ahora, mueva el puntero del mouse a la ventana **HTML** . A medida que mueve el 
 
 ![Ventana HTML](using-page-inspector-in-aspnet-mvc/_static/image22.png)
 
-Como antes, Inspector de página abre el archivo \_layout. cshtml en una pestaña temporal. Haga clic en la ficha temporal \_layout. cshtml y el marcado correspondiente se resaltará en el encabezado &lt;&gt; sección:
+Como antes, Inspector de página abre el \_ archivo layout. cshtml en una pestaña temporal. Haga clic en la \_ pestaña temporal layout. cshtml y el marcado correspondiente se resaltará en la &lt; &gt; sección de encabezado automáticamente:
 
 ![Marcado resaltado](using-page-inspector-in-aspnet-mvc/_static/image24.png)
 
@@ -187,7 +187,7 @@ La ventana **estilos** muestra todas las reglas de CSS para este elemento. Despl
 
 ![](using-page-inspector-in-aspnet-mvc/_static/image32.png)
 
-Ahora, cambie el valor de `background-color` por "rojo". El cambio aparece inmediatamente en el explorador de Inspector de página.
+Ahora, cambie el valor de `background-color` a "rojo". El cambio aparece inmediatamente en el explorador de Inspector de página.
 
 ![](using-page-inspector-in-aspnet-mvc/_static/image34.png)
 
@@ -196,7 +196,7 @@ Ahora, cambie el valor de `background-color` por "rojo". El cambio aparece inmed
 
 El editor de CSS de Visual Studio 2012 tiene un selector de colores que facilita la elección y la inserción de colores. El selector de colores incluye una paleta estándar de colores, admite los nombres de colores estándar, códigos hash, RGB, RGBA, HSL y HSLA, y mantiene una lista de los colores usados más recientemente en el documento.
 
-En la sección anterior, cambió el valor de la propiedad `background-color`. Para invocar el selector de colores, coloque el punto de inserción después del nombre y el tipo de la propiedad **#** o **RGB (** .
+En la sección anterior, cambió el valor de la `background-color` propiedad. Para invocar el selector de colores, coloque el punto de inserción después del nombre de la propiedad y escriba **#** o **RGB (**.
 
 ![Barra de selector de colores de CSS](using-page-inspector-in-aspnet-mvc/_static/image36.png)
 
@@ -236,7 +236,7 @@ Con la versión 1,3, Inspector de página ahora pueden asignar elementos que se 
 > [!NOTE]
 > La plantilla SPA requiere la actualización [ASP.NET and Web Tools 2012,2](https://go.microsoft.com/fwlink/?LinkId=282650) .
 
-En Visual Studio, elija **archivo** &gt; **nuevo proyecto**. A la izquierda, expanda **C#visualmente**, seleccione **Web**y, a continuación, seleccione **aplicación Web de ASP.net MVC4**. Haga clic en **Aceptar**.
+En Visual Studio, seleccione **Archivo** &gt; **Nuevo proyecto**. A la izquierda, expanda **Visual C#**, seleccione **Web**y, a continuación, seleccione **aplicación Web de ASP.net MVC4**. Haga clic en **OK**.
 
 En el cuadro de diálogo **nuevo proyecto de ASP.NET MVC 4** , seleccione **aplicación de una sola página**.
 
