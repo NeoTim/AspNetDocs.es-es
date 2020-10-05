@@ -10,10 +10,10 @@ ms.assetid: 50e6e62b-e72e-4a29-8293-4b67377bd21f
 msc.legacyurl: /web-api/overview/odata-support-in-aspnet-web-api/supporting-odata-query-options
 msc.type: authoredcontent
 ms.openlocfilehash: 96820fab7ac89885058962f44ded86cb0184ee97
-ms.sourcegitcommit: ce28244209db8615bc9bdd576a2e2c88174d318d
+ms.sourcegitcommit: 4ed0b65ae32d9f35e42ee6296b877747e063df4d
 ms.translationtype: MT
 ms.contentlocale: es-ES
-ms.lasthandoff: 04/06/2020
+ms.lasthandoff: 10/05/2020
 ms.locfileid: "86188645"
 ---
 # <a name="supporting-odata-query-options-in-aspnet-web-api-2"></a>Compatibilidad de las opciones de consulta de OData en ASP.NET Web API 2
@@ -77,16 +77,16 @@ En el caso de los conjuntos de entidades de gran tamaño, es posible que el clie
 
 La opción $top proporciona el número máximo de entradas que se van a devolver y la opción $skip proporciona el número de entradas que se van a omitir. En el ejemplo anterior se capturan las entradas 21 a 30.
 
-**Filtrado**
+**Filtros**
 
 La opción $filter permite que un cliente filtre los resultados aplicando una expresión booleana. Las expresiones de filtro son bastante eficaces; incluyen operadores lógicos y aritméticos, funciones de cadena y funciones de fecha.
 
-| Devuelve todos los productos con una categoría igual a "Toys". | `http://localhost/Products?$filter=Category`EC ' juguetes ' |
+| Devuelve todos los productos con una categoría igual a "Toys". | `http://localhost/Products?$filter=Category` EC ' juguetes ' |
 | --- | --- |
-| Devolver todos los productos con un precio inferior a 10. | `http://localhost/Products?$filter=Price`lt 10 |
-| Operadores lógicos: devuelve todos los productos en los que el precio >= 5 y el precio <= 15. | `http://localhost/Products?$filter=Price`GE 5 y precio le 15 |
+| Devolver todos los productos con un precio inferior a 10. | `http://localhost/Products?$filter=Price` lt 10 |
+| Operadores lógicos: devuelve todos los productos en los que el precio >= 5 y el precio <= 15. | `http://localhost/Products?$filter=Price` GE 5 y precio le 15 |
 | Funciones de cadena: devuelve todos los productos con "ZZ" en el nombre. | `http://localhost/Products?$filter=substringof('zz',Name)` |
-| Funciones de fecha: devuelve todos los productos con ReleaseDate después de 2005. | `http://localhost/Products?$filter=year(ReleaseDate)`gt 2005 |
+| Funciones de fecha: devuelve todos los productos con ReleaseDate después de 2005. | `http://localhost/Products?$filter=year(ReleaseDate)` gt 2005 |
 
 **Ordenar**
 
